@@ -102,8 +102,8 @@ $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
 ```php
 $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
 [
-  ['id', 'name', 'mail'],
-  ['1', 'name1', 'mail1'],
+  ['id', 'name'],
+  ['1', 'name1'],
 ]
 ```
 
