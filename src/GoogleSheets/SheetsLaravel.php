@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 class SheetsLaravel extends Sheets
 {
     /**
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function get()
     {
@@ -17,9 +17,9 @@ class SheetsLaravel extends Sheets
 
     /**
      * @param array $header
-     * @param array|Collection $rows
+     * @param array|\Illuminate\Support\Collection $rows
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function collection($header, $rows)
     {
