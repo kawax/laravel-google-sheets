@@ -98,6 +98,27 @@ $sheets->setService($service);
 $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
 ```
 
+### example4 A1 notation
+```php
+$values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
+[
+  ['id', 'name', 'mail'],
+  ['1', 'name1', 'mail1'],
+]
+```
+
+### example5 update
+```php
+Sheets::sheet('Sheet 1')->range('A4')->update([['3', 'name3', 'mail3']]);
+$values = Sheets::range('')->all();
+[
+  ['id', 'name', 'mail'],
+  ['1', 'name1', 'mail1'],
+  ['2', 'name1', 'mail2'],
+  ['3', 'name3', 'mail3']
+]
+```
+
 ## Use original Google_Service_Sheets
 ```php
 $sheets->spreadsheets->...
