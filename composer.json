@@ -1,0 +1,37 @@
+{
+  "name": "revolution/laravel-google-sheets",
+  "description": "Google Sheets API v4",
+  "keywords": ["google", "sheets", "laravel"],
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/kawax/google-apiclient"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "google/apiclient": "^2.0"
+  },
+  "require-dev": {
+    "pulkitjalan/google-apiclient": "dev-master",
+    "phpunit/phpunit": "5.*",
+    "mockery/mockery": "0.9.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "GoogleSheets\\": "src/GoogleSheets/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GoogleSheets\\tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "kawax",
+      "email": "kawaxbiz@gmail.com"
+    }
+  ]
+}
