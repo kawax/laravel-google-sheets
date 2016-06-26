@@ -10,7 +10,7 @@ composer require revolution/laravel-google-sheets
 ```
 
 ### Laravel
-```
+```json
     "repositories": [
         {
             "type": "vcs",
@@ -21,7 +21,6 @@ composer require revolution/laravel-google-sheets
 
 ```
 composer require pulkitjalan/google-apiclient:dev-master
-
 ```
 
 config/google.php  
@@ -30,11 +29,11 @@ https://github.com/kawax/google-apiclient
 
 config/app.php  
 
-```
+```php
 GoogleSheets\Providers\SheetsServiceProvider::class,
 ```
 
-```
+```php
 'Sheets' => GoogleSheets\Facades\Sheets::class,
 ```
 
@@ -46,7 +45,7 @@ GoogleSheets\Providers\SheetsServiceProvider::class,
 |2|name2|mail2|
 
 ### Laravel example1
-```
+```php
 use Sheets;
 use Google;
 
@@ -63,7 +62,7 @@ $values = Sheets::sheet('Sheet 1')->all();
 ```
 
 ### Laravel example2
-```
+```php
 // get() returns Laravel Collection
 $values = Sheets::sheet('Sheet 1')->get();
 
@@ -77,14 +76,14 @@ $sheets->toArray()
 
 ```
 view
-```
+```php
 @foreach($sheets as $sheet)
   {{ array_get($sheet, 'name') }}
 @endforeach
 ```
 
 ### example3 not Laravel
-```
+```php
 use GoogleSheets\Sheets;
 
 $client = Google_Client();
@@ -100,7 +99,7 @@ $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
 ```
 
 ## Use original Google_Service_Sheets
-```
+```php
 $sheets->spreadsheets->...
 $sheets->spreadsheets_sheets->...
 $sheets->spreadsheets_values->...
