@@ -34,7 +34,6 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
 
 //        dd($collection);
         $this->assertEquals('name1', $collection->first()['name']);
-
     }
 
     public function testCollection2()
@@ -49,7 +48,22 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
 
 //        dd($collection);
         $this->assertNotNull($collection->last()['mail']);
+    }
 
+    public function testCollection3()
+    {
+        $rows = collect([
+            ['id', 'name', 'mail'],
+            ['1', 'name1', 'mail1'],
+            ['2', 'name2', 'mail3']
+        ]);
+
+        $header = $rows->pull(0);
+
+        $collection = $this->laravel->collection($header, $rows);
+
+//        dd($collection);
+        $this->assertEquals('mail3', $collection->last()['mail']);
     }
 
 }

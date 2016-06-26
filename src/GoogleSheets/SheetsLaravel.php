@@ -1,11 +1,12 @@
 <?php
 namespace GoogleSheets;
 
+use Illuminate\Support\Collection;
 
 class SheetsLaravel extends Sheets
 {
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function get()
     {
@@ -16,12 +17,17 @@ class SheetsLaravel extends Sheets
 
     /**
      * @param array $header
-     * @param array $rows
-     * @return \Illuminate\Support\Collection
+     * @param array|Collection $rows
+     *
+     * @return Collection
      */
     public function collection($header, $rows)
     {
         $collection = [];
+
+        if ($rows instanceof Collection) {
+            $rows = $rows->toArray();
+        }
 
         foreach ($rows as $row) {
             $col = [];

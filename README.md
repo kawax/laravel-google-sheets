@@ -64,11 +64,11 @@ $values = Sheets::sheet('Sheet 1')->all();
 ### Laravel example2
 ```php
 // get() returns Laravel Collection
-$values = Sheets::sheet('Sheet 1')->get();
+$rows = Sheets::sheet('Sheet 1')->get();
 
-$head = $values->pull(0);
-$sheets = Sheets::collection($head, $values->toArray());
-$sheets->toArray()
+$header = $rows->pull(0);
+$values = Sheets::collection($header, $rows);
+$values->toArray()
 [
   ['id' => '1', 'name' => 'name1', 'mail' => 'mail1'],
   ['id' => '2', 'name' => 'name2', 'mail' => 'mail2']
@@ -77,8 +77,8 @@ $sheets->toArray()
 ```
 view
 ```php
-@foreach($sheets as $sheet)
-  {{ array_get($sheet, 'name') }}
+@foreach($values as $value)
+  {{ array_get($value, 'name') }}
 @endforeach
 ```
 
