@@ -1,5 +1,6 @@
 # Google Sheets API v4 for Laravel
 
+[![Build Status](https://travis-ci.org/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.org/kawax/laravel-google-sheets)
 
 ## Install
 
