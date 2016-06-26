@@ -20,7 +20,7 @@ composer require revolution/laravel-google-sheets
 ```
 
 ```
-composer require pulkitjalan/google-apiclient:dev-master
+composer require pulkitjalan/google-apiclient:^3.0
 ```
 
 config/google.php  

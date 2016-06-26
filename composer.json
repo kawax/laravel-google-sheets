@@ -14,7 +14,7 @@
     "google/apiclient": "^2.0"
   },
   "require-dev": {
-    "pulkitjalan/google-apiclient": "dev-master",
+    "pulkitjalan/google-apiclient": "^3.0",
     "phpunit/phpunit": "5.*",
     "mockery/mockery": "0.9.*"
   },
