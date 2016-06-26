@@ -24,7 +24,6 @@ composer require pulkitjalan/google-apiclient:^3.0
 ```
 
 config/google.php  
-https://github.com/pulkitjalan/google-apiclient  
 https://github.com/kawax/google-apiclient
 
 config/app.php  
