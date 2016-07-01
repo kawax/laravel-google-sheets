@@ -109,7 +109,7 @@ class Sheets
      * @param string $property
      * @return mixed
      *
-     * @throws \BadMethodCallException
+     * @throws \InvalidArgumentException
      */
     public function __get($property)
     {
@@ -117,7 +117,7 @@ class Sheets
             return $this->service->{$property};
         }
 
-        throw new \BadMethodCallException(sprintf('Property [%s] does not exist.', $property));
+        throw new \InvalidArgumentException(sprintf('Property [%s] does not exist.', $property));
     }
 
 
