@@ -19,7 +19,6 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**

@@ -208,7 +208,6 @@ class SheetsTest extends PHPUnit_Framework_TestCase
 
 //        dd($sheets);
         $this->assertEquals(3, count($sheets));
-
     }
 
     public function testSheetValuesMajorDimension()
@@ -243,6 +242,4 @@ class SheetsTest extends PHPUnit_Framework_TestCase
 //        dd($response);
         $this->assertEquals($this->spreadsheetId, $response->getSpreadsheetId());
     }
-
-
 }

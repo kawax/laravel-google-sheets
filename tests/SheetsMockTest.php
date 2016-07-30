@@ -73,5 +73,4 @@ class SheetsMockTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('test!A1', $this->sheet->ranges());
         $this->assertInstanceOf('Google_Service_Sheets_UpdateValuesResponse', $values);
     }
-
 }

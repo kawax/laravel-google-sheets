@@ -43,5 +43,4 @@ class SheetsLaravel extends Sheets
 
         return collect($collection);
     }
-
 }
