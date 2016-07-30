@@ -65,5 +65,4 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
 //        dd($collection);
         $this->assertEquals('mail3', $collection->last()['mail']);
     }
-
 }
