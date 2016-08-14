@@ -1,20 +1,20 @@
 <?php
 namespace GoogleSheet\tests;
 
-use Mockery as m;
+//use Mockery as m;
 use PHPUnit_Framework_TestCase;
 
-use GoogleSheets\SheetsLaravel;
+use GoogleSheets\Sheets;
 
-class SheetsLaravelTest extends PHPUnit_Framework_TestCase
+class SheetsCollectionTest extends PHPUnit_Framework_TestCase
 {
-    protected $laravel;
+    protected $sheet;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->laravel = new SheetsLaravel();
+        $this->sheet = new Sheets();
     }
 
 //    public function tearDown()
@@ -30,7 +30,7 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
             ['2', 'name2', 'mail2']
         ];
 
-        $collection = $this->laravel->collection($header, $rows);
+        $collection = $this->sheet->collection($header, $rows);
 
 //        dd($collection);
         $this->assertEquals('name1', $collection->first()['name']);
@@ -44,7 +44,7 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
             ['2', 'name2']
         ];
 
-        $collection = $this->laravel->collection($header, $rows);
+        $collection = $this->sheet->collection($header, $rows);
 
 //        dd($collection);
         $this->assertNotNull($collection->last()['mail']);
@@ -60,7 +60,7 @@ class SheetsLaravelTest extends PHPUnit_Framework_TestCase
 
         $header = $rows->pull(0);
 
-        $collection = $this->laravel->collection($header, $rows);
+        $collection = $this->sheet->collection($header, $rows);
 
 //        dd($collection);
         $this->assertEquals('mail3', $collection->last()['mail']);

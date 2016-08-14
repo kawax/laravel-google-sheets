@@ -3,18 +3,11 @@
   "description": "Google Sheets API v4",
   "keywords": ["google", "sheets", "laravel"],
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/kawax/google-apiclient"
-    }
-  ],
   "require": {
     "php": ">=5.5.9",
-    "google/apiclient": "^2.0"
+    "pulkitjalan/google-apiclient": "3.*"
   },
   "require-dev": {
-    "pulkitjalan/google-apiclient": "^3.0",
     "phpunit/phpunit": "5.*",
     "mockery/mockery": "0.9.*"
   },

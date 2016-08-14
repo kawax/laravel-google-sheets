@@ -13,6 +13,6 @@ class Sheets extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'google.sheets';
+        return \GoogleSheets\Sheets::class;
     }
 }

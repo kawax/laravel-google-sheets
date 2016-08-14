@@ -3,7 +3,7 @@ namespace GoogleSheets;
 
 use Illuminate\Support\Collection;
 
-class SheetsLaravel extends Sheets
+trait SheetsCollection
 {
     /**
      * @return \Illuminate\Support\Collection

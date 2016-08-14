@@ -3,7 +3,7 @@ namespace GoogleSheets\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use GoogleSheets\SheetsLaravel;
+use GoogleSheets\Sheets;
 
 class SheetsServiceProvider extends ServiceProvider
 {
@@ -28,8 +28,8 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('google.sheets', function ($app) {
-            return new SheetsLaravel();
+        $this->app->singleton(Sheets::class, function ($app) {
+            return new Sheets();
         });
     }
 
@@ -40,6 +40,6 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['google.sheets'];
+        return [Sheets::class];
     }
 }

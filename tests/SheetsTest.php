@@ -55,12 +55,12 @@ class SheetsTest extends PHPUnit_Framework_TestCase
         }
 
         $this->client = new Client([
-            'service' => [
-                'enable' => true,
-                'scopes' => [Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS],
-                'credentials' => $config,
-            ]
-        ]);
+                                       'scopes'  => [Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS],
+                                       'service' => [
+                                           'enable' => true,
+                                           'file'   => $config,
+                                       ],
+                                   ]);
 
         $this->sheet = new Sheets();
 
@@ -100,7 +100,7 @@ class SheetsTest extends PHPUnit_Framework_TestCase
 
         $properties = $this->sheet->spreadsheet($this->spreadsheetId)->spreadsheetProperties();
 
-//        dd($properties);
+        //        dd($properties);
 
         $this->assertNotEmpty($properties->title);
     }
@@ -113,11 +113,10 @@ class SheetsTest extends PHPUnit_Framework_TestCase
 
         $properties = $this->sheet->spreadsheet($this->spreadsheetId)->sheet($this->sheetTitle)->sheetProperties();
 
-//        dd($properties);
+        //        dd($properties);
 
         $this->assertEquals($this->sheetTitle, $properties->title);
     }
-
 
     public function testSheetList()
     {
@@ -206,7 +205,7 @@ class SheetsTest extends PHPUnit_Framework_TestCase
             ->range('A1:E3')
             ->all();
 
-//        dd($sheets);
+        //        dd($sheets);
         $this->assertEquals(3, count($sheets));
     }
 
@@ -223,7 +222,7 @@ class SheetsTest extends PHPUnit_Framework_TestCase
             ->majorDimension('COLUMNS')
             ->all();
 
-//        dd($sheets);
+        //        dd($sheets);
         $this->assertEquals(5, count($sheets));
     }
 
@@ -239,7 +238,7 @@ class SheetsTest extends PHPUnit_Framework_TestCase
             ->range('A1:B3')
             ->update([['test', 'test2'], ['test3']]);
 
-//        dd($response);
+        //        dd($response);
         $this->assertEquals($this->spreadsheetId, $response->getSpreadsheetId());
     }
 }

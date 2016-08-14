@@ -10,29 +10,17 @@ composer require revolution/laravel-google-sheets
 ```
 
 ### Laravel
-```json
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/kawax/google-apiclient"
-        }
-    ],
-```
-
-```
-composer require pulkitjalan/google-apiclient:^3.0
-```
-
 config/google.php  
-https://github.com/kawax/google-apiclient
+https://github.com/pulkitjalan/google-apiclient
 
 config/app.php  
-
 ```php
+PulkitJalan\Google\GoogleServiceProvider::class,
 GoogleSheets\Providers\SheetsServiceProvider::class,
 ```
 
 ```php
+'Google' => PulkitJalan\Google\Facades\Google::class,
 'Sheets' => GoogleSheets\Facades\Sheets::class,
 ```
 
@@ -42,6 +30,8 @@ GoogleSheets\Providers\SheetsServiceProvider::class,
 |---|---|---|
 |1|name1|mail1|
 |2|name2|mail2|
+
+https://docs.google.com/spreadsheets/d/{spreadsheetID}/...
 
 ### Laravel example1
 ```php
@@ -85,11 +75,12 @@ view
 ```php
 use GoogleSheets\Sheets;
 
-$client = Google_Client();
+$client = \Google_Client();
 $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
 // setup Google Client
+// ...
 
-$service = new Google_Service_Sheets($client);
+$service = new \Google_Service_Sheets($client);
 
 $sheets = new Sheets();
 $sheets->setService($service);
@@ -129,7 +120,48 @@ Sheets::getService()->spreadsheets->...
 ```
 see https://github.com/google/google-api-php-client-services/blob/master/Sheets.php
 
+## Upgrade
 
+### to 2.0 from 1.0.x
+- Remove "repositories" from composer.json
+```json
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kawax/google-apiclient"
+        }
+    ],
+```
+- Change composer.json  
+Bump version
+```json
+    "require": {
+        "revolution/laravel-google-sheets": "^2.0"
+    }
+```
+Remove
+```
+        "pulkitjalan/google-apiclient": "^3.0",
+```
+- Remove "vendor" dir.
+- Remove composer.lock
+- Clear composer cache. `composer clear-cache`
+- `composer install`
+- Change config/google.php  
+```
+    'service' =>  [
+        /*
+        | Enable service account auth or not.
+        */
+        'enabled' => false,
+
+        /*
+        | Path to service account json file
+        */
+        'file' => '',
+    ],
+```
+https://github.com/pulkitjalan/google-apiclient#usage
 
 ## LICENSE
 MIT  

@@ -5,7 +5,7 @@ use \Google_Service_Sheets;
 
 class Sheets
 {
-    use SheetsValues, SheetsDrive, SheetsProperties;
+    use SheetsValues, SheetsDrive, SheetsProperties, SheetsCollection;
 
     /**
      * @var \Google_Service_Sheets
