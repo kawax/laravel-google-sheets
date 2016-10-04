@@ -241,4 +241,21 @@ class SheetsTest extends PHPUnit_Framework_TestCase
         //        dd($response);
         $this->assertEquals($this->spreadsheetId, $response->getSpreadsheetId());
     }
+
+    public function testSheetAppend()
+    {
+        if (!$this->checkDevConfig()) {
+            return;
+        }
+
+        $response = $this->sheet
+            ->spreadsheet($this->spreadsheetId)
+            ->sheet('test')
+            ->range('')
+            ->append([['test_append']]);
+
+        //                dd($response);
+        $this->assertEquals(1, $response->updates->updatedRows);
+    }
+
 }

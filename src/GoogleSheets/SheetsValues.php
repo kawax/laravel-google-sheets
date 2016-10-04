@@ -49,8 +49,9 @@ trait SheetsValues
     }
 
     /**
-     * @param array $value
+     * @param array  $value
      * @param string $valueInputOption
+     *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
     public function update($value, $valueInputOption = 'RAW')
@@ -68,6 +69,32 @@ trait SheetsValues
 
         $response = $this->service->spreadsheets_values
             ->batchUpdate($this->spreadsheetId, $batch);
+
+        return $response;
+    }
+
+    /**
+     * @param array  $value
+     * @param string $valueInputOption
+     * @param string $insertDataOption
+     *
+     * @return mixed|\Google_Service_Sheets_AppendValuesResponse
+     */
+    public function append($value, $valueInputOption = 'RAW', $insertDataOption = 'OVERWRITE')
+    {
+        $range = $this->ranges();
+
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues($value);
+        $valueRange->setRange($range);
+
+        $optParams = [
+            'valueInputOption' => $valueInputOption,
+            'insertDataOption' => $insertDataOption,
+        ];
+
+        $response = $this->service->spreadsheets_values
+            ->append($this->spreadsheetId, $range, $valueRange, $optParams);
 
         return $response;
     }
@@ -92,6 +119,7 @@ trait SheetsValues
 
     /**
      * @param string $range
+     *
      * @return $this
      */
     public function range($range)
@@ -103,6 +131,7 @@ trait SheetsValues
 
     /**
      * @param string $majorDimension
+     *
      * @return $this
      */
     public function majorDimension($majorDimension)
@@ -114,6 +143,7 @@ trait SheetsValues
 
     /**
      * @param string $dateTimeRenderOption
+     *
      * @return $this
      */
     public function dateTimeRenderOption($dateTimeRenderOption)

@@ -109,6 +109,18 @@ $values = Sheets::range('')->all();
 ]
 ```
 
+### example6 append
+```php
+Sheets::sheet('Sheet 1')->range('')->append([['3', 'name3', 'mail3']]);
+$values = Sheets::range('')->all();
+[
+  ['id', 'name', 'mail'],
+  ['1', 'name1', 'mail1'],
+  ['2', 'name1', 'mail2'],
+  ['3', 'name3', 'mail3']
+]
+```
+
 ## Use original Google_Service_Sheets
 ```php
 $sheets->spreadsheets->...
