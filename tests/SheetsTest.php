@@ -257,5 +257,4 @@ class SheetsTest extends PHPUnit_Framework_TestCase
         //                dd($response);
         $this->assertEquals(1, $response->updates->updatedRows);
     }
-
 }
