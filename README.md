@@ -23,7 +23,7 @@ GoogleSheets\Providers\SheetsServiceProvider::class,
 'Google' => PulkitJalan\Google\Facades\Google::class,
 'Sheets' => GoogleSheets\Facades\Sheets::class,
 ```
-
+ run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
 ## Usage
 
 |id|name|mail|
