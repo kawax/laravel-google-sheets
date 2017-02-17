@@ -15,17 +15,13 @@ composer require revolution/laravel-google-sheets
 
 2. Add to ```providers``` in ```config/app.php```
 
-```php
-PulkitJalan\Google\GoogleServiceProvider::class,
-GoogleSheets\Providers\SheetsServiceProvider::class,
-```
+        PulkitJalan\Google\GoogleServiceProvider::class,
+        GoogleSheets\Providers\SheetsServiceProvider::class,
 
 3. Add to ```aliases``` in ```config/app.php```
 
-```php
-'Google' => PulkitJalan\Google\Facades\Google::class,
-'Sheets' => GoogleSheets\Facades\Sheets::class,
-```
+        'Google' => PulkitJalan\Google\Facades\Google::class,
+        'Sheets' => GoogleSheets\Facades\Sheets::class,
 
 4. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
 
