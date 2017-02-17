@@ -25,6 +25,18 @@ composer require revolution/laravel-google-sheets
 
 4. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
 
+5. (Optional) Get API Credentials from https://developers.google.com/console
+
+6. Configure .env as needed
+
+        GOOGLE_APPLICATION_NAME=
+        GOOGLE_CLIENT_ID=
+        GOOGLE_CLIENT_SECRET=
+        GOOGLE_REDIRECT=
+        GOOGLE_DEVELOPER_KEY=
+        GOOGLE_SERVICE_ENABLED=
+        GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=
+
 ## Usage
 
 |id|name|mail|
