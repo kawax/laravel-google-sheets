@@ -10,20 +10,33 @@ composer require revolution/laravel-google-sheets
 ```
 
 ### Laravel
-config/google.php  
-https://github.com/pulkitjalan/google-apiclient
 
-config/app.php  
-```php
-PulkitJalan\Google\GoogleServiceProvider::class,
-GoogleSheets\Providers\SheetsServiceProvider::class,
-```
+1. Review ```config/google.php`` in https://github.com/pulkitjalan/google-apiclient#usage
 
-```php
-'Google' => PulkitJalan\Google\Facades\Google::class,
-'Sheets' => GoogleSheets\Facades\Sheets::class,
-```
- run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
+2. Add to ```providers``` in ```config/app.php```
+
+        PulkitJalan\Google\GoogleServiceProvider::class,
+        GoogleSheets\Providers\SheetsServiceProvider::class,
+
+3. Add to ```aliases``` in ```config/app.php```
+
+        'Google' => PulkitJalan\Google\Facades\Google::class,
+        'Sheets' => GoogleSheets\Facades\Sheets::class,
+
+4. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
+
+5. (Optional) Get API Credentials from https://developers.google.com/console
+
+6. Configure .env as needed
+
+        GOOGLE_APPLICATION_NAME=
+        GOOGLE_CLIENT_ID=
+        GOOGLE_CLIENT_SECRET=
+        GOOGLE_REDIRECT=
+        GOOGLE_DEVELOPER_KEY=
+        GOOGLE_SERVICE_ENABLED=
+        GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=
+
 ## Usage
 
 |id|name|mail|
