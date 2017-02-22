@@ -257,4 +257,22 @@ class SheetsTest extends PHPUnit_Framework_TestCase
         //                dd($response);
         $this->assertEquals(1, $response->updates->updatedRows);
     }
+
+    public function testSheetsClear()
+    {
+        if (!$this->checkDevConfig()) {
+            return;
+        }
+
+        // load data to delete
+        $this->testSheetAppend();
+
+        $response = $this->sheet
+            ->spreadsheet($this->spreadsheetId)
+            ->sheet('test')
+            ->range('')
+            ->clear();
+        $this->assertEquals("Sheet1!A1:Z1000", $response->clearedRange);
+    }
+
 }
