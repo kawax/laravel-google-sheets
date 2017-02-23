@@ -74,6 +74,21 @@ trait SheetsValues
     }
 
     /**
+     * @return mixed|\Google_Service_Sheets_ClearValuesResponse
+     */
+    public function clear()
+    {
+        $range = $this->ranges();
+
+        $clear = new \Google_Service_Sheets_ClearValuesRequest();
+
+        $response = $this->service->spreadsheets_values
+            ->clear($this->spreadsheetId, $range, $clear);
+
+        return $response;
+    }
+
+    /**
      * @param array  $value
      * @param string $valueInputOption
      * @param string $insertDataOption
