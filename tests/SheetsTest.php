@@ -264,15 +264,13 @@ class SheetsTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        // load data to delete
-        $this->testSheetAppend();
-
         $response = $this->sheet
             ->spreadsheet($this->spreadsheetId)
             ->sheet('test')
             ->range('')
             ->clear();
-        $this->assertEquals("Sheet1!A1:Z1000", $response->clearedRange);
+
+        $this->assertEquals("test!A1:Z1000", $response->clearedRange);
     }
 
 }
