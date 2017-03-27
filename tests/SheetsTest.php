@@ -48,8 +48,8 @@ class SheetsTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         if ($this->checkDevConfig()) {
-            $config = __DIR__ . '/data/dev-credentials.json';
-            include __DIR__ . '/data/dev-config.php';
+            $config = __DIR__ . '/data/test-credentials.json';
+            include __DIR__ . '/data/test-config.php';
         } else {
             $config = __DIR__ . '/data/service-account.json';
         }
@@ -79,7 +79,7 @@ class SheetsTest extends PHPUnit_Framework_TestCase
      */
     private function checkDevConfig()
     {
-        return file_exists(__DIR__ . '/data/dev-config.php');
+        return file_exists(__DIR__ . '/data/test-config.php');
     }
 
     public function testSheetsInstance()
@@ -90,6 +90,18 @@ class SheetsTest extends PHPUnit_Framework_TestCase
     public function testService()
     {
         $this->assertInstanceOf('Google_Service_Sheets', $this->sheet->getService());
+    }
+
+    public function testSpreadsheetByTitle()
+    {
+        if (!$this->checkDevConfig()) {
+            return;
+        }
+
+        $this->sheet->setDriveService($this->client->make('drive'));
+        $properties = $this->sheet->spreadsheetByTitle($this->spreadsheetTitle)->spreadsheetProperties();
+
+        $this->assertEquals($this->spreadsheetTitle, $properties->title);
     }
 
     public function testSpreadsheetProperties()

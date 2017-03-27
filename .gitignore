@@ -2,4 +2,5 @@
 composer.lock
 .DS_Store
 /build
-dev-*
+tests/data/test*
+!tests/data/test-config-sample.php

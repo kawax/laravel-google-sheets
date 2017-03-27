@@ -1,4 +1,5 @@
 <?php
+
 namespace GoogleSheets;
 
 use \Google_Service_Drive;
@@ -21,7 +22,13 @@ trait SheetsDrive
 
         $list = [];
 
-        $files = $this->drive->files->listFiles(['q' => "mimeType = 'application/vnd.google-apps.spreadsheet'"])->getFiles();
+        $files = $this->drive
+            ->files
+            ->listFiles([
+                            'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
+                        ])
+            ->getFiles();
+
         foreach ($files as $file) {
             $list[$file->id] = $file->name;
         }
