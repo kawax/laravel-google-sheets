@@ -56,7 +56,7 @@ class Sheets
     public function spreadsheetByTitle($title)
     {
         $list = $this->spreadsheetList();
-        $id = array_get($list, $title);
+        $id = array_get(array_flip($list), $title);
 
         $this->spreadsheetId = $id;
 
