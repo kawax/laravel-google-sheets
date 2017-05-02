@@ -11,7 +11,7 @@ composer require revolution/laravel-google-sheets
 
 ### Laravel
 
-1. Review ```config/google.php`` in https://github.com/pulkitjalan/google-apiclient#usage
+1. Review `config/google.php` in https://github.com/pulkitjalan/google-apiclient#usage
 
 2. Add to ```providers``` in ```config/app.php```
 
