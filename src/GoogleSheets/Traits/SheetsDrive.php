@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleSheets;
+namespace GoogleSheets\Traits;
 
 use \Google_Service_Drive;
 

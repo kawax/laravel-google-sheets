@@ -1,11 +1,15 @@
 <?php
+
 namespace GoogleSheets;
 
 use \Google_Service_Sheets;
 
 class Sheets
 {
-    use SheetsValues, SheetsDrive, SheetsProperties, SheetsCollection;
+    use Traits\SheetsValues;
+    use Traits\SheetsDrive;
+    use Traits\SheetsProperties;
+    use Traits\SheetsCollection;
 
     /**
      * @var \Google_Service_Sheets
@@ -39,7 +43,8 @@ class Sheets
     }
 
     /**
-     * @param $spreadsheetId
+     * @param string $spreadsheetId
+     *
      * @return $this
      */
     public function spreadsheet($spreadsheetId)
@@ -51,6 +56,7 @@ class Sheets
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function spreadsheetByTitle($title)
@@ -64,7 +70,8 @@ class Sheets
     }
 
     /**
-     * @param $sheet
+     * @param string $sheet
+     *
      * @return $this
      */
     public function sheet($sheet)
@@ -75,7 +82,8 @@ class Sheets
     }
 
     /**
-     * @param $sheetId
+     * @param string $sheetId
+     *
      * @return $this
      */
     public function sheetById($sheetId)
@@ -107,6 +115,7 @@ class Sheets
 
     /**
      * @param string $property
+     *
      * @return mixed
      *
      * @throws \InvalidArgumentException
@@ -120,12 +129,11 @@ class Sheets
         throw new \InvalidArgumentException(sprintf('Property [%s] does not exist.', $property));
     }
 
-
     /**
      * Magic call method.
      *
      * @param string $method
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @throws \BadMethodCallException
      *

@@ -2,11 +2,11 @@
 namespace GoogleSheet\tests;
 
 //use Mockery as m;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 use GoogleSheets\Sheets;
 
-class SheetsCollectionTest extends PHPUnit_Framework_TestCase
+class SheetsCollectionTest extends TestCase
 {
     protected $sheet;
 

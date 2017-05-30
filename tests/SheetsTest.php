@@ -3,7 +3,7 @@
 namespace GoogleSheet\tests;
 
 use Mockery;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 use Google_Service_Sheets;
 
@@ -11,7 +11,7 @@ use PulkitJalan\Google\Client;
 
 use GoogleSheets\Sheets;
 
-class SheetsTest extends PHPUnit_Framework_TestCase
+class SheetsTest extends TestCase
 {
     /**
      * @var Sheets
