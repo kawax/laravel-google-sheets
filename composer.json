@@ -1,7 +1,11 @@
 {
   "name": "revolution/laravel-google-sheets",
   "description": "Google Sheets API v4",
-  "keywords": ["google", "sheets", "laravel"],
+  "keywords": [
+    "google",
+    "sheets",
+    "laravel"
+  ],
   "license": "MIT",
   "require": {
     "php": "^5.6.4 || ^7.0",
@@ -26,5 +30,15 @@
       "name": "kawax",
       "email": "kawaxbiz@gmail.com"
     }
-  ]
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "GoogleSheets\\Providers\\SheetsServiceProvider"
+      ],
+      "aliases": {
+        "Sheets": "GoogleSheets\\Facades\\Sheets"
+      }
+    }
+  }
 }
