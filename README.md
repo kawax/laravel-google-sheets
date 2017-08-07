@@ -145,6 +145,15 @@ Sheets::getService()->spreadsheets->...
 ```
 see https://github.com/google/google-api-php-client-services/blob/master/Sheets.php
 
+## How to resolve invalid_scope?
+```php
+$client = Google::getClient();
+$client->setScopes([
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/spreadsheets'
+]);
+```
+
 ## Upgrade
 
 ### to 2.0 from 1.0.x
