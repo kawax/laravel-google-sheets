@@ -1,8 +1,8 @@
 <?php
 
-namespace GoogleSheets\Traits;
+namespace Revolution\Google\Sheets\Traits;
 
-use \Google_Service_Drive;
+use Google_Service_Drive;
 
 trait SheetsDrive
 {
@@ -14,7 +14,7 @@ trait SheetsDrive
     /**
      * @return array
      */
-    public function spreadsheetList()
+    public function spreadsheetList(): array
     {
         if (is_null($this->drive)) {
             return [];
@@ -37,7 +37,7 @@ trait SheetsDrive
     }
 
     /**
-     * @param Google_Service_Drive\\Google_Service $drive
+     * @param Google_Service_Drive|\Google_Service $drive
      */
     public function setDriveService($drive)
     {

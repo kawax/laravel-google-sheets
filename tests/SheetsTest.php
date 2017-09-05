@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleSheet\tests;
+namespace Revolution\Google\Sheets\tests;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -9,7 +9,7 @@ use Google_Service_Sheets;
 
 use PulkitJalan\Google\Client;
 
-use GoogleSheets\Sheets;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsTest extends TestCase
 {
@@ -84,7 +84,7 @@ class SheetsTest extends TestCase
 
     public function testSheetsInstance()
     {
-        $this->assertInstanceOf('GoogleSheets\Sheets', $this->sheet);
+        $this->assertInstanceOf('Revolution\Google\Sheets\Sheets', $this->sheet);
     }
 
     public function testService()

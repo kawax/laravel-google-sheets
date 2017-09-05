@@ -1,5 +1,5 @@
 <?php
-namespace GoogleSheets\Traits;
+namespace Revolution\Google\Sheets\Traits;
 
 trait SheetsProperties
 {

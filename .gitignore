@@ -1,6 +1,5 @@
 /vendor
 composer.lock
 .DS_Store
-/build
 tests/data/test*
 !tests/data/test-config-sample.php

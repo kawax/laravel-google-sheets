@@ -1,5 +1,5 @@
 <?php
-namespace GoogleSheets\Traits;
+namespace Revolution\Google\Sheets\Traits;
 
 use Illuminate\Support\Collection;
 
@@ -8,7 +8,7 @@ trait SheetsCollection
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function get()
+    public function get(): Collection
     {
         $values = $this->all();
 
@@ -21,7 +21,7 @@ trait SheetsCollection
      *
      * @return \Illuminate\Support\Collection
      */
-    public function collection($header, $rows)
+    public function collection(array $header, $rows): Collection
     {
         $collection = [];
 

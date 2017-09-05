@@ -1,9 +1,9 @@
 <?php
-namespace GoogleSheets\Providers;
+namespace Revolution\Google\Sheets\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use GoogleSheets\Sheets;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsServiceProvider extends ServiceProvider
 {

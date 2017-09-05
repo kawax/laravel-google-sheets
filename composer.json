@@ -8,21 +8,21 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^5.6.4 || ^7.0",
-    "pulkitjalan/google-apiclient": "3.*"
+    "php": ">=7.0.0",
+    "pulkitjalan/google-apiclient": "^3.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7 || ^6.0",
+    "phpunit/phpunit": "^6.0",
     "mockery/mockery": "0.9.*"
   },
   "autoload": {
     "psr-4": {
-      "GoogleSheets\\": "src/GoogleSheets/"
+      "Revolution\\Google\\Sheets\\": "src/GoogleSheets/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "GoogleSheets\\tests\\": "tests/"
+      "Revolution\\Google\\Sheets\\tests\\": "tests/"
     }
   },
   "authors": [
@@ -34,10 +34,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "GoogleSheets\\Providers\\SheetsServiceProvider"
+        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider"
       ],
       "aliases": {
-        "Sheets": "GoogleSheets\\Facades\\Sheets"
+        "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"
       }
     }
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleSheets\Facades;
+namespace Revolution\Google\Sheets\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -13,6 +13,6 @@ class Sheets extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \GoogleSheets\Sheets::class;
+        return \Revolution\Google\Sheets\Sheets::class;
     }
 }

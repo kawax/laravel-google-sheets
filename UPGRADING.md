@@ -1,5 +1,13 @@
 # UPGRADING
 
+## 2.x to 3.0
+- require `PHP>=7.0` and Laravel 5.5
+- Change namespace to `Revolution\Google\Sheets\`. It will auto resolved by Package discovery.
+- composer.json
+```
+        "revolution/laravel-google-sheets": "^3.0"
+```
+
 ## 1.0.x to 2.0
 - Remove "repositories" from composer.json
 ```json

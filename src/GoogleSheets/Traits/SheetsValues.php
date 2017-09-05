@@ -1,5 +1,5 @@
 <?php
-namespace GoogleSheets\Traits;
+namespace Revolution\Google\Sheets\Traits;
 
 trait SheetsValues
 {
@@ -26,7 +26,7 @@ trait SheetsValues
     /**
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         $query = $this->query();
 
@@ -41,7 +41,7 @@ trait SheetsValues
     /**
      * @return array
      */
-    public function first()
+    public function first(): array
     {
         $values = $this->all();
 
@@ -54,7 +54,7 @@ trait SheetsValues
      *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
-    public function update($value, $valueInputOption = 'RAW')
+    public function update(array $value, string $valueInputOption = 'RAW')
     {
         $range = $this->ranges();
 
@@ -95,7 +95,7 @@ trait SheetsValues
      *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
-    public function append($value, $valueInputOption = 'RAW', $insertDataOption = 'OVERWRITE')
+    public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
     {
         $range = $this->ranges();
 
@@ -137,7 +137,7 @@ trait SheetsValues
      *
      * @return $this
      */
-    public function range($range)
+    public function range(string $range)
     {
         $this->range = $range;
 
@@ -149,7 +149,7 @@ trait SheetsValues
      *
      * @return $this
      */
-    public function majorDimension($majorDimension)
+    public function majorDimension(string $majorDimension)
     {
         $this->majorDimension = $majorDimension;
 
@@ -161,7 +161,7 @@ trait SheetsValues
      *
      * @return $this
      */
-    public function dateTimeRenderOption($dateTimeRenderOption)
+    public function dateTimeRenderOption(string $dateTimeRenderOption)
     {
         $this->dateTimeRenderOption = $dateTimeRenderOption;
 
@@ -171,7 +171,7 @@ trait SheetsValues
     /**
      * @return array
      */
-    private function query()
+    private function query(): array
     {
         $query = [];
 

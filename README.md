@@ -2,10 +2,9 @@
 
 [![Build Status](https://travis-ci.org/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.org/kawax/laravel-google-sheets)
 
-## Prior notice 3.0
-
-- require `PHP>=7.0` and Laravel 5.5
-- Change namespace. maybe `Revolution\Google\Sheets\`. It will auto resolved by Package discovery.
+## Requirements
+- PHP >= 7.0
+- Laravel >= 5.5 (recommended)
 
 ## Installation
 
@@ -18,39 +17,26 @@ composer require revolution/laravel-google-sheets
 
 1. This package depends on https://github.com/pulkitjalan/google-apiclient
 
-2. Add to `providers` in `config/app.php` (not necessary in Laravel 5.5)
+2. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
 
-```
-        PulkitJalan\Google\GoogleServiceProvider::class,
-        GoogleSheets\Providers\SheetsServiceProvider::class,
-```
+        // config/google.php
+        
+        // OAuth
+        'client_id'        => env('GOOGLE_CLIENT_ID', ''),
+        'client_secret'    => env('GOOGLE_CLIENT_SECRET', ''),
+        'redirect_uri'     => env('GOOGLE_REDIRECT', ''),
+        'scopes'           => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
+        'access_type'      => 'online',
+        'approval_prompt'  => 'auto',
+        'prompt'           => 'consent', //"none", "consent", "select_account" default:none
+        
+        // or Service Account
+        'file'    => storage_path('credentials.json'),
+        'enable'  => env('GOOGLE_SERVICE_ENABLED', true),
 
+3. (Optional) Get API Credentials from https://developers.google.com/console
 
-3. Add to `aliases` in `config/app.php` (not necessary in Laravel 5.5)
-
-```
-        'Google' => PulkitJalan\Google\Facades\Google::class,
-        'Sheets' => GoogleSheets\Facades\Sheets::class,
-```
-
-
-4. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
-
-Edit `config/google.php`
-
-```php
-    'client_id'        => env('GOOGLE_CLIENT_ID', ''),
-    'client_secret'    => env('GOOGLE_CLIENT_SECRET', ''),
-    'redirect_uri'     => env('GOOGLE_REDIRECT', ''),
-    'scopes'           => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
-    'access_type'      => 'online',
-    'approval_prompt'  => 'auto',
-    'prompt'           => 'consent', //"none", "consent", "select_account" default:none
-```
-
-5. (Optional) Get API Credentials from https://developers.google.com/console
-
-6. Configure .env as needed
+4. Configure .env as needed
 
         GOOGLE_APPLICATION_NAME=
         GOOGLE_CLIENT_ID=
@@ -109,7 +95,7 @@ view
 
 ### example3 not Laravel
 ```php
-use GoogleSheets\Sheets;
+use Revolution\Google\Sheets\Sheets;
 
 $client = \Google_Client();
 $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);

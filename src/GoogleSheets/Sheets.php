@@ -1,10 +1,10 @@
 <?php
 
-namespace GoogleSheets;
+namespace Revolution\Google\Sheets;
 
-use \Google_Service_Sheets;
+use Google_Service_Sheets;
 
-class Sheets
+class Sheets implements SheetsInterface
 {
     use Traits\SheetsValues;
     use Traits\SheetsDrive;
@@ -37,7 +37,7 @@ class Sheets
     /**
      * @return Google_Service_Sheets
      */
-    public function getService()
+    public function getService(): Google_Service_Sheets
     {
         return $this->service;
     }
@@ -47,7 +47,7 @@ class Sheets
      *
      * @return $this
      */
-    public function spreadsheet($spreadsheetId)
+    public function spreadsheet(string $spreadsheetId)
     {
         $this->spreadsheetId = $spreadsheetId;
 
@@ -59,7 +59,7 @@ class Sheets
      *
      * @return $this
      */
-    public function spreadsheetByTitle($title)
+    public function spreadsheetByTitle(string $title)
     {
         $list = $this->spreadsheetList();
         $id = array_get(array_flip($list), $title);
@@ -74,7 +74,7 @@ class Sheets
      *
      * @return $this
      */
-    public function sheet($sheet)
+    public function sheet(string $sheet)
     {
         $this->sheet = $sheet;
 
@@ -86,7 +86,7 @@ class Sheets
      *
      * @return $this
      */
-    public function sheetById($sheetId)
+    public function sheetById(string $sheetId)
     {
         $list = $this->sheetList();
 
@@ -100,7 +100,7 @@ class Sheets
     /**
      * @return array
      */
-    public function sheetList()
+    public function sheetList(): array
     {
         $list = [];
 

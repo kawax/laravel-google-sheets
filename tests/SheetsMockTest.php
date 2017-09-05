@@ -1,10 +1,10 @@
 <?php
-namespace GoogleSheet\tests;
+namespace Revolution\Google\Sheets\tests;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
-use GoogleSheets\Sheets;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsMockTest extends TestCase
 {
