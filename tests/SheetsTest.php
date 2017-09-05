@@ -284,5 +284,4 @@ class SheetsTest extends TestCase
 
         $this->assertEquals("test!A1:Z1000", $response->clearedRange);
     }
-
 }
