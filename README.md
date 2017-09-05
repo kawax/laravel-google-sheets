@@ -2,7 +2,12 @@
 
 [![Build Status](https://travis-ci.org/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.org/kawax/laravel-google-sheets)
 
-## Install
+## Prior notice 3.0
+
+- require `PHP>=7.0` and Laravel 5.5
+- Change namespace. maybe `Revolution\Google\Sheets\`. It will auto resolved by Package discovery.
+
+## Installation
 
 ### Composer
 ```
@@ -11,19 +16,37 @@ composer require revolution/laravel-google-sheets
 
 ### Laravel
 
-1. Review `config/google.php` in https://github.com/pulkitjalan/google-apiclient#usage
+1. This package depends on https://github.com/pulkitjalan/google-apiclient
 
-2. Add to ```providers``` in ```config/app.php```
+2. Add to `providers` in `config/app.php` (not necessary in Laravel 5.5)
 
+```
         PulkitJalan\Google\GoogleServiceProvider::class,
         GoogleSheets\Providers\SheetsServiceProvider::class,
+```
 
-3. Add to ```aliases``` in ```config/app.php```
 
+3. Add to `aliases` in `config/app.php` (not necessary in Laravel 5.5)
+
+```
         'Google' => PulkitJalan\Google\Facades\Google::class,
         'Sheets' => GoogleSheets\Facades\Sheets::class,
+```
+
 
 4. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
+
+Edit `config/google.php`
+
+```php
+    'client_id'        => env('GOOGLE_CLIENT_ID', ''),
+    'client_secret'    => env('GOOGLE_CLIENT_SECRET', ''),
+    'redirect_uri'     => env('GOOGLE_REDIRECT', ''),
+    'scopes'           => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
+    'access_type'      => 'online',
+    'approval_prompt'  => 'auto',
+    'prompt'           => 'consent', //"none", "consent", "select_account" default:none
+```
 
 5. (Optional) Get API Credentials from https://developers.google.com/console
 
@@ -144,49 +167,6 @@ Sheets::getService()->spreadsheets->...
 
 ```
 see https://github.com/google/google-api-php-client-services/blob/master/Sheets.php
-
-## Upgrade
-
-### to 2.0 from 1.0.x
-- Remove "repositories" from composer.json
-```json
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/kawax/google-apiclient"
-        }
-    ],
-```
-- Change composer.json  
-Bump version
-```json
-    "require": {
-        "revolution/laravel-google-sheets": "^2.0"
-    }
-```
-Remove
-```
-        "pulkitjalan/google-apiclient": "^3.0",
-```
-- Remove "vendor" dir.
-- Remove composer.lock
-- Clear composer cache. `composer clear-cache`
-- `composer install`
-- Change config/google.php  
-```
-    'service' =>  [
-        /*
-        | Enable service account auth or not.
-        */
-        'enabled' => false,
-
-        /*
-        | Path to service account json file
-        */
-        'file' => '',
-    ],
-```
-https://github.com/pulkitjalan/google-apiclient#usage
 
 ## Local Testing
 - composer install
