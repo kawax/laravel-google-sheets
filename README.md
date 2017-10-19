@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.org/kawax/laravel-google-sheets)
 
+## Concept
+This package focused on **read from Google Sheets**
+
+1. Get all data as Laravel's Collection.
+2. Leave it to Laravel.
+
 ## Requirements
 - PHP >= 7.0
 - Laravel >= 5.5 (recommended)
