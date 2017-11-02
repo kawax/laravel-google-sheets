@@ -158,7 +158,7 @@ $sheets->spreadsheets_values->...
 Sheets::getService()->spreadsheets->...
 
 ```
-see https://github.com/google/google-api-php-client-services/blob/master/Sheets.php
+see https://github.com/google/google-api-php-client-services/blob/master/src/Google/Service/Sheets.php
 
 ## Local Testing
 - composer install
