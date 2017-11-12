@@ -26,7 +26,7 @@ composer require revolution/laravel-google-sheets
 2. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
 
         // config/google.php
-        
+
         // OAuth
         'client_id'        => env('GOOGLE_CLIENT_ID', ''),
         'client_secret'    => env('GOOGLE_CLIENT_SECRET', ''),
@@ -35,12 +35,13 @@ composer require revolution/laravel-google-sheets
         'access_type'      => 'online',
         'approval_prompt'  => 'auto',
         'prompt'           => 'consent', //"none", "consent", "select_account" default:none
-        
+
         // or Service Account
         'file'    => storage_path('credentials.json'),
         'enable'  => env('GOOGLE_SERVICE_ENABLED', true),
 
-3. (Optional) Get API Credentials from https://developers.google.com/console
+3. Get API Credentials from https://developers.google.com/console  
+Enable `Google Sheets API`, `Google Drive API` and `Google+ API`.
 
 4. Configure .env as needed
 
@@ -51,6 +52,11 @@ composer require revolution/laravel-google-sheets
         GOOGLE_DEVELOPER_KEY=
         GOOGLE_SERVICE_ENABLED=
         GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=
+
+## Demo
+https://sheets.kawax.biz/
+
+https://github.com/kawax/google-sheets-project
 
 ## Usage
 
