@@ -149,6 +149,18 @@ $values = Sheets::range('')->all();
 ]
 ```
 
+### Set Access Token
+```php
+use Sheets;
+use Google;
+
+Google::setAccessToken($token);
+Sheets::setService(Google::make('sheets'));
+Sheets::spreadsheet('spreadsheetId');
+
+...
+```
+
 ## Use original Google_Service_Sheets
 ```php
 $sheets->spreadsheets->...
@@ -159,6 +171,24 @@ Sheets::getService()->spreadsheets->...
 
 ```
 see https://github.com/google/google-api-php-client-services/blob/master/src/Google/Service/Sheets.php
+
+## Macroable
+
+### Register in AppServiceProvider.php
+
+```php
+    public function register()
+    {
+        \Sheets::macro('my', function () {
+            return $this->service->spreadsheets->...
+        });
+    }
+```
+
+### Use somewhere
+```php
+$values = \Sheets::sheet('Sheet 1')->my();
+```
 
 ## Local Testing
 - composer install

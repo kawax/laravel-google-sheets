@@ -4,12 +4,16 @@ namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
 
+use Illuminate\Support\Traits\Macroable;
+
 class Sheets implements SheetsInterface
 {
     use Traits\SheetsValues;
     use Traits\SheetsDrive;
     use Traits\SheetsProperties;
     use Traits\SheetsCollection;
+
+    use Macroable;
 
     /**
      * @var \Google_Service_Sheets
@@ -143,6 +147,12 @@ class Sheets implements SheetsInterface
     {
         if (method_exists($this->service, $method)) {
             return call_user_func_array([$this->service, $method], $parameters);
+        }
+
+        if (static::hasMacro($method)) {
+            if (static::$macros[$method] instanceof \Closure) {
+                return call_user_func_array(static::$macros[$method]->bindTo($this, static::class), $parameters);
+            }
         }
 
         throw new \BadMethodCallException(sprintf('Method [%s] does not exist.', $method));

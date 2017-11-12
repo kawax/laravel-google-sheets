@@ -55,12 +55,12 @@ class SheetsTest extends TestCase
         }
 
         $this->client = new Client([
-                                       'scopes'  => [Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS],
-                                       'service' => [
-                                           'enable' => true,
-                                           'file'   => $config,
-                                       ],
-                                   ]);
+            'scopes'  => [Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS],
+            'service' => [
+                'enable' => true,
+                'file'   => $config,
+            ],
+        ]);
 
         $this->sheet = new Sheets();
 

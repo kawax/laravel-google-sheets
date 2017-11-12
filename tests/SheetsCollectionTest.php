@@ -1,7 +1,6 @@
 <?php
 namespace Revolution\Google\Sheets\tests;
 
-//use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 use Revolution\Google\Sheets\Sheets;
@@ -17,11 +16,6 @@ class SheetsCollectionTest extends TestCase
         $this->sheet = new Sheets();
     }
 
-//    public function tearDown()
-//    {
-//        m::close();
-//    }
-
     public function testCollection()
     {
         $header = ['id', 'name', 'mail'];
@@ -32,7 +26,6 @@ class SheetsCollectionTest extends TestCase
 
         $collection = $this->sheet->collection($header, $rows);
 
-//        dd($collection);
         $this->assertEquals('name1', $collection->first()['name']);
     }
 
@@ -46,7 +39,6 @@ class SheetsCollectionTest extends TestCase
 
         $collection = $this->sheet->collection($header, $rows);
 
-//        dd($collection);
         $this->assertNotNull($collection->last()['mail']);
     }
 
@@ -62,7 +54,6 @@ class SheetsCollectionTest extends TestCase
 
         $collection = $this->sheet->collection($header, $rows);
 
-//        dd($collection);
         $this->assertEquals('mail3', $collection->last()['mail']);
     }
 }
