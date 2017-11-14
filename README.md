@@ -183,7 +183,7 @@ see https://github.com/google/google-api-php-client-services/blob/master/src/Goo
 ### Register in AppServiceProvider.php
 
 ```php
-    public function register()
+    public function boot()
     {
         \Sheets::macro('my', function () {
             return $this->service->spreadsheets->...
