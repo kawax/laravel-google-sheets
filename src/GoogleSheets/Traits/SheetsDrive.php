@@ -25,8 +25,8 @@ trait SheetsDrive
         $files = $this->drive
             ->files
             ->listFiles([
-                            'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
-                        ])
+                'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
+            ])
             ->getFiles();
 
         foreach ($files as $file) {
@@ -38,10 +38,14 @@ trait SheetsDrive
 
     /**
      * @param Google_Service_Drive|\Google_Service $drive
+     *
+     * @return $this
      */
     public function setDriveService($drive)
     {
         $this->drive = $drive;
+
+        return $this;
     }
 
     /**

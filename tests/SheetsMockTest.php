@@ -55,7 +55,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(anything(), anything())->once()->andReturn($response);
+        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->all();
 

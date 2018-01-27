@@ -32,10 +32,14 @@ class Sheets implements SheetsInterface
 
     /**
      * @param Google_Service_Sheets|\Google_Service $service
+     *
+     * @return $this
      */
     public function setService($service)
     {
         $this->service = $service;
+
+        return $this;
     }
 
     /**
