@@ -26,5 +26,5 @@ trait GoogleSheets
      *
      * @return null|string
      */
-    abstract public function sheetsAccessToken(): ?string;
+    abstract public function sheetsAccessToken();
 }
