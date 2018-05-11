@@ -1,9 +1,11 @@
 <?php
+
 namespace Revolution\Google\Sheets\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 use Revolution\Google\Sheets\Sheets;
+use Revolution\Google\Sheets\SheetsInterface;
 
 class SheetsServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,10 @@ class SheetsServiceProvider extends ServiceProvider
         $this->app->singleton(Sheets::class, function ($app) {
             return new Sheets();
         });
+
+        $this->app->alias(
+            Sheets::class, SheetsInterface::class
+        );
     }
 
     /**
