@@ -17,7 +17,13 @@ trait GoogleSheets
      */
     public function sheets()
     {
-        Google::setAccessToken($this->sheetsAccessToken());
+        $token = $this->sheetsAccessToken();
+
+        Google::setAccessToken($token);
+
+        if (isset($token['refresh_token']) and Google::isAccessTokenExpired()) {
+            Google::fetchAccessTokenWithRefreshToken();
+        }
 
         return app(SheetsInterface::class)->setService(Google::make('sheets'))
                                           ->setDriveService(Google::make('drive'));
@@ -26,7 +32,7 @@ trait GoogleSheets
     /**
      * Get the Access Token
      *
-     * @return null|string
+     * @return string|array
      */
     abstract protected function sheetsAccessToken();
 }

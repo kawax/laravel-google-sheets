@@ -21,11 +21,15 @@ class User extends Authenticatable
     /**
      * Get the Access Token
      *
-     * @return string
+     * @return string|array
      */
     protected function sheetsAccessToken()
     {
-        return $this->access_token;
+        return [
+            'access_token'  => $this->access_token,
+            'refresh_token' => $this->refresh_token,
+            'expires_in'    => $this->expires_in,
+        ];
     }
 }
 ```
