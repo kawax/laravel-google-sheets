@@ -30,7 +30,7 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Sheets::class, function ($app) {
+        $this->app->singleton(SheetsInterface::class, function ($app) {
             return new Sheets();
         });
 
@@ -46,6 +46,6 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [Sheets::class];
+        return [SheetsInterface::class];
     }
 }

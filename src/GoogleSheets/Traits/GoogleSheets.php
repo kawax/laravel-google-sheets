@@ -2,7 +2,8 @@
 
 namespace Revolution\Google\Sheets\Traits;
 
-use Revolution\Google\Sheets\Facades\Sheets;
+use Revolution\Google\Sheets\SheetsInterface;
+
 use PulkitJalan\Google\Facades\Google;
 
 /**
@@ -18,8 +19,8 @@ trait GoogleSheets
     {
         Google::setAccessToken($this->sheetsAccessToken());
 
-        return Sheets::setService(Google::make('sheets'))
-                     ->setDriveService(Google::make('drive'));
+        return app(SheetsInterface::class)->setService(Google::make('sheets'))
+                                          ->setDriveService(Google::make('drive'));
     }
 
     /**

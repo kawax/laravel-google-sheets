@@ -4,6 +4,8 @@ namespace Revolution\Google\Sheets\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+use Revolution\Google\Sheets\SheetsInterface;
+
 class Sheets extends Facade
 {
     /**
@@ -13,6 +15,6 @@ class Sheets extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \Revolution\Google\Sheets\Sheets::class;
+        return SheetsInterface::class;
     }
 }
