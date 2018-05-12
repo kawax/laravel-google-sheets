@@ -64,3 +64,11 @@ Trait has `sheets()` that returns Sheets instance.
         return view('sheets.index')->with(compact('spreadsheets'));
     }
 ```
+
+## Already sheets() exists
+
+```php
+use GoogleSheets { 
+    GoogleSheets::sheets as googlesheets;
+};
+```
