@@ -70,5 +70,5 @@ Trait has `sheets()` that returns Sheets instance.
 ```php
 use GoogleSheets { 
     GoogleSheets::sheets as googlesheets;
-};
+}
 ```
