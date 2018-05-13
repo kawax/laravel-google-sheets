@@ -3,6 +3,7 @@
 namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
+use PulkitJalan\Google\Facades\Google;
 
 use Illuminate\Support\Traits\Macroable;
 
@@ -48,6 +49,25 @@ class Sheets implements SheetsInterface
     public function getService(): Google_Service_Sheets
     {
         return $this->service;
+    }
+
+    /**
+     * set access_token and set new service
+     *
+     * @param string|array $token
+     *
+     * @return $this
+     */
+    public function setAccessToken($token)
+    {
+        Google::setAccessToken($token);
+
+        if (isset($token['refresh_token']) and Google::isAccessTokenExpired()) {
+            Google::fetchAccessTokenWithRefreshToken();
+        }
+
+        return $this->setService(Google::make('sheets'))
+                    ->setDriveService(Google::make('drive'));
     }
 
     /**
