@@ -10,8 +10,7 @@ use Revolution\Google\Sheets\SheetsInterface;
 trait GoogleSheets
 {
     /**
-     * @return \Revolution\Google\Sheets\Sheets
-     * @throws \Exception
+     * @return SheetsInterface
      */
     public function sheets()
     {
