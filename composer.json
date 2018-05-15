@@ -9,6 +9,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.0.0",
+    "illuminate/container": "^5.5",
     "pulkitjalan/google-apiclient": "^3.1"
   },
   "require-dev": {

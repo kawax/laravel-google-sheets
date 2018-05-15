@@ -3,11 +3,14 @@
 namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
-use PulkitJalan\Google\Facades\Google;
+use PulkitJalan\Google\Client;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Traits\Macroable;
 
-class Sheets implements SheetsInterface
+use Revolution\Google\Sheets\Contracts\Factory;
+
+class Sheets implements Factory
 {
     use Traits\SheetsValues;
     use Traits\SheetsDrive;
@@ -57,17 +60,23 @@ class Sheets implements SheetsInterface
      * @param string|array $token
      *
      * @return $this
+     * @throws \Exception
      */
     public function setAccessToken($token)
     {
-        Google::setAccessToken($token);
+        /**
+         * @var Client $google
+         */
+        $google = Container::getInstance()->make(Client::class);
 
-        if (isset($token['refresh_token']) and Google::isAccessTokenExpired()) {
-            Google::fetchAccessTokenWithRefreshToken();
+        $google->setAccessToken($token);
+
+        if (isset($token['refresh_token']) and $google->isAccessTokenExpired()) {
+            $google->fetchAccessTokenWithRefreshToken();
         }
 
-        return $this->setService(Google::make('sheets'))
-                    ->setDriveService(Google::make('drive'));
+        return $this->setService($google->make('sheets'))
+                    ->setDriveService($google->make('drive'));
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace Revolution\Google\Sheets;
+namespace Revolution\Google\Sheets\Contracts;
 
 use Google_Service_Drive;
 use Google_Service_Sheets;
 use Illuminate\Support\Collection;
 
-interface SheetsInterface
+interface Factory
 {
     /**
      * @param Google_Service_Sheets|\Google_Service $service

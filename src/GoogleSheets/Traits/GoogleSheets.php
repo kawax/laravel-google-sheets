@@ -2,7 +2,7 @@
 
 namespace Revolution\Google\Sheets\Traits;
 
-use Revolution\Google\Sheets\SheetsInterface;
+use Revolution\Google\Sheets\Contracts\Factory;
 
 /**
  * use at User model
@@ -10,13 +10,13 @@ use Revolution\Google\Sheets\SheetsInterface;
 trait GoogleSheets
 {
     /**
-     * @return SheetsInterface
+     * @return Factory
      */
     public function sheets()
     {
         $token = $this->sheetsAccessToken();
 
-        return app(SheetsInterface::class)->setAccessToken($token);
+        return app(Factory::class)->setAccessToken($token);
     }
 
     /**

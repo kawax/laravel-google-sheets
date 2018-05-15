@@ -5,7 +5,7 @@ namespace Revolution\Google\Sheets\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use Revolution\Google\Sheets\Sheets;
-use Revolution\Google\Sheets\SheetsInterface;
+use Revolution\Google\Sheets\Contracts\Factory;
 
 class SheetsServiceProvider extends ServiceProvider
 {
@@ -30,12 +30,12 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(SheetsInterface::class, function ($app) {
+        $this->app->singleton(Factory::class, function ($app) {
             return new Sheets();
         });
 
         $this->app->alias(
-            Sheets::class, SheetsInterface::class
+            Sheets::class, Factory::class
         );
     }
 
@@ -46,6 +46,6 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [SheetsInterface::class];
+        return [Factory::class];
     }
 }
