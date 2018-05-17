@@ -70,13 +70,18 @@ https://docs.google.com/spreadsheets/d/{spreadsheetID}/...
 ### Laravel example1
 ```php
 use Sheets;
-use Google;
 
-Sheets::setService(Google::make('sheets'));
-Sheets::spreadsheet('spreadsheetId');
+$user = $request->user();
+
+$token = [
+      'access_token'  => $user->access_token,
+      'refresh_token' => $user->refresh_token,
+      'expires_in'    => $user->expires_in,
+      'created'       => $user->updated_at->getTimestamp(),
+];
 
 // all() returns array
-$values = Sheets::sheet('Sheet 1')->all();
+$values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('Sheet 1')->all();
 [
   ['id', 'name', 'mail'],
   ['1', 'name1', 'mail1'],
@@ -155,17 +160,6 @@ $values = Sheets::range('')->all();
 ]
 ```
 
-### Set Access Token
-```php
-use Sheets;
-use Google;
-
-Google::setAccessToken($token);
-Sheets::setService(Google::make('sheets'));
-Sheets::spreadsheet('spreadsheetId');
-
-...
-```
 
 ## Use original Google_Service_Sheets
 ```php

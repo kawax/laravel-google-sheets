@@ -1,8 +1,7 @@
 <?php
-namespace Revolution\Google\Sheets\tests;
+namespace Tests;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 
 use Revolution\Google\Sheets\Sheets;
 

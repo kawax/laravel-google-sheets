@@ -1,21 +1,10 @@
 <?php
-namespace Revolution\Google\Sheets\tests;
+namespace Tests;
 
-use PHPUnit\Framework\TestCase;
-
-use Revolution\Google\Sheets\Sheets;
+use Revolution\Google\Sheets\Facades\Sheets;
 
 class SheetsCollectionTest extends TestCase
 {
-    protected $sheet;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->sheet = new Sheets();
-    }
-
     public function testCollection()
     {
         $header = ['id', 'name', 'mail'];
@@ -24,7 +13,7 @@ class SheetsCollectionTest extends TestCase
             ['2', 'name2', 'mail2']
         ];
 
-        $collection = $this->sheet->collection($header, $rows);
+        $collection = Sheets::collection($header, $rows);
 
         $this->assertEquals('name1', $collection->first()['name']);
     }
@@ -37,7 +26,7 @@ class SheetsCollectionTest extends TestCase
             ['2', 'name2']
         ];
 
-        $collection = $this->sheet->collection($header, $rows);
+        $collection = Sheets::collection($header, $rows);
 
         $this->assertNotNull($collection->last()['mail']);
     }
@@ -52,7 +41,7 @@ class SheetsCollectionTest extends TestCase
 
         $header = $rows->pull(0);
 
-        $collection = $this->sheet->collection($header, $rows);
+        $collection = Sheets::collection($header, $rows);
 
         $this->assertEquals('mail3', $collection->last()['mail']);
     }

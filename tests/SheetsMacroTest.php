@@ -1,10 +1,8 @@
 <?php
 
-namespace Revolution\Google\Sheets\tests;
+namespace Tests;
 
-use PHPUnit\Framework\TestCase;
-
-use Revolution\Google\Sheets\Sheets;
+use Revolution\Google\Sheets\Facades\Sheets;
 
 class SheetsMacroTest extends TestCase
 {
