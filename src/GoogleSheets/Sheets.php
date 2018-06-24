@@ -69,6 +69,8 @@ class Sheets implements Factory
          */
         $google = Container::getInstance()->make(Client::class);
 
+        $google->getCache()->clear();
+
         $google->setAccessToken($token);
 
         if (isset($token['refresh_token']) and $google->isAccessTokenExpired()) {
@@ -77,6 +79,14 @@ class Sheets implements Factory
 
         return $this->setService($google->make('sheets'))
                     ->setDriveService($google->make('drive'));
+    }
+
+    /**
+     * @return array
+     */
+    public function getAccessToken()
+    {
+        return $this->getService()->getClient()->getAccessToken();
     }
 
     /**

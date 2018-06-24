@@ -39,6 +39,8 @@ class SheetsTest extends TestCase
 
     public function testSetAccessToken()
     {
+        $this->google->shouldReceive('getCache')->once()->andReturn(m::self());
+        $this->google->shouldReceive('clear')->once();
         $this->google->shouldReceive('setAccessToken')->once();
         $this->google->shouldReceive('isAccessTokenExpired')->once()->andReturns(true);
         $this->google->shouldReceive('fetchAccessTokenWithRefreshToken')->once();
