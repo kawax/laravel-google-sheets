@@ -54,8 +54,6 @@ Enable `Google Sheets API`, `Google Drive API` and `Google+ API`.
         GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=
 
 ## Demo
-https://sheets.kawax.biz/
-
 https://github.com/kawax/google-sheets-project
 
 ## Usage
