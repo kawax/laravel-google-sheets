@@ -35,7 +35,7 @@ trait SheetsValues
 
         $values = $sheets->getValueRanges()[0]->getValues();
 
-        return $values;
+        return $values : $values : [];
     }
 
     /**
