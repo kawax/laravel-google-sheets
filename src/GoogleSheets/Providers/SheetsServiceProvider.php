@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Revolution\Google\Sheets\Sheets;
 use Revolution\Google\Sheets\Contracts\Factory;
 
+use PulkitJalan\Google\Facades\Google;
+
 class SheetsServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +23,7 @@ class SheetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //
     }
 
     /**
@@ -31,7 +34,8 @@ class SheetsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Factory::class, function ($app) {
-            return new Sheets();
+            return (new Sheets())->setService(Google::make('sheets'))
+                                 ->setDriveService(Google::make('drive'));
         });
 
         $this->app->alias(
