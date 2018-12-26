@@ -99,14 +99,14 @@ interface Factory
     public function sheetProperties();
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function all(): array;
+    public function all();
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function first(): array;
+    public function first();
 
     /**
      * @param array  $value
