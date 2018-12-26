@@ -8,7 +8,7 @@ trait SheetsProperties
      */
     public function spreadsheetProperties()
     {
-        $properties = $this->service->spreadsheets->get($this->spreadsheetId)->getProperties()->toSimpleObject();
+        $properties = $this->getService()->spreadsheets->get($this->spreadsheetId)->getProperties()->toSimpleObject();
 
         return $properties;
     }
@@ -18,7 +18,7 @@ trait SheetsProperties
      */
     public function sheetProperties()
     {
-        $sheets = $this->service->spreadsheets->get($this->spreadsheetId, ['ranges' => $this->sheet])->getSheets();
+        $sheets = $this->getService()->spreadsheets->get($this->spreadsheetId, ['ranges' => $this->sheet])->getSheets();
 
         $properties = $sheets[0]->getProperties()->toSimpleObject();
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Revolution\Google\Sheets\Traits;
 
 trait SheetsValues
@@ -24,13 +25,13 @@ trait SheetsValues
     protected $dateTimeRenderOption;
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function all(): array
+    public function all()
     {
         $query = $this->query();
 
-        $sheets = $this->service->spreadsheets_values
+        $sheets = $this->getService()->spreadsheets_values
             ->batchGet($this->spreadsheetId, $query);
 
         $values = $sheets->getValueRanges()[0]->getValues();
@@ -39,9 +40,9 @@ trait SheetsValues
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function first(): array
+    public function first()
     {
         $values = $this->all();
 
@@ -67,7 +68,7 @@ trait SheetsValues
 
         $batch->setData($valueRange);
 
-        $response = $this->service->spreadsheets_values
+        $response = $this->getService()->spreadsheets_values
             ->batchUpdate($this->spreadsheetId, $batch);
 
         return $response;
@@ -82,7 +83,7 @@ trait SheetsValues
 
         $clear = new \Google_Service_Sheets_ClearValuesRequest();
 
-        $response = $this->service->spreadsheets_values
+        $response = $this->getService()->spreadsheets_values
             ->clear($this->spreadsheetId, $range, $clear);
 
         return $response;
@@ -108,7 +109,7 @@ trait SheetsValues
             'insertDataOption' => $insertDataOption,
         ];
 
-        $response = $this->service->spreadsheets_values
+        $response = $this->getService()->spreadsheets_values
             ->append($this->spreadsheetId, $range, $valueRange, $optParams);
 
         return $response;

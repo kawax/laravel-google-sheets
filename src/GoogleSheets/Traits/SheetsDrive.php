@@ -22,7 +22,7 @@ trait SheetsDrive
 
         $list = [];
 
-        $files = $this->drive
+        $files = $this->getDriveService()
             ->files
             ->listFiles([
                 'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",

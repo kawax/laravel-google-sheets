@@ -51,6 +51,10 @@ class Sheets implements Factory
      */
     public function getService(): Google_Service_Sheets
     {
+        if (is_null($this->service)) {
+            $this->service = Container::getInstance()->make(Client::class)->make('sheets');
+        }
+
         return $this->service;
     }
 
@@ -151,7 +155,7 @@ class Sheets implements Factory
     {
         $list = [];
 
-        $sheets = $this->service->spreadsheets->get($this->spreadsheetId)->getSheets();
+        $sheets = $this->getService()->spreadsheets->get($this->spreadsheetId)->getSheets();
 
         foreach ($sheets as $sheet) {
             $list[$sheet->getProperties()->getSheetId()] = $sheet->getProperties()->getTitle();
@@ -169,8 +173,8 @@ class Sheets implements Factory
      */
     public function __get($property)
     {
-        if (property_exists($this->service, $property)) {
-            return $this->service->{$property};
+        if (property_exists($this->getService(), $property)) {
+            return $this->getService()->{$property};
         }
 
         throw new \InvalidArgumentException(sprintf('Property [%s] does not exist.', $property));
@@ -188,8 +192,8 @@ class Sheets implements Factory
      */
     public function __call($method, $parameters)
     {
-        if (method_exists($this->service, $method)) {
-            return call_user_func_array([$this->service, $method], $parameters);
+        if (method_exists($this->getService(), $method)) {
+            return call_user_func_array([$this->getService(), $method], $parameters);
         }
 
         if (static::hasMacro($method)) {
