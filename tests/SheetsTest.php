@@ -32,7 +32,7 @@ class SheetsTest extends TestCase
     {
         $this->google->shouldReceive('make')->once()->andReturns(m::mock(\Google_Service_Sheets::class));
 
-        Sheets::setService($this->google->make('Sheets'));
+        //        Sheets::setService($this->google->make('Sheets'));
 
         $this->assertInstanceOf(\Google_Service_Sheets::class, Sheets::getService());
     }

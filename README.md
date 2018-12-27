@@ -41,7 +41,7 @@ composer require revolution/laravel-google-sheets
         'enable'  => env('GOOGLE_SERVICE_ENABLED', true),
 
 3. Get API Credentials from https://developers.google.com/console  
-Enable `Google Sheets API`, `Google Drive API` and `Google+ API`.
+Enable `Google Sheets API`, `Google Drive API`.
 
 4. Configure .env as needed
 
