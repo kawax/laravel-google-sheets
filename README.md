@@ -104,7 +104,7 @@ $values->toArray()
 view
 ```php
 @foreach($values as $value)
-  {{ array_get($value, 'name') }}
+  {{ data_get($value, 'name') }}
 @endforeach
 ```
 

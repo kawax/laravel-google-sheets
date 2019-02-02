@@ -7,6 +7,7 @@ use PulkitJalan\Google\Client;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Support\Arr;
 
 use Revolution\Google\Sheets\Contracts\Factory;
 
@@ -113,7 +114,7 @@ class Sheets implements Factory
     public function spreadsheetByTitle(string $title)
     {
         $list = $this->spreadsheetList();
-        $id = array_get(array_flip($list), $title);
+        $id = Arr::get(array_flip($list), $title);
 
         $this->spreadsheetId = $id;
 
@@ -141,7 +142,7 @@ class Sheets implements Factory
     {
         $list = $this->sheetList();
 
-        $sheet = array_get($list, $sheetId);
+        $sheet = Arr::get($list, $sheetId);
 
         $this->sheet = $sheet;
 
