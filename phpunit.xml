@@ -10,16 +10,16 @@
          processIsolation="false"
          stopOnFailure="true">
     <testsuites>
-        <testsuite name="Google Sheets Test Suite">
+        <testsuite name="Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">src/GoogleSheets/</directory>
+            <directory suffix=".php">src/</directory>
             <exclude>
-                <file>src/GoogleSheets/Providers/SheetsServiceProvider.php</file>
-                <directory suffix=".php">src/GoogleSheets/Facades/</directory>
+                <directory suffix=".php">src/Providers/</directory>
+                <directory suffix=".php">src/Facades/</directory>
             </exclude>
         </whitelist>
     </filter>

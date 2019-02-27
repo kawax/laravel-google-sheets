@@ -3,19 +3,13 @@
 namespace Revolution\Google\Sheets\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 use Revolution\Google\Sheets\Sheets;
 use Revolution\Google\Sheets\Contracts\Factory;
 
-class SheetsServiceProvider extends ServiceProvider
+class SheetsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
     /**
      * Boot the service provider.
      */
@@ -34,10 +28,6 @@ class SheetsServiceProvider extends ServiceProvider
         $this->app->singleton(Factory::class, function ($app) {
             return new Sheets();
         });
-
-        $this->app->alias(
-            Sheets::class, Factory::class
-        );
     }
 
     /**

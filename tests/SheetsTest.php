@@ -15,7 +15,7 @@ class SheetsTest extends TestCase
      */
     protected $google;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -23,7 +23,7 @@ class SheetsTest extends TestCase
         app()->instance(Client::class, $this->google);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }

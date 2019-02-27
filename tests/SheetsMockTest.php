@@ -27,7 +27,7 @@ class SheetsMockTest extends TestCase
      */
     protected $values;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -42,7 +42,7 @@ class SheetsMockTest extends TestCase
         $this->sheet->setService($this->service);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }

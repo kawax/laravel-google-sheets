@@ -2,6 +2,7 @@
 
 namespace Revolution\Google\Sheets\Traits;
 
+use Illuminate\Container\Container;
 use Revolution\Google\Sheets\Contracts\Factory;
 
 /**
@@ -16,7 +17,7 @@ trait GoogleSheets
     {
         $token = $this->sheetsAccessToken();
 
-        return app(Factory::class)->setAccessToken($token);
+        return Container::getInstance()->make(Factory::class)->setAccessToken($token);
     }
 
     /**

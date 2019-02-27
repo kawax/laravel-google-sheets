@@ -12,7 +12,7 @@ trait SheetsCollection
     {
         $values = $this->all();
 
-        return collect($values);
+        return Collection::make($values);
     }
 
     /**
@@ -41,6 +41,6 @@ trait SheetsCollection
             }
         }
 
-        return collect($collection);
+        return Collection::make($collection);
     }
 }

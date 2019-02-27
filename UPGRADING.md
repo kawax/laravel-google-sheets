@@ -1,5 +1,8 @@
 # UPGRADING
 
+## 3.x to 4.0
+- require `PHP>=7.1.3` and Laravel 5.8
+
 ## 2.x to 3.0
 - require `PHP>=7.0` and Laravel 5.5
 - Change namespace to `Revolution\Google\Sheets\`. It will auto resolved by Package discovery.

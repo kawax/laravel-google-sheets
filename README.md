@@ -9,8 +9,8 @@ This package focused on **read from Google Sheets**
 2. Leave it to Laravel.
 
 ## Requirements
-- PHP >= 7.0
-- Laravel >= 5.5
+- PHP >= 7.1
+- Laravel >= 5.8
 
 ## Installation
 
