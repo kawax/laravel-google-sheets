@@ -158,6 +158,14 @@ $values = Sheets::range('')->all();
 ]
 ```
 
+### example7 Query parameters
+```php
+$values = Sheets::sheet('Sheet 1')->majorDimension('DIMENSION_UNSPECIFIED')
+                                  ->valueRenderOption('FORMATTED_VALUE')
+                                  ->dateTimeRenderOption('SERIAL_NUMBER')
+                                  ->all();
+```
+https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get#query-parameters
 
 ## Use original Google_Service_Sheets
 ```php

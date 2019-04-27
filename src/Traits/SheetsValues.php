@@ -50,8 +50,8 @@ trait SheetsValues
     }
 
     /**
-     * @param array  $value
-     * @param string $valueInputOption
+     * @param  array  $value
+     * @param  string  $valueInputOption
      *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
@@ -90,9 +90,9 @@ trait SheetsValues
     }
 
     /**
-     * @param array  $value
-     * @param string $valueInputOption
-     * @param string $insertDataOption
+     * @param  array  $value
+     * @param  string  $valueInputOption
+     * @param  string  $insertDataOption
      *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
@@ -124,7 +124,7 @@ trait SheetsValues
             if (empty($this->range)) {
                 $ranges = $this->sheet;
             } else {
-                $ranges = $this->sheet . '!' . $this->range;
+                $ranges = $this->sheet.'!'.$this->range;
             }
         } else {
             $ranges = $this->range;
@@ -134,7 +134,7 @@ trait SheetsValues
     }
 
     /**
-     * @param string $range
+     * @param  string  $range
      *
      * @return $this
      */
@@ -146,7 +146,7 @@ trait SheetsValues
     }
 
     /**
-     * @param string $majorDimension
+     * @param  string  $majorDimension
      *
      * @return $this
      */
@@ -158,7 +158,19 @@ trait SheetsValues
     }
 
     /**
-     * @param string $dateTimeRenderOption
+     * @param  string  $valueRenderOption
+     *
+     * @return $this
+     */
+    public function valueRenderOption(string $valueRenderOption)
+    {
+        $this->valueRenderOption = $valueRenderOption;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $dateTimeRenderOption
      *
      * @return $this
      */
@@ -178,19 +190,19 @@ trait SheetsValues
 
         $ranges = $this->ranges();
 
-        if (!empty($ranges)) {
+        if (! empty($ranges)) {
             $query['ranges'] = $ranges;
         }
 
-        if (!empty($this->majorDimension)) {
+        if (! empty($this->majorDimension)) {
             $query['majorDimension'] = $this->majorDimension;
         }
 
-        if (!empty($this->valueRenderOption)) {
+        if (! empty($this->valueRenderOption)) {
             $query['valueRenderOption'] = $this->valueRenderOption;
         }
 
-        if (!empty($this->dateTimeRenderOption)) {
+        if (! empty($this->dateTimeRenderOption)) {
             $query['dateTimeRenderOption'] = $this->dateTimeRenderOption;
         }
 
