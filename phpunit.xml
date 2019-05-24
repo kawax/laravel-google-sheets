@@ -20,6 +20,7 @@
             <exclude>
                 <directory suffix=".php">src/Providers/</directory>
                 <directory suffix=".php">src/Facades/</directory>
+                <directory suffix=".php">src/Contracts/</directory>
             </exclude>
         </whitelist>
     </filter>

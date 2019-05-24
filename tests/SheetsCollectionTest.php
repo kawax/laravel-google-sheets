@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests;
 
 use Revolution\Google\Sheets\Facades\Sheets;
@@ -10,7 +11,7 @@ class SheetsCollectionTest extends TestCase
         $header = ['id', 'name', 'mail'];
         $rows = [
             ['1', 'name1', 'mail1'],
-            ['2', 'name2', 'mail2']
+            ['2', 'name2', 'mail2'],
         ];
 
         $collection = Sheets::collection($header, $rows);
@@ -23,7 +24,7 @@ class SheetsCollectionTest extends TestCase
         $header = ['id', 'name', 'mail'];
         $rows = [
             ['1', 'name1', 'mail1'],
-            ['2', 'name2']
+            ['2', 'name2'],
         ];
 
         $collection = Sheets::collection($header, $rows);
@@ -36,7 +37,7 @@ class SheetsCollectionTest extends TestCase
         $rows = collect([
             ['id', 'name', 'mail'],
             ['1', 'name1', 'mail1'],
-            ['2', 'name2', 'mail3']
+            ['2', 'name2', 'mail3'],
         ]);
 
         $header = $rows->pull(0);

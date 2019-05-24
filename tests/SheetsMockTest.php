@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests;
 
 use Mockery as m;
@@ -56,7 +57,11 @@ class SheetsMockTest extends TestCase
 
         $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
-        $values = $this->sheet->all();
+        $values = $this->sheet->range('A1!A1')
+                              ->majorDimension('test')
+                              ->valueRenderOption('test')
+                              ->dateTimeRenderOption('test')
+                              ->all();
 
         $this->assertGreaterThan(1, count($values));
     }
@@ -71,5 +76,64 @@ class SheetsMockTest extends TestCase
 
         $this->assertEquals('test!A1', $this->sheet->ranges());
         $this->assertInstanceOf('Google_Service_Sheets_UpdateValuesResponse', $values);
+    }
+
+    public function testSheetsFirst()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+
+        $value = $this->sheet->first();
+
+        $this->assertSame(['test1' => '1'], $value);
+    }
+
+    public function testSheetsClear()
+    {
+        $this->values->shouldReceive('clear')->once();
+
+        $value = $this->sheet->clear();
+
+        $this->assertNull($value);
+    }
+
+    public function testSheetsAppend()
+    {
+        $response = new \Google_Service_Sheets_AppendValuesResponse();
+        $updates = new \Google_Service_Sheets_UpdateValuesResponse();
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
+        $response->setUpdates($updates);
+
+        $this->values->shouldReceive('append')->once()->andReturn($response);
+
+        $value = $this->sheet->append([]);
+
+        $this->assertSame($response, $value);
+    }
+
+    public function testSpreadsheetProperties()
+    {
+        $this->spreadsheets->shouldReceive('get->getProperties->toSimpleObject')->once()->andReturn(new \stdClass());
+
+        $properties = $this->sheet->spreadsheetProperties();
+
+        $this->assertInstanceOf(\stdClass::class, $properties);
+    }
+
+    public function testSheetProperties()
+    {
+        $sheet = m::mock(\Google_Service_Sheets_Spreadsheet::class);
+        $sheet->shouldReceive('getProperties->toSimpleObject')->once()->andReturn(new \stdClass());
+
+        $this->spreadsheets->shouldReceive('get->getSheets')->once()->andReturn([$sheet]);
+
+        $properties = $this->sheet->sheetProperties();
+
+        $this->assertInstanceOf(\stdClass::class, $properties);
     }
 }
