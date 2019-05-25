@@ -37,7 +37,7 @@ trait SheetsDrive
     }
 
     /**
-     * @param Google_Service_Drive|\Google_Service $drive
+     * @param  Google_Service_Drive|\Google_Service  $drive
      *
      * @return $this
      */

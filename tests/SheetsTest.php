@@ -7,6 +7,7 @@ use Mockery as m;
 use PulkitJalan\Google\Client;
 
 use Revolution\Google\Sheets\Facades\Sheets;
+use Revolution\Google\Sheets\Traits\GoogleSheets;
 
 class SheetsTest extends TestCase
 {
@@ -56,5 +57,24 @@ class SheetsTest extends TestCase
         ]);
 
         $this->assertInstanceOf(\Google_Service_Sheets::class, $photos->getService());
+    }
+
+    public function testTrait()
+    {
+        Sheets::shouldReceive('setAccessToken')->with('test')->once()->andReturn(m::self());
+
+        $sheets = (new User())->sheets();
+
+        $this->assertNotNull($sheets);
+    }
+}
+
+class User
+{
+    use GoogleSheets;
+
+    public function sheetsAccessToken()
+    {
+        return 'test';
     }
 }

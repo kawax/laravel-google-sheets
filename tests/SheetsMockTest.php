@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Support\Collection;
 use Mockery as m;
 
 use Revolution\Google\Sheets\Sheets;
@@ -48,7 +49,7 @@ class SheetsMockTest extends TestCase
         m::close();
     }
 
-    public function testSheetsGetMock()
+    public function testSheetsAll()
     {
         $response = new \Google_Service_Sheets_BatchGetValuesResponse();
         $valueRange = new \Google_Service_Sheets_ValueRange();
@@ -57,7 +58,9 @@ class SheetsMockTest extends TestCase
 
         $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
-        $values = $this->sheet->range('A1!A1')
+        $values = $this->sheet->spreadsheet('test')
+                              ->sheet('test')
+                              ->range('A1!A1')
                               ->majorDimension('test')
                               ->valueRenderOption('test')
                               ->dateTimeRenderOption('test')
@@ -79,6 +82,21 @@ class SheetsMockTest extends TestCase
         $values = $this->sheet->all();
 
         $this->assertSame([], $values);
+    }
+
+    public function testSheetsGet()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+
+        $values = $this->sheet->get();
+
+        $this->assertInstanceOf(Collection::class, $values);
+        $this->assertSame([['test1' => '1'], ['test2' => '2']], $values->toArray());
     }
 
     public function testSheetsUpdate()
