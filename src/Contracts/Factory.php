@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 interface Factory
 {
     /**
-     * @param Google_Service_Sheets|\Google_Service $service
+     * @param  Google_Service_Sheets|\Google_Service  $service
      */
     public function setService($service);
 
@@ -21,35 +21,35 @@ interface Factory
     /**
      * set access_token and set new service
      *
-     * @param string|array $token
+     * @param  string|array  $token
      *
      * @return $this
      */
     public function setAccessToken($token);
 
     /**
-     * @param string $spreadsheetId
+     * @param  string  $spreadsheetId
      *
      * @return $this
      */
     public function spreadsheet(string $spreadsheetId);
 
     /**
-     * @param string $title
+     * @param  string  $title
      *
      * @return $this
      */
     public function spreadsheetByTitle(string $title);
 
     /**
-     * @param string $sheet
+     * @param  string  $sheet
      *
      * @return $this
      */
     public function sheet(string $sheet);
 
     /**
-     * @param string $sheetId
+     * @param  string  $sheetId
      *
      * @return $this
      */
@@ -66,8 +66,8 @@ interface Factory
     public function get(): Collection;
 
     /**
-     * @param array                                $header
-     * @param array|\Illuminate\Support\Collection $rows
+     * @param  array  $header
+     * @param  array|\Illuminate\Support\Collection  $rows
      *
      * @return \Illuminate\Support\Collection
      */
@@ -79,7 +79,7 @@ interface Factory
     public function spreadsheetList(): array;
 
     /**
-     * @param Google_Service_Drive|\Google_Service $drive
+     * @param  Google_Service_Drive|\Google_Service  $drive
      */
     public function setDriveService($drive);
 
@@ -99,18 +99,18 @@ interface Factory
     public function sheetProperties();
 
     /**
-     * @return array|null
+     * @return array
      */
     public function all();
 
     /**
-     * @return array|null
+     * @return array
      */
     public function first();
 
     /**
-     * @param array  $value
-     * @param string $valueInputOption
+     * @param  array  $value
+     * @param  string  $valueInputOption
      *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
@@ -122,9 +122,9 @@ interface Factory
     public function clear();
 
     /**
-     * @param array  $value
-     * @param string $valueInputOption
-     * @param string $insertDataOption
+     * @param  array  $value
+     * @param  string  $valueInputOption
+     * @param  string  $insertDataOption
      *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
@@ -136,21 +136,21 @@ interface Factory
     public function ranges();
 
     /**
-     * @param string $range
+     * @param  string  $range
      *
      * @return $this
      */
     public function range(string $range);
 
     /**
-     * @param string $majorDimension
+     * @param  string  $majorDimension
      *
      * @return $this
      */
     public function majorDimension(string $majorDimension);
 
     /**
-     * @param string $dateTimeRenderOption
+     * @param  string  $dateTimeRenderOption
      *
      * @return $this
      */

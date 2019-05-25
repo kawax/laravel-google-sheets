@@ -36,7 +36,7 @@ class Sheets implements Factory
     protected $sheet;
 
     /**
-     * @param Google_Service_Sheets|\Google_Service $service
+     * @param  Google_Service_Sheets|\Google_Service  $service
      *
      * @return $this
      */
@@ -62,7 +62,7 @@ class Sheets implements Factory
     /**
      * set access_token and set new service
      *
-     * @param string|array $token
+     * @param  string|array  $token
      *
      * @return $this
      * @throws \Exception
@@ -95,7 +95,7 @@ class Sheets implements Factory
     }
 
     /**
-     * @param string $spreadsheetId
+     * @param  string  $spreadsheetId
      *
      * @return $this
      */
@@ -107,7 +107,7 @@ class Sheets implements Factory
     }
 
     /**
-     * @param string $title
+     * @param  string  $title
      *
      * @return $this
      */
@@ -122,7 +122,7 @@ class Sheets implements Factory
     }
 
     /**
-     * @param string $sheet
+     * @param  string  $sheet
      *
      * @return $this
      */
@@ -134,7 +134,7 @@ class Sheets implements Factory
     }
 
     /**
-     * @param string $sheetId
+     * @param  string  $sheetId
      *
      * @return $this
      */
@@ -156,7 +156,7 @@ class Sheets implements Factory
     {
         $list = [];
 
-        $sheets = $this->getService()->spreadsheets->get($this->spreadsheetId)->getSheets();
+        $sheets = $this->serviceSpreadsheets()->get($this->spreadsheetId)->getSheets();
 
         foreach ($sheets as $sheet) {
             $list[$sheet->getProperties()->getSheetId()] = $sheet->getProperties()->getTitle();
@@ -166,7 +166,15 @@ class Sheets implements Factory
     }
 
     /**
-     * @param string $property
+     * @return \Google_Service_Sheets_Resource_Spreadsheets
+     */
+    protected function serviceSpreadsheets()
+    {
+        return $this->getService()->spreadsheets;
+    }
+
+    /**
+     * @param  string  $property
      *
      * @return mixed
      *
@@ -184,12 +192,12 @@ class Sheets implements Factory
     /**
      * Magic call method.
      *
-     * @param string $method
-     * @param array  $parameters
-     *
-     * @throws \BadMethodCallException
+     * @param  string  $method
+     * @param  array  $parameters
      *
      * @return mixed
+     * @throws \BadMethodCallException
+     *
      */
     public function __call($method, $parameters)
     {

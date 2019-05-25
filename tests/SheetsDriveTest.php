@@ -4,7 +4,7 @@ namespace Tests;
 
 use Mockery as m;
 use Revolution\Google\Sheets\Facades\Sheets;
-
+use PulkitJalan\Google\Client;
 use \Google_Service_Drive_DriveFile;
 
 class SheetsDriveTest extends TestCase
@@ -48,12 +48,14 @@ class SheetsDriveTest extends TestCase
         $this->assertSame(['id' => 'name'], $list);
     }
 
-    public function testListNull()
+    public function testNull()
     {
-        $this->files->shouldReceive('listFiles->getFiles')->never();
+        $this->mock(Client::class, function ($mock) {
+            $mock->shouldReceive('make')->andReturn($this->service);
+        });
 
-        $list = Sheets::setDriveService(null)->spreadsheetList();
+        $drive = Sheets::setDriveService(null)->getDriveService();
 
-        $this->assertSame([], $list);
+        $this->assertSame($this->service, $drive);
     }
 }

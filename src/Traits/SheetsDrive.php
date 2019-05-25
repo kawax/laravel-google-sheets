@@ -3,6 +3,8 @@
 namespace Revolution\Google\Sheets\Traits;
 
 use Google_Service_Drive;
+use Illuminate\Container\Container;
+use PulkitJalan\Google\Client;
 
 trait SheetsDrive
 {
@@ -16,10 +18,6 @@ trait SheetsDrive
      */
     public function spreadsheetList(): array
     {
-        if (is_null($this->drive)) {
-            return [];
-        }
-
         $list = [];
 
         $files = $this->getDriveService()
@@ -53,6 +51,10 @@ trait SheetsDrive
      */
     public function getDriveService()
     {
+        if (is_null($this->drive)) {
+            $this->drive = Container::getInstance()->make(Client::class)->make('drive');
+        }
+
         return $this->drive;
     }
 }

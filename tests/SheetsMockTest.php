@@ -33,7 +33,7 @@ class SheetsMockTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = m::mock('Google_Service_Sheets');
+        $this->service = m::mock('Google_Service_Sheets')->makePartial();
         $this->spreadsheets = m::mock('Google_Service_Sheets_Resource_Spreadsheets');
         $this->service->spreadsheets = $this->spreadsheets;
         $this->values = m::mock('Google_Service_Sheets_Resource_SpreadsheetsValues');
@@ -189,5 +189,80 @@ class SheetsMockTest extends TestCase
         $spreadsheets = $this->sheet->spreadsheets;
 
         $this->assertNotNull($spreadsheets);
+    }
+
+    public function testSheetsList()
+    {
+        $sheets = new \Google_Service_Sheets_Sheet([
+            'properties' => [
+                'sheetId' => 'sheetId',
+                'title'   => 'title',
+            ],
+        ]);
+
+        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+
+        $sheet->shouldReceive('serviceSpreadsheets->get->getSheets')->andReturn([$sheets]);
+
+        $values = $sheet->sheetList();
+
+        $this->assertSame(['sheetId' => 'title'], $values);
+    }
+
+    public function testSheetById()
+    {
+        $sheets = new \Google_Service_Sheets_Sheet([
+            'properties' => [
+                'sheetId' => 'sheetId',
+                'title'   => 'title',
+            ],
+        ]);
+
+        $sheet = m::mock(Sheets::class)->makePartial();
+
+        $sheet->shouldReceive('sheetList')->andReturn([$sheets]);
+
+        $sheet->sheetById('sheetId');
+
+        $this->assertNotNull($sheet);
+    }
+
+    public function testSpreadsheetByTitle()
+    {
+        $list = [
+            'id' => 'title',
+        ];
+
+        $sheet = m::mock(Sheets::class)->makePartial();
+
+        $sheet->shouldReceive('spreadsheetList')->andReturn($list);
+
+        $sheet->spreadsheetByTitle('title');
+
+        $this->assertNotNull($sheet);
+    }
+
+    public function testGetAccessToken()
+    {
+        $sheet = m::mock(Sheets::class)->makePartial();
+
+        $token = $sheet->getAccessToken();
+
+        $this->assertNull($token);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testProperty()
+    {
+        $this->sheet->test;
+    }
+
+    public function testGetClient()
+    {
+        $client = $this->sheet->getClient();
+
+        $this->assertNull($client);
     }
 }

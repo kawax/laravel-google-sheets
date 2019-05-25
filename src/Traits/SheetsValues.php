@@ -31,7 +31,7 @@ trait SheetsValues
     {
         $query = $this->query();
 
-        $sheets = $this->getService()->spreadsheets_values->batchGet($this->spreadsheetId, $query);
+        $sheets = $this->serviceValues()->batchGet($this->spreadsheetId, $query);
 
         $values = $sheets->getValueRanges()[0]->getValues();
 
@@ -69,8 +69,8 @@ trait SheetsValues
 
         $batch->setData($valueRange);
 
-        $response = $this->getService()->spreadsheets_values
-            ->batchUpdate($this->spreadsheetId, $batch);
+        $response = $this->serviceValues()
+                         ->batchUpdate($this->spreadsheetId, $batch);
 
         return $response;
     }
@@ -84,8 +84,8 @@ trait SheetsValues
 
         $clear = new \Google_Service_Sheets_ClearValuesRequest();
 
-        $response = $this->getService()->spreadsheets_values
-            ->clear($this->spreadsheetId, $range, $clear);
+        $response = $this->serviceValues()
+                         ->clear($this->spreadsheetId, $range, $clear);
 
         return $response;
     }
@@ -110,8 +110,7 @@ trait SheetsValues
             'insertDataOption' => $insertDataOption,
         ];
 
-        $response = $this->getService()->spreadsheets_values
-            ->append($this->spreadsheetId, $range, $valueRange, $optParams);
+        $response = $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
 
         return $response;
     }
@@ -183,9 +182,17 @@ trait SheetsValues
     }
 
     /**
+     * @return \Google_Service_Sheets_Resource_SpreadsheetsValues
+     */
+    protected function serviceValues()
+    {
+        return $this->getService()->spreadsheets_values;
+    }
+
+    /**
      * @return array
      */
-    private function query(): array
+    protected function query(): array
     {
         $query = [];
 
