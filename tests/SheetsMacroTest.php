@@ -12,7 +12,18 @@ class SheetsMacroTest extends TestCase
             return 'test';
         });
 
+        $test = Sheets::test();
+
         $this->assertTrue(Sheets::hasMacro('test'));
         $this->assertTrue(is_callable(Sheets::class, 'test'));
+        $this->assertSame('test', $test);
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     */
+    public function testMacroException()
+    {
+        $test = Sheets::test2();
     }
 }

@@ -183,4 +183,11 @@ class SheetsMockTest extends TestCase
 
         $this->assertInstanceOf(\stdClass::class, $properties);
     }
+
+    public function testMagicGet()
+    {
+        $spreadsheets = $this->sheet->spreadsheets;
+
+        $this->assertNotNull($spreadsheets);
+    }
 }
