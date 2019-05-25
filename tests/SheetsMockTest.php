@@ -64,6 +64,21 @@ class SheetsMockTest extends TestCase
                               ->all();
 
         $this->assertGreaterThan(1, count($values));
+        $this->assertSame([['test1' => '1'], ['test2' => '2']], $values);
+    }
+
+    public function testSheetsEmpty()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues(null);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+
+        $values = $this->sheet->all();
+
+        $this->assertSame([], $values);
     }
 
     public function testSheetsUpdate()
@@ -90,6 +105,20 @@ class SheetsMockTest extends TestCase
         $value = $this->sheet->first();
 
         $this->assertSame(['test1' => '1'], $value);
+    }
+
+    public function testSheetsFirstEmpty()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
+        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange->setValues(null);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+
+        $value = $this->sheet->first();
+
+        $this->assertSame([], $value);
     }
 
     public function testSheetsClear()

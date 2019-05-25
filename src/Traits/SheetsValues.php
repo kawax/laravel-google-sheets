@@ -25,28 +25,29 @@ trait SheetsValues
     protected $dateTimeRenderOption;
 
     /**
-     * @return array|null
+     * @return array
      */
     public function all()
     {
         $query = $this->query();
 
-        $sheets = $this->getService()->spreadsheets_values
-            ->batchGet($this->spreadsheetId, $query);
+        $sheets = $this->getService()->spreadsheets_values->batchGet($this->spreadsheetId, $query);
 
         $values = $sheets->getValueRanges()[0]->getValues();
 
-        return $values;
+        return $values ?? [];
     }
 
     /**
-     * @return array|null
+     * @return array
      */
     public function first()
     {
         $values = $this->all();
 
-        return array_shift($values);
+        $first = array_shift($values);
+
+        return $first ?? [];
     }
 
     /**
