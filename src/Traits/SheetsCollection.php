@@ -1,4 +1,5 @@
 <?php
+
 namespace Revolution\Google\Sheets\Traits;
 
 use Illuminate\Support\Collection;
@@ -6,7 +7,7 @@ use Illuminate\Support\Collection;
 trait SheetsCollection
 {
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function get(): Collection
     {
@@ -16,31 +17,17 @@ trait SheetsCollection
     }
 
     /**
-     * @param array $header
-     * @param array|\Illuminate\Support\Collection $rows
+     * @param  array  $header
+     * @param  array|Collection  $rows
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection(array $header, $rows): Collection
     {
-        $collection = [];
+        return Collection::make($rows)->map(function ($item) use ($header) {
+            $row = Collection::make($item)->pad(count($header), '');
 
-        if ($rows instanceof Collection) {
-            $rows = $rows->toArray();
-        }
-
-        foreach ($rows as $row) {
-            $col = [];
-
-            foreach ($header as $index => $head) {
-                $col[$head] = empty($row[$index]) ? '' : $row[$index];
-            }
-
-            if (!empty($col)) {
-                $collection[] = $col;
-            }
-        }
-
-        return Collection::make($collection);
+            return Collection::make($header)->combine($row);
+        });
     }
 }
