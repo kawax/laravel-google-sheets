@@ -56,7 +56,12 @@ Enable `Google Sheets API`, `Google Drive API`.
         GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=
 
 ## Demo
-https://github.com/kawax/google-sheets-project
+- https://github.com/kawax/google-sheets-project
+- https://sheets.kawax.biz/
+
+Another Google API Series.
+- https://github.com/kawax/laravel-google-photos
+- https://github.com/kawax/laravel-google-searchconsole
 
 ## Usage
 
