@@ -251,11 +251,10 @@ class SheetsMockTest extends TestCase
         $this->assertNull($token);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testProperty()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->sheet->test;
     }
 

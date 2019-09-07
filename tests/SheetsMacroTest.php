@@ -19,11 +19,10 @@ class SheetsMacroTest extends TestCase
         $this->assertSame('test', $test);
     }
 
-    /**
-     * @expectedException \BadMethodCallException
-     */
     public function testMacroException()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         $test = Sheets::test2();
     }
 }
