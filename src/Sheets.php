@@ -4,19 +4,17 @@ namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
 use PulkitJalan\Google\Client;
-
 use Illuminate\Container\Container;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Arr;
-
 use Revolution\Google\Sheets\Contracts\Factory;
 
 class Sheets implements Factory
 {
-    use Traits\SheetsValues;
-    use Traits\SheetsDrive;
-    use Traits\SheetsProperties;
-    use Traits\SheetsCollection;
+    use Concerns\SheetsValues;
+    use Concerns\SheetsDrive;
+    use Concerns\SheetsProperties;
+    use Concerns\SheetsCollection;
 
     use Macroable;
 
