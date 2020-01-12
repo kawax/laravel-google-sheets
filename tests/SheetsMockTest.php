@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Revolution\Google\Sheets\Tests;
 
 use Illuminate\Support\Collection;
 use Mockery as m;

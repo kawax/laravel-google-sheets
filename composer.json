@@ -24,7 +24,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Revolution\\Google\\Sheets\\Tests\\": "tests/"
     }
   },
   "authors": [
