@@ -4,15 +4,14 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/maintainability)](https://codeclimate.com/github/kawax/laravel-google-sheets/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/test_coverage)](https://codeclimate.com/github/kawax/laravel-google-sheets/test_coverage)
 
-## Concept
-This package focused on **read from Google Sheets**
-
-1. Get all data as Laravel's Collection.
-2. Leave it to Laravel.
-
 ## Requirements
 - PHP >= 7.2
 - Laravel >= 5.8
+
+## Versioning
+- Basic : semver
+- Drop old PHP or Laravel version : `+0.1`
+- Support only latest major version (`master` brunch), but you can PR to old brunches.
 
 ## Installation
 
