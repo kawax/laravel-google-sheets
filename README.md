@@ -1,6 +1,6 @@
 # Google Sheets API v4 for Laravel
 
-[![Build Status](https://travis-ci.org/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.org/kawax/laravel-google-sheets)
+[![Build Status](https://travis-ci.com/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.com/kawax/laravel-google-sheets)
 [![Maintainability](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/maintainability)](https://codeclimate.com/github/kawax/laravel-google-sheets/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/test_coverage)](https://codeclimate.com/github/kawax/laravel-google-sheets/test_coverage)
 
