@@ -3,9 +3,7 @@
 namespace Revolution\Google\Sheets\Tests;
 
 use Mockery as m;
-
 use PulkitJalan\Google\Client;
-
 use Revolution\Google\Sheets\Facades\Sheets;
 use Revolution\Google\Sheets\Traits\GoogleSheets;
 

@@ -4,7 +4,6 @@ namespace Revolution\Google\Sheets\Tests;
 
 use Illuminate\Support\Collection;
 use Mockery as m;
-
 use Revolution\Google\Sheets\Sheets;
 
 class SheetsMockTest extends TestCase

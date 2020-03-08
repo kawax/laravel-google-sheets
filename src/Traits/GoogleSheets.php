@@ -6,7 +6,7 @@ use Illuminate\Container\Container;
 use Revolution\Google\Sheets\Contracts\Factory;
 
 /**
- * use at User model
+ * use at User model.
  */
 trait GoogleSheets
 {
@@ -21,7 +21,7 @@ trait GoogleSheets
     }
 
     /**
-     * Get the Access Token
+     * Get the Access Token.
      *
      * @return string|array
      */
