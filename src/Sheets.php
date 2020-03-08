@@ -3,10 +3,10 @@
 namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
-use PulkitJalan\Google\Client;
 use Illuminate\Container\Container;
-use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
+use PulkitJalan\Google\Client;
 use Revolution\Google\Sheets\Contracts\Factory;
 
 class Sheets implements Factory
@@ -15,7 +15,6 @@ class Sheets implements Factory
     use Concerns\SheetsDrive;
     use Concerns\SheetsProperties;
     use Concerns\SheetsCollection;
-
     use Macroable;
 
     /**
@@ -58,7 +57,7 @@ class Sheets implements Factory
     }
 
     /**
-     * set access_token and set new service
+     * set access_token and set new service.
      *
      * @param  string|array  $token
      *
@@ -195,7 +194,6 @@ class Sheets implements Factory
      *
      * @return mixed
      * @throws \BadMethodCallException
-     *
      */
     public function __call($method, $parameters)
     {

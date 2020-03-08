@@ -2,11 +2,10 @@
 
 namespace Revolution\Google\Sheets\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
-
-use Revolution\Google\Sheets\Sheets;
+use Illuminate\Support\ServiceProvider;
 use Revolution\Google\Sheets\Contracts\Factory;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsServiceProvider extends ServiceProvider implements DeferrableProvider
 {

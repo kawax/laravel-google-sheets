@@ -3,7 +3,6 @@
 namespace Revolution\Google\Sheets\Facades;
 
 use Illuminate\Support\Facades\Facade;
-
 use Revolution\Google\Sheets\Contracts\Factory;
 
 class Sheets extends Facade
