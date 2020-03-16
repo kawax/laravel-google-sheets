@@ -198,7 +198,7 @@ class Sheets implements Factory
      */
     public function deleteSheet(string $sheetTitle)
     {
-        $list = $this->spreadsheetList();
+        $list = $this->sheetList();
         $id = Arr::get(array_flip($list), $sheetTitle);
 
         $body = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
