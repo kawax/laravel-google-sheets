@@ -155,4 +155,23 @@ interface Factory
      * @return $this
      */
     public function dateTimeRenderOption(string $dateTimeRenderOption);
+
+    /**
+     * @return string
+     */
+    public function getSpreadsheetId();
+
+    /**
+     * @param  string  $sheetTitle
+     *
+     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     */
+    public function addSheet(string $sheetTitle);
+
+    /**
+     * @param  string  $sheetTitle
+     *
+     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     */
+    public function deleteSheet(string $sheetTitle);
 }

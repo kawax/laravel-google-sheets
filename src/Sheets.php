@@ -3,6 +3,7 @@
 namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
+use Google_Service_Sheets_BatchUpdateSpreadsheetRequest;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
@@ -80,7 +81,7 @@ class Sheets implements Factory
         }
 
         return $this->setService($google->make('sheets'))
-                    ->setDriveService($google->make('drive'));
+            ->setDriveService($google->make('drive'));
     }
 
     /**
@@ -168,6 +169,47 @@ class Sheets implements Factory
     protected function serviceSpreadsheets()
     {
         return $this->getService()->spreadsheets;
+    }
+
+    /**
+     * @param  string  $sheetTitle
+     *
+     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     */
+    public function addSheet(string $sheetTitle)
+    {
+        $body = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
+            'requests' => [
+                'addSheet' => [
+                    'properties' => [
+                        'title' => $sheetTitle,
+                    ],
+                ],
+            ],
+        ]);
+
+        return $this->serviceSpreadsheets()->batchUpdate($this->spreadsheetId, $body);
+    }
+
+    /**
+     * @param  string  $sheetTitle
+     *
+     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     */
+    public function deleteSheet(string $sheetTitle)
+    {
+        $list = $this->spreadsheetList();
+        $id = Arr::get(array_flip($list), $sheetTitle);
+
+        $body = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
+            'requests' => [
+                'deleteSheet' => [
+                    'sheetId' => $id,
+                ],
+            ],
+        ]);
+
+        return $this->serviceSpreadsheets()->batchUpdate($this->spreadsheetId, $body);
     }
 
     /**
