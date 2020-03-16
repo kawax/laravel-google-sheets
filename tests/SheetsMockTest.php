@@ -58,12 +58,12 @@ class SheetsMockTest extends TestCase
         $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->spreadsheet('test')
-                              ->sheet('test')
-                              ->range('A1!A1')
-                              ->majorDimension('test')
-                              ->valueRenderOption('test')
-                              ->dateTimeRenderOption('test')
-                              ->all();
+            ->sheet('test')
+            ->range('A1!A1')
+            ->majorDimension('test')
+            ->valueRenderOption('test')
+            ->dateTimeRenderOption('test')
+            ->all();
 
         $this->assertGreaterThan(1, count($values));
         $this->assertSame([['test1' => '1'], ['test2' => '2']], $values);
@@ -262,5 +262,34 @@ class SheetsMockTest extends TestCase
         $client = $this->sheet->getClient();
 
         $this->assertNull($client);
+    }
+
+    public function testAddSheet()
+    {
+        $sheets = new \Google_Service_Sheets_Sheet([
+            'properties' => [
+                'sheetId' => 'sheetId',
+                'title'   => 'title',
+            ],
+        ]);
+
+        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+
+        $sheet->shouldReceive('addSheet')->andReturn([$sheets]);
+
+        $sheet->addSheet('new sheet');
+
+        $this->assertNotNull($sheet);
+    }
+
+    public function testDeleteSheet()
+    {
+        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+
+        $sheet->shouldReceive('deleteSheet')->andReturn(null);
+
+        $sheet->deleteSheet('old sheet');
+
+        $this->assertNotNull($sheet);
     }
 }
