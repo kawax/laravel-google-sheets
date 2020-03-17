@@ -3,7 +3,6 @@
 namespace Revolution\Google\Sheets;
 
 use Google_Service_Sheets;
-use Google_Service_Sheets_BatchUpdateSpreadsheetRequest;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
@@ -154,7 +153,7 @@ class Sheets implements Factory
     {
         $list = [];
 
-        $sheets = $this->serviceSpreadsheets()->get($this->spreadsheetId)->getSheets();
+        $sheets = $this->getService()->spreadsheets->get($this->spreadsheetId)->getSheets();
 
         foreach ($sheets as $sheet) {
             $list[$sheet->getProperties()->getSheetId()] = $sheet->getProperties()->getTitle();
@@ -164,21 +163,13 @@ class Sheets implements Factory
     }
 
     /**
-     * @return \Google_Service_Sheets_Resource_Spreadsheets
-     */
-    protected function serviceSpreadsheets()
-    {
-        return $this->getService()->spreadsheets;
-    }
-
-    /**
      * @param  string  $sheetTitle
      *
      * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle)
     {
-        $body = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
+        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
             'requests' => [
                 'addSheet' => [
                     'properties' => [
@@ -188,7 +179,7 @@ class Sheets implements Factory
             ],
         ]);
 
-        return $this->serviceSpreadsheets()->batchUpdate($this->spreadsheetId, $body);
+        return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
     }
 
     /**
@@ -201,7 +192,7 @@ class Sheets implements Factory
         $list = $this->sheetList();
         $id = Arr::get(array_flip($list), $sheetTitle);
 
-        $body = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
+        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
             'requests' => [
                 'deleteSheet' => [
                     'sheetId' => $id,
@@ -209,7 +200,7 @@ class Sheets implements Factory
             ],
         ]);
 
-        return $this->serviceSpreadsheets()->batchUpdate($this->spreadsheetId, $body);
+        return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
     }
 
     /**

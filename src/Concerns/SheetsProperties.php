@@ -9,7 +9,8 @@ trait SheetsProperties
      */
     public function spreadsheetProperties()
     {
-        return $this->serviceSpreadsheets()
+        return $this->getService()
+            ->spreadsheets
             ->get($this->spreadsheetId)
             ->getProperties()
             ->toSimpleObject();
@@ -20,7 +21,8 @@ trait SheetsProperties
      */
     public function sheetProperties()
     {
-        $sheets = $this->serviceSpreadsheets()
+        $sheets = $this->getService()
+            ->spreadsheets
             ->get($this->spreadsheetId, ['ranges' => $this->sheet])
             ->getSheets();
 

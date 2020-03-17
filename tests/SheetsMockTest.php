@@ -31,7 +31,6 @@ class SheetsMockTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
         $this->service = m::mock('Google_Service_Sheets')->makePartial();
         $this->spreadsheets = m::mock('Google_Service_Sheets_Resource_Spreadsheets');
         $this->service->spreadsheets = $this->spreadsheets;
@@ -199,11 +198,8 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
-
-        $sheet->shouldReceive('serviceSpreadsheets->get->getSheets')->andReturn([$sheets]);
-
-        $values = $sheet->sheetList();
+        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $values = $this->sheet->sheetList();
 
         $this->assertSame(['sheetId' => 'title'], $values);
     }
@@ -266,6 +262,16 @@ class SheetsMockTest extends TestCase
 
     public function testAddSheet()
     {
+        $this->spreadsheets
+            ->shouldReceive('batchUpdate')
+            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
+
+        $response = $this->sheet->addSheet('new sheet');
+        $this->assertNotNull($response);
+    }
+
+    public function testDeleteSheet()
+    {
         $sheets = new \Google_Service_Sheets_Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
@@ -273,23 +279,13 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $this->spreadsheets
+            ->shouldReceive('batchUpdate')
+            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
 
-        $sheet->shouldReceive('addSheet')->andReturn([$sheets]);
-
-        $sheet->addSheet('new sheet');
-
-        $this->assertNotNull($sheet);
-    }
-
-    public function testDeleteSheet()
-    {
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
-
-        $sheet->shouldReceive('deleteSheet')->andReturn(null);
-
-        $sheet->deleteSheet('old sheet');
-
-        $this->assertNotNull($sheet);
+        $this->sheet->shouldReceive('sheetList')->andReturn([$sheets]);
+        $response = $this->sheet->deleteSheet('title');
+        $this->assertNotNull($response);
     }
 }

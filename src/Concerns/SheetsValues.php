@@ -69,10 +69,7 @@ trait SheetsValues
 
         $batch->setData($valueRange);
 
-        $response = $this->serviceValues()
-                         ->batchUpdate($this->spreadsheetId, $batch);
-
-        return $response;
+        return $this->serviceValues()->batchUpdate($this->spreadsheetId, $batch);
     }
 
     /**
@@ -84,10 +81,7 @@ trait SheetsValues
 
         $clear = new \Google_Service_Sheets_ClearValuesRequest();
 
-        $response = $this->serviceValues()
-                         ->clear($this->spreadsheetId, $range, $clear);
-
-        return $response;
+        return $this->serviceValues()->clear($this->spreadsheetId, $range, $clear);
     }
 
     /**
@@ -110,9 +104,7 @@ trait SheetsValues
             'insertDataOption' => $insertDataOption,
         ];
 
-        $response = $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
-
-        return $response;
+        return $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
     }
 
     /**
@@ -120,17 +112,15 @@ trait SheetsValues
      */
     public function ranges()
     {
-        if (strpos($this->range, '!') === false) {
-            if (empty($this->range)) {
-                $ranges = $this->sheet;
-            } else {
-                $ranges = $this->sheet.'!'.$this->range;
-            }
-        } else {
-            $ranges = $this->range;
+        if (!isset($this->range)) {
+            return $this->sheet;
         }
 
-        return $ranges;
+        if (strpos($this->range, '!') === false) {
+            return $this->sheet . '!' . $this->range;
+        }
+
+        return $this->range;
     }
 
     /**
@@ -198,19 +188,19 @@ trait SheetsValues
 
         $ranges = $this->ranges();
 
-        if (! empty($ranges)) {
+        if (!empty($ranges)) {
             $query['ranges'] = $ranges;
         }
 
-        if (! empty($this->majorDimension)) {
+        if (!empty($this->majorDimension)) {
             $query['majorDimension'] = $this->majorDimension;
         }
 
-        if (! empty($this->valueRenderOption)) {
+        if (!empty($this->valueRenderOption)) {
             $query['valueRenderOption'] = $this->valueRenderOption;
         }
 
-        if (! empty($this->dateTimeRenderOption)) {
+        if (!empty($this->dateTimeRenderOption)) {
             $query['dateTimeRenderOption'] = $this->dateTimeRenderOption;
         }
 
