@@ -147,17 +147,32 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsAppend()
     {
-        $response = new \Google_Service_Sheets_AppendValuesResponse();
-        $updates = new \Google_Service_Sheets_UpdateValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new \Google_Service_Sheets_AppendValuesResponse;
+        $updates = new \Google_Service_Sheets_UpdateValuesResponse;
+        $valueRange = new \Google_Service_Sheets_ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setUpdates($updates);
 
         $this->values->shouldReceive('append')->once()->andReturn($response);
 
-        $value = $this->sheet->append([]);
+        $value = $this->sheet->append([[]]);
 
         $this->assertSame($response, $value);
+    }
+
+    public function testSheetsAppendWithKeys()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse;
+        $valueRange = new \Google_Service_Sheets_ValueRange;
+        $valueRange->setValues([['header1', 'header2'], ['value1', 'value2']]);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')
+            ->with(m::any(), m::any())
+            ->andReturn($response);
+
+        $ordered = $this->sheet->orderAppendables([['header2' => 'value3', 'header1' => null]]);
+        $this->assertSame([[null, 'value3']], $ordered);
     }
 
     public function testSpreadsheetProperties()

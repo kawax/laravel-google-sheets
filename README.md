@@ -165,6 +165,20 @@ $values = Sheets::all();
 ]
 ```
 
+### Append a set of values with keys
+```php
+// When providing an associative array, values get matched up to the headers in the provided sheet
+Sheets::sheet('Sheet 1')->append([['name' => 'name4', 'mail' => 'mail4', 'id' => 4]]);
+$values = Sheets::all();
+[
+  ['id', 'name', 'mail'],
+  ['1', 'name1', 'mail1'],
+  ['2', 'name1', 'mail2'],
+  ['3', 'name3', 'mail3'],
+  ['4', 'name4', 'mail4'],
+]
+```
+
 ### Add a new sheet
 ```php
 Sheets::spreadsheetByTitle($title)->addSheet('New Sheet Title');

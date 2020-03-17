@@ -85,18 +85,19 @@ trait SheetsValues
     }
 
     /**
-     * @param  array  $value
+     * @param  array  $values
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
      *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
-    public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
+    public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
     {
         $range = $this->ranges();
+        $orderedValues = $this->orderAppendables($values);
 
         $valueRange = new \Google_Service_Sheets_ValueRange();
-        $valueRange->setValues($value);
+        $valueRange->setValues($orderedValues);
         $valueRange->setRange($range);
 
         $optParams = [
@@ -105,6 +106,43 @@ trait SheetsValues
         ];
 
         return $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
+    }
+
+    /**
+     * @param array $values
+     *
+     * @return array
+     */
+    public function orderAppendables(array $values)
+    {
+        // The array has integer keys, so just append
+        if (!$this->isAssociatedArray($values[0])) {
+            return $values;
+        }
+        // The array has keys, which we want to map to headers and order
+        $header = $this->first();
+
+        $ordered = [];
+
+        // Gets just the values of an array that has been re-ordered to match the header order
+        foreach ($values as $value) {
+            array_push($ordered, array_values(array_replace(array_flip($header), $value)));
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * https://stackoverflow.com/a/173479/6646558
+     *
+     * @param array $arr
+     *
+     * @return boolean
+     */
+    protected function isAssociatedArray(array $arr)
+    {
+        if (array() === $arr) return false;
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     /**
