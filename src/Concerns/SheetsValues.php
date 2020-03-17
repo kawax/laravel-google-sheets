@@ -112,14 +112,17 @@ trait SheetsValues
      */
     public function ranges()
     {
+        // If no range is provided, we get the sheet automatically
         if (!isset($this->range)) {
             return $this->sheet;
         }
 
+        // If we only provide part of the range, we get the full proper range
         if (strpos($this->range, '!') === false) {
             return $this->sheet . '!' . $this->range;
         }
 
+        // If we provide the full range, it returns accurately
         return $this->range;
     }
 

@@ -58,7 +58,6 @@ class SheetsMockTest extends TestCase
 
         $values = $this->sheet->spreadsheet('test')
             ->sheet('test')
-            ->range('A1!A1')
             ->majorDimension('test')
             ->valueRenderOption('test')
             ->dateTimeRenderOption('test')
@@ -287,5 +286,25 @@ class SheetsMockTest extends TestCase
         $this->sheet->shouldReceive('sheetList')->andReturn([$sheets]);
         $response = $this->sheet->deleteSheet('title');
         $this->assertNotNull($response);
+    }
+
+    public function testGetProperRanges()
+    {
+        $this->values
+            ->shouldReceive('batchUpdate')
+            ->times(3)
+            ->andReturn(new \Google_Service_Sheets_UpdateValuesResponse);
+
+        // If no range is provided, we get the sheet automatically
+        $this->sheet->sheet('test')->update([['test']]);
+        $this->assertEquals('test', $this->sheet->ranges());
+
+        // If we provide the full range, it returns accurately
+        $this->sheet->sheet('test')->range('test!A1')->update([['test']]);
+        $this->assertEquals('test!A1', $this->sheet->ranges());
+
+        // If we only provide part of the range, we get the full proper range
+        $this->sheet->sheet('test')->range('A1')->update([['test']]);
+        $this->assertEquals('test!A1', $this->sheet->ranges());
     }
 }
