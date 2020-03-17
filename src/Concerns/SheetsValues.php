@@ -116,7 +116,7 @@ trait SheetsValues
     public function orderAppendables(array $values)
     {
         // The array has integer keys, so just append
-        if (!$this->isAssociatedArray($values[0])) {
+        if (! $this->isAssociatedArray($values[0])) {
             return $values;
         }
         // The array has keys, which we want to map to headers and order
@@ -133,15 +133,17 @@ trait SheetsValues
     }
 
     /**
-     * https://stackoverflow.com/a/173479/6646558
+     * https://stackoverflow.com/a/173479/6646558.
      *
      * @param array $arr
      *
-     * @return boolean
+     * @return bool
      */
     protected function isAssociatedArray(array $arr)
     {
-        if (array() === $arr) return false;
+        if ($arr === []) {
+            return false;
+        }
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
@@ -151,13 +153,13 @@ trait SheetsValues
     public function ranges()
     {
         // If no range is provided, we get the sheet automatically
-        if (!isset($this->range)) {
+        if (! isset($this->range)) {
             return $this->sheet;
         }
 
         // If we only provide part of the range, we get the full proper range
         if (strpos($this->range, '!') === false) {
-            return $this->sheet . '!' . $this->range;
+            return $this->sheet.'!'.$this->range;
         }
 
         // If we provide the full range, it returns accurately
@@ -229,19 +231,19 @@ trait SheetsValues
 
         $ranges = $this->ranges();
 
-        if (!empty($ranges)) {
+        if (! empty($ranges)) {
             $query['ranges'] = $ranges;
         }
 
-        if (!empty($this->majorDimension)) {
+        if (! empty($this->majorDimension)) {
             $query['majorDimension'] = $this->majorDimension;
         }
 
-        if (!empty($this->valueRenderOption)) {
+        if (! empty($this->valueRenderOption)) {
             $query['valueRenderOption'] = $this->valueRenderOption;
         }
 
-        if (!empty($this->dateTimeRenderOption)) {
+        if (! empty($this->dateTimeRenderOption)) {
             $query['dateTimeRenderOption'] = $this->dateTimeRenderOption;
         }
 
