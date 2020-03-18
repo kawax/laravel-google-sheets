@@ -31,7 +31,6 @@ class SheetsMockTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
         $this->service = m::mock('Google_Service_Sheets')->makePartial();
         $this->spreadsheets = m::mock('Google_Service_Sheets_Resource_Spreadsheets');
         $this->service->spreadsheets = $this->spreadsheets;
@@ -59,7 +58,6 @@ class SheetsMockTest extends TestCase
 
         $values = $this->sheet->spreadsheet('test')
             ->sheet('test')
-            ->range('A1!A1')
             ->majorDimension('test')
             ->valueRenderOption('test')
             ->dateTimeRenderOption('test')
@@ -149,17 +147,32 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsAppend()
     {
-        $response = new \Google_Service_Sheets_AppendValuesResponse();
-        $updates = new \Google_Service_Sheets_UpdateValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new \Google_Service_Sheets_AppendValuesResponse;
+        $updates = new \Google_Service_Sheets_UpdateValuesResponse;
+        $valueRange = new \Google_Service_Sheets_ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setUpdates($updates);
 
         $this->values->shouldReceive('append')->once()->andReturn($response);
 
-        $value = $this->sheet->append([]);
+        $value = $this->sheet->append([[]]);
 
         $this->assertSame($response, $value);
+    }
+
+    public function testSheetsAppendWithKeys()
+    {
+        $response = new \Google_Service_Sheets_BatchGetValuesResponse;
+        $valueRange = new \Google_Service_Sheets_ValueRange;
+        $valueRange->setValues([['header1', 'header2'], ['value1', 'value2']]);
+        $response->setValueRanges([$valueRange]);
+
+        $this->values->shouldReceive('batchGet')
+            ->with(m::any(), m::any())
+            ->andReturn($response);
+
+        $ordered = $this->sheet->orderAppendables([['header2' => 'value3', 'header1' => null]]);
+        $this->assertSame([[null, 'value3']], $ordered);
     }
 
     public function testSpreadsheetProperties()
@@ -199,11 +212,8 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
-
-        $sheet->shouldReceive('serviceSpreadsheets->get->getSheets')->andReturn([$sheets]);
-
-        $values = $sheet->sheetList();
+        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $values = $this->sheet->sheetList();
 
         $this->assertSame(['sheetId' => 'title'], $values);
     }
@@ -266,6 +276,16 @@ class SheetsMockTest extends TestCase
 
     public function testAddSheet()
     {
+        $this->spreadsheets
+            ->shouldReceive('batchUpdate')
+            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
+
+        $response = $this->sheet->addSheet('new sheet');
+        $this->assertNotNull($response);
+    }
+
+    public function testDeleteSheet()
+    {
         $sheets = new \Google_Service_Sheets_Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
@@ -273,23 +293,33 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $this->spreadsheets
+            ->shouldReceive('batchUpdate')
+            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
 
-        $sheet->shouldReceive('addSheet')->andReturn([$sheets]);
-
-        $sheet->addSheet('new sheet');
-
-        $this->assertNotNull($sheet);
+        $this->sheet->shouldReceive('sheetList')->andReturn([$sheets]);
+        $response = $this->sheet->deleteSheet('title');
+        $this->assertNotNull($response);
     }
 
-    public function testDeleteSheet()
+    public function testGetProperRanges()
     {
-        $sheet = m::mock(Sheets::class)->makePartial()->shouldAllowMockingProtectedMethods();
+        $this->values
+            ->shouldReceive('batchUpdate')
+            ->times(3)
+            ->andReturn(new \Google_Service_Sheets_UpdateValuesResponse);
 
-        $sheet->shouldReceive('deleteSheet')->andReturn(null);
+        // If no range is provided, we get the sheet automatically
+        $this->sheet->sheet('test')->update([['test']]);
+        $this->assertEquals('test', $this->sheet->ranges());
 
-        $sheet->deleteSheet('old sheet');
+        // If we provide the full range, it returns accurately
+        $this->sheet->sheet('test')->range('test!A1')->update([['test']]);
+        $this->assertEquals('test!A1', $this->sheet->ranges());
 
-        $this->assertNotNull($sheet);
+        // If we only provide part of the range, we get the full proper range
+        $this->sheet->sheet('test')->range('A1')->update([['test']]);
+        $this->assertEquals('test!A1', $this->sheet->ranges());
     }
 }

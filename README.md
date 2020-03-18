@@ -71,7 +71,7 @@ Another Google API Series.
 
 https://docs.google.com/spreadsheets/d/{spreadsheetID}/...
 
-### Laravel example1
+### Basic Laravel Usage
 ```php
 use Sheets;
 
@@ -86,14 +86,31 @@ $token = [
 
 // all() returns array
 $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('Sheet 1')->all();
-[
-  ['id', 'name', 'mail'],
-  ['1', 'name1', 'mail1'],
-  ['2', 'name1', 'mail2']
-]
+// [
+//   ['id', 'name', 'mail'],
+//   ['1', 'name1', 'mail1'],
+//   ['2', 'name1', 'mail2']
+// ]
 ```
 
-### Laravel example2
+### Basic Non-Laravel Usage
+```php
+use Revolution\Google\Sheets\Sheets;
+
+$client = \Google_Client();
+$client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
+// setup Google Client
+// ...
+
+$service = new \Google_Service_Sheets($client);
+
+$sheets = new Sheets();
+$sheets->setService($service);
+
+$values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
+```
+
+### Get a sheet's values with the header as the key
 ```php
 // get() returns Laravel Collection
 $rows = Sheets::sheet('Sheet 1')->get();
@@ -114,33 +131,16 @@ view
 @endforeach
 ```
 
-### example3 not Laravel
-```php
-use Revolution\Google\Sheets\Sheets;
-
-$client = \Google_Client();
-$client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
-// setup Google Client
-// ...
-
-$service = new \Google_Service_Sheets($client);
-
-$sheets = new Sheets();
-$sheets->setService($service);
-
-$values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
-```
-
-### example4 A1 notation
+### Using A1 Notation
 ```php
 $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
-[
-  ['id', 'name'],
-  ['1', 'name1'],
-]
+// [
+//   ['id', 'name'],
+//   ['1', 'name1'],
+// ]
 ```
 
-### example5 update
+### Updating a specific range
 ```php
 Sheets::sheet('Sheet 1')->range('A4')->update([['3', 'name3', 'mail3']]);
 $values = Sheets::range('')->all();
@@ -152,10 +152,11 @@ $values = Sheets::range('')->all();
 ]
 ```
 
-### example6 append
+### Append a set of values to a sheet
 ```php
-Sheets::sheet('Sheet 1')->range('')->append([['3', 'name3', 'mail3']]);
-$values = Sheets::range('')->all();
+// When we don't provide a specific range, the sheet becomes the default range
+Sheets::sheet('Sheet 1')->append([['3', 'name3', 'mail3']]);
+$values = Sheets::all();
 [
   ['id', 'name', 'mail'],
   ['1', 'name1', 'mail1'],
@@ -164,7 +165,31 @@ $values = Sheets::range('')->all();
 ]
 ```
 
-### example7 Query parameters
+### Append a set of values with keys
+```php
+// When providing an associative array, values get matched up to the headers in the provided sheet
+Sheets::sheet('Sheet 1')->append([['name' => 'name4', 'mail' => 'mail4', 'id' => 4]]);
+$values = Sheets::all();
+[
+  ['id', 'name', 'mail'],
+  ['1', 'name1', 'mail1'],
+  ['2', 'name1', 'mail2'],
+  ['3', 'name3', 'mail3'],
+  ['4', 'name4', 'mail4'],
+]
+```
+
+### Add a new sheet
+```php
+Sheets::spreadsheetByTitle($title)->addSheet('New Sheet Title');
+```
+
+### Deleting a sheet
+```php
+Sheets::spreadsheetByTitle($title)->deleteSheet('Old Sheet Title');
+```
+
+### Specifying query parameters
 ```php
 $values = Sheets::sheet('Sheet 1')->majorDimension('DIMENSION_UNSPECIFIED')
                                   ->valueRenderOption('FORMATTED_VALUE')

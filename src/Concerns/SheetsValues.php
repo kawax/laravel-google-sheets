@@ -69,10 +69,7 @@ trait SheetsValues
 
         $batch->setData($valueRange);
 
-        $response = $this->serviceValues()
-                         ->batchUpdate($this->spreadsheetId, $batch);
-
-        return $response;
+        return $this->serviceValues()->batchUpdate($this->spreadsheetId, $batch);
     }
 
     /**
@@ -84,25 +81,23 @@ trait SheetsValues
 
         $clear = new \Google_Service_Sheets_ClearValuesRequest();
 
-        $response = $this->serviceValues()
-                         ->clear($this->spreadsheetId, $range, $clear);
-
-        return $response;
+        return $this->serviceValues()->clear($this->spreadsheetId, $range, $clear);
     }
 
     /**
-     * @param  array  $value
+     * @param  array  $values
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
      *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
-    public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
+    public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
     {
         $range = $this->ranges();
+        $orderedValues = $this->orderAppendables($values);
 
         $valueRange = new \Google_Service_Sheets_ValueRange();
-        $valueRange->setValues($value);
+        $valueRange->setValues($orderedValues);
         $valueRange->setRange($range);
 
         $optParams = [
@@ -110,9 +105,47 @@ trait SheetsValues
             'insertDataOption' => $insertDataOption,
         ];
 
-        $response = $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
+        return $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
+    }
 
-        return $response;
+    /**
+     * @param array $values
+     *
+     * @return array
+     */
+    public function orderAppendables(array $values)
+    {
+        // The array has integer keys, so just append
+        if (! $this->isAssociatedArray($values[0])) {
+            return $values;
+        }
+        // The array has keys, which we want to map to headers and order
+        $header = $this->first();
+
+        $ordered = [];
+
+        // Gets just the values of an array that has been re-ordered to match the header order
+        foreach ($values as $value) {
+            array_push($ordered, array_values(array_replace(array_flip($header), $value)));
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * https://stackoverflow.com/a/173479/6646558.
+     *
+     * @param array $arr
+     *
+     * @return bool
+     */
+    protected function isAssociatedArray(array $arr)
+    {
+        if ($arr === []) {
+            return false;
+        }
+
+        return array_keys($arr) !== range(0, count($arr) - 1);
     }
 
     /**
@@ -120,17 +153,18 @@ trait SheetsValues
      */
     public function ranges()
     {
-        if (strpos($this->range, '!') === false) {
-            if (empty($this->range)) {
-                $ranges = $this->sheet;
-            } else {
-                $ranges = $this->sheet.'!'.$this->range;
-            }
-        } else {
-            $ranges = $this->range;
+        // If no range is provided, we get the sheet automatically
+        if (! isset($this->range)) {
+            return $this->sheet;
         }
 
-        return $ranges;
+        // If we only provide part of the range, we get the full proper range
+        if (strpos($this->range, '!') === false) {
+            return $this->sheet.'!'.$this->range;
+        }
+
+        // If we provide the full range, it returns accurately
+        return $this->range;
     }
 
     /**
