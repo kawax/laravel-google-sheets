@@ -119,17 +119,33 @@ trait SheetsValues
         if (! $this->isAssociatedArray($values[0])) {
             return $values;
         }
+
         // The array has keys, which we want to map to headers and order
         $header = $this->first();
 
         $ordered = [];
-
         // Gets just the values of an array that has been re-ordered to match the header order
         foreach ($values as $value) {
-            array_push($ordered, array_values(array_replace(array_flip($header), $value)));
+            array_push(
+                $ordered,
+                array_values(array_replace(array_flip($header), $value))
+            );
         }
 
-        return $ordered;
+        // Replaces null values with empty strings to work with Google's API
+        return array_map(function ($row) {
+            $notNull = [];
+            foreach ($row as $key => $value) {
+                // If key is the same as value, that's because the user
+                // didn't specify a header that exists in the sheet.
+                if (is_null($value) || $key === $value) {
+                    array_push($notNull, '');
+                } else {
+                    array_push($notNull, $value);
+                }
+            }
+            return $notNull;
+        }, $ordered);
     }
 
     /**

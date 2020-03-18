@@ -118,13 +118,13 @@ $rows = Sheets::sheet('Sheet 1')->get();
 $header = $rows->pull(0);
 $values = Sheets::collection($header, $rows);
 $values->toArray()
-[
-  ['id' => '1', 'name' => 'name1', 'mail' => 'mail1'],
-  ['id' => '2', 'name' => 'name2', 'mail' => 'mail2']
-]
-
+// [
+//   ['id' => '1', 'name' => 'name1', 'mail' => 'mail1'],
+//   ['id' => '2', 'name' => 'name2', 'mail' => 'mail2']
+// ]
 ```
-view
+
+Blade
 ```php
 @foreach($values as $value)
   {{ data_get($value, 'name') }}
@@ -144,12 +144,12 @@ $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
 ```php
 Sheets::sheet('Sheet 1')->range('A4')->update([['3', 'name3', 'mail3']]);
 $values = Sheets::range('')->all();
-[
-  ['id', 'name', 'mail'],
-  ['1', 'name1', 'mail1'],
-  ['2', 'name1', 'mail2'],
-  ['3', 'name3', 'mail3']
-]
+// [
+//   ['id', 'name', 'mail'],
+//   ['1', 'name1', 'mail1'],
+//   ['2', 'name1', 'mail2'],
+//   ['3', 'name3', 'mail3']
+// ]
 ```
 
 ### Append a set of values to a sheet
@@ -157,12 +157,12 @@ $values = Sheets::range('')->all();
 // When we don't provide a specific range, the sheet becomes the default range
 Sheets::sheet('Sheet 1')->append([['3', 'name3', 'mail3']]);
 $values = Sheets::all();
-[
-  ['id', 'name', 'mail'],
-  ['1', 'name1', 'mail1'],
-  ['2', 'name1', 'mail2'],
-  ['3', 'name3', 'mail3']
-]
+// [
+//   ['id', 'name', 'mail'],
+//   ['1', 'name1', 'mail1'],
+//   ['2', 'name1', 'mail2'],
+//   ['3', 'name3', 'mail3']
+// ]
 ```
 
 ### Append a set of values with keys
@@ -170,13 +170,13 @@ $values = Sheets::all();
 // When providing an associative array, values get matched up to the headers in the provided sheet
 Sheets::sheet('Sheet 1')->append([['name' => 'name4', 'mail' => 'mail4', 'id' => 4]]);
 $values = Sheets::all();
-[
-  ['id', 'name', 'mail'],
-  ['1', 'name1', 'mail1'],
-  ['2', 'name1', 'mail2'],
-  ['3', 'name3', 'mail3'],
-  ['4', 'name4', 'mail4'],
-]
+// [
+//   ['id', 'name', 'mail'],
+//   ['1', 'name1', 'mail1'],
+//   ['2', 'name1', 'mail2'],
+//   ['3', 'name3', 'mail3'],
+//   ['4', 'name4', 'mail4'],
+// ]
 ```
 
 ### Add a new sheet
