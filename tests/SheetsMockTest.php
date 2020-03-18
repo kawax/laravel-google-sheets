@@ -172,7 +172,7 @@ class SheetsMockTest extends TestCase
             ->andReturn($response);
 
         $ordered = $this->sheet->orderAppendables([['header2' => 'value3', 'header1' => null]]);
-        $this->assertSame([[null, 'value3']], $ordered);
+        $this->assertSame([['', 'value3']], $ordered);
     }
 
     public function testSpreadsheetProperties()
