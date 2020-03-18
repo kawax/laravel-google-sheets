@@ -144,6 +144,7 @@ trait SheetsValues
                     array_push($notNull, $value);
                 }
             }
+
             return $notNull;
         }, $ordered);
     }
