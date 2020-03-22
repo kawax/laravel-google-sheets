@@ -2,6 +2,9 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 trait SheetsValues
 {
     /**
@@ -45,9 +48,9 @@ trait SheetsValues
     {
         $values = $this->all();
 
-        $first = array_shift($values);
+        $first = head($values);
 
-        return $first ?? [];
+        return $first ?: [];
     }
 
     /**
@@ -116,7 +119,7 @@ trait SheetsValues
     public function orderAppendables(array $values)
     {
         // The array has integer keys, so just append
-        if (! $this->isAssociatedArray($values[0])) {
+        if (! Arr::isAssoc(head($values) ?: [])) {
             return $values;
         }
 
@@ -150,33 +153,17 @@ trait SheetsValues
     }
 
     /**
-     * https://stackoverflow.com/a/173479/6646558.
-     *
-     * @param array $arr
-     *
-     * @return bool
-     */
-    protected function isAssociatedArray(array $arr)
-    {
-        if ($arr === []) {
-            return false;
-        }
-
-        return array_keys($arr) !== range(0, count($arr) - 1);
-    }
-
-    /**
      * @return string
      */
     public function ranges()
     {
         // If no range is provided, we get the sheet automatically
-        if (! isset($this->range)) {
+        if (blank($this->range)) {
             return $this->sheet;
         }
 
         // If we only provide part of the range, we get the full proper range
-        if (strpos($this->range, '!') === false) {
+        if (! Str::contains($this->range, '!')) {
             return $this->sheet.'!'.$this->range;
         }
 
