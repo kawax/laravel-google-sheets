@@ -6,7 +6,7 @@
 
 ## Requirements
 - PHP >= 7.2
-- Laravel >= 5.8
+- Laravel >= 6.0
 
 ## Versioning
 - Basic : semver
