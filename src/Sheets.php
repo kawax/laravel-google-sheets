@@ -80,7 +80,7 @@ class Sheets implements Factory
         }
 
         return $this->setService($google->make('sheets'))
-            ->setDriveService($google->make('drive'));
+                    ->setDriveService($google->make('drive'));
     }
 
     /**
@@ -165,19 +165,21 @@ class Sheets implements Factory
     /**
      * @param  string  $sheetTitle
      *
-     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle)
     {
-        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
-            'requests' => [
-                'addSheet' => [
-                    'properties' => [
-                        'title' => $sheetTitle,
+        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest(
+            [
+                'requests' => [
+                    'addSheet' => [
+                        'properties' => [
+                            'title' => $sheetTitle,
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]
+        );
 
         return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
     }
@@ -185,20 +187,22 @@ class Sheets implements Factory
     /**
      * @param  string  $sheetTitle
      *
-     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle)
     {
         $list = $this->sheetList();
         $id = Arr::get(array_flip($list), $sheetTitle);
 
-        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest([
-            'requests' => [
-                'deleteSheet' => [
-                    'sheetId' => $id,
+        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest(
+            [
+                'requests' => [
+                    'deleteSheet' => [
+                        'sheetId' => $id,
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
 
         return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
     }

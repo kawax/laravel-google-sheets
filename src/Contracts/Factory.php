@@ -164,14 +164,14 @@ interface Factory
     /**
      * @param  string  $sheetTitle
      *
-     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle);
 
     /**
      * @param  string  $sheetTitle
      *
-     * @return Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle);
 }
