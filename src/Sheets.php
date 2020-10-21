@@ -15,7 +15,9 @@ class Sheets implements Factory
     use Concerns\SheetsDrive;
     use Concerns\SheetsProperties;
     use Concerns\SheetsCollection;
-    use Macroable;
+    use Macroable {
+        __call as macroCall;
+    }
 
     /**
      * @var \Google_Service_Sheets
@@ -235,15 +237,9 @@ class Sheets implements Factory
     public function __call($method, $parameters)
     {
         if (method_exists($this->getService(), $method)) {
-            return call_user_func_array([$this->getService(), $method], $parameters);
+            return $this->getService()->{$method}(...array_values($parameters));
         }
 
-        if (static::hasMacro($method)) {
-            if (static::$macros[$method] instanceof \Closure) {
-                return call_user_func_array(static::$macros[$method]->bindTo($this, static::class), $parameters);
-            }
-        }
-
-        throw new \BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
+        return $this->macroCall($method, $parameters);
     }
 }
