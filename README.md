@@ -95,7 +95,7 @@ $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('S
 
 ### Basic Non-Laravel Usage
 ```php
-use Revolution\Google\Sheets\Sheets;
+use Revolution\Google\Sheets\SheetsClient;
 
 $client = \Google_Client();
 $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
@@ -104,7 +104,7 @@ $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADS
 
 $service = new \Google_Service_Sheets($client);
 
-$sheets = new Sheets();
+$sheets = new SheetsClient();
 $sheets->setService($service);
 
 $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
