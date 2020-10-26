@@ -4,12 +4,12 @@ namespace Revolution\Google\Sheets\Tests;
 
 use Illuminate\Support\Collection;
 use Mockery as m;
-use Revolution\Google\Sheets\SheetsClient;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsMockTest extends TestCase
 {
     /**
-     * @var SheetsClient
+     * @var Sheets
      */
     protected $sheet;
 
@@ -37,7 +37,7 @@ class SheetsMockTest extends TestCase
         $this->values = m::mock('Google_Service_Sheets_Resource_SpreadsheetsValues');
         $this->service->spreadsheets_values = $this->values;
 
-        $this->sheet = new SheetsClient();
+        $this->sheet = new Sheets();
 
         $this->sheet->setService($this->service);
     }
@@ -227,7 +227,7 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $sheet = m::mock(SheetsClient::class)->makePartial();
+        $sheet = m::mock(Sheets::class)->makePartial();
 
         $sheet->shouldReceive('sheetList')->andReturn([$sheets]);
 
@@ -242,7 +242,7 @@ class SheetsMockTest extends TestCase
             'id' => 'title',
         ];
 
-        $sheet = m::mock(SheetsClient::class)->makePartial();
+        $sheet = m::mock(Sheets::class)->makePartial();
 
         $sheet->shouldReceive('spreadsheetList')->andReturn($list);
 
@@ -253,7 +253,7 @@ class SheetsMockTest extends TestCase
 
     public function testGetAccessToken()
     {
-        $sheet = m::mock(SheetsClient::class)->makePartial();
+        $sheet = m::mock(Sheets::class)->makePartial();
 
         $token = $sheet->getAccessToken();
 

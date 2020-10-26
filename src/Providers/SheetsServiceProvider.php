@@ -5,7 +5,7 @@ namespace Revolution\Google\Sheets\Providers;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Revolution\Google\Sheets\Contracts\Factory;
-use Revolution\Google\Sheets\SheetsClient;
+use Revolution\Google\Sheets\Sheets;
 
 class SheetsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -24,7 +24,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        $this->app->singleton(Factory::class, SheetsClient::class);
+        $this->app->singleton(Factory::class, Sheets::class);
     }
 
     /**

@@ -10,7 +10,7 @@ use Illuminate\Support\Traits\Macroable;
 use PulkitJalan\Google\Client;
 use Revolution\Google\Sheets\Contracts\Factory;
 
-class SheetsClient implements Factory
+class Sheets implements Factory
 {
     use Concerns\SheetsValues;
     use Concerns\SheetsDrive;
