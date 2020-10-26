@@ -2,6 +2,7 @@
 
 namespace Revolution\Google\Sheets;
 
+use Google\Service;
 use Google_Service_Sheets;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
@@ -35,7 +36,7 @@ class SheetsClient implements Factory
     protected $sheet;
 
     /**
-     * @param  Google_Service_Sheets|\Google_Service  $service
+     * @param  Google_Service_Sheets|Service  $service
      *
      * @return $this
      */

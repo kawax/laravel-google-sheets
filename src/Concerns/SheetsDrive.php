@@ -2,6 +2,7 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
+use Google\Service;
 use Google_Service_Drive;
 use Illuminate\Container\Container;
 use PulkitJalan\Google\Client;
@@ -22,9 +23,11 @@ trait SheetsDrive
 
         $files = $this->getDriveService()
             ->files
-            ->listFiles([
-                'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
-            ])
+            ->listFiles(
+                [
+                    'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
+                ]
+            )
             ->getFiles();
 
         foreach ($files as $file) {
@@ -35,7 +38,7 @@ trait SheetsDrive
     }
 
     /**
-     * @param  Google_Service_Drive|\Google_Service  $drive
+     * @param  Google_Service_Drive|Service  $drive
      *
      * @return $this
      */
@@ -47,7 +50,7 @@ trait SheetsDrive
     }
 
     /**
-     * @return Google_Service_Drive|\Google_Service
+     * @return Google_Service_Drive|Service
      */
     public function getDriveService()
     {

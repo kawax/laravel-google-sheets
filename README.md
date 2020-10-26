@@ -95,9 +95,10 @@ $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('S
 
 ### Basic Non-Laravel Usage
 ```php
+use Google\Client;
 use Revolution\Google\Sheets\SheetsClient;
 
-$client = \Google_Client();
+$client = new Client();
 $client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
 // setup Google Client
 // ...
