@@ -7,11 +7,17 @@
     "laravel"
   ],
   "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/kawax/google-apiclient"
+    }
+  ],
   "require": {
     "php": "^7.2||^8.0",
     "illuminate/container": "^6.0||^7.0||^8.0",
     "illuminate/support": "^6.0||^7.0||^8.0",
-    "pulkitjalan/google-apiclient": "^4.0"
+    "pulkitjalan/google-apiclient": "dev-patch"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0||^9.0",
