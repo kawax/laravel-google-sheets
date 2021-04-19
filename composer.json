@@ -11,7 +11,8 @@
     "php": "^7.3||^8.0",
     "illuminate/container": "^6.0||^7.0||^8.0",
     "illuminate/support": "^6.0||^7.0||^8.0",
-    "google/apiclient": "^2.9"
+    "google/apiclient": "^2.9",
+    "pulkitjalan/google-apiclient": "^4.1@dev"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.0",
@@ -20,8 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Revolution\\Google\\Sheets\\": "src/",
-      "PulkitJalan\\Google\\": "lib/google-apiclient/src"
+      "Revolution\\Google\\Sheets\\": "src/"
     }
   },
   "autoload-dev": {
@@ -38,8 +38,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider",
-        "PulkitJalan\\Google\\GoogleServiceProvider"
+        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider"
       ],
       "aliases": {
         "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"
