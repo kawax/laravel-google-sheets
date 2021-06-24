@@ -3,14 +3,14 @@
 namespace Revolution\Google\Sheets\Concerns;
 
 use Google\Service;
-use Google_Service_Drive;
+use Google\Service\Drive;
 use Illuminate\Container\Container;
 use PulkitJalan\Google\Client;
 
 trait SheetsDrive
 {
     /**
-     * @var Google_Service_Drive
+     * @var Drive
      */
     protected $drive;
 
@@ -38,7 +38,7 @@ trait SheetsDrive
     }
 
     /**
-     * @param  Google_Service_Drive|Service  $drive
+     * @param  Drive|Service  $drive
      *
      * @return $this
      */
@@ -50,7 +50,7 @@ trait SheetsDrive
     }
 
     /**
-     * @return Google_Service_Drive|Service
+     * @return Drive|Service
      */
     public function getDriveService()
     {

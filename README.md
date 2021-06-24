@@ -1,7 +1,6 @@
 # Google Sheets API v4 for Laravel
 
 [![packagist](https://badgen.net/packagist/v/revolution/laravel-google-sheets)](https://packagist.org/packages/revolution/laravel-google-sheets)
-[![Build Status](https://travis-ci.com/kawax/laravel-google-sheets.svg?branch=master)](https://travis-ci.com/kawax/laravel-google-sheets)
 [![Maintainability](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/maintainability)](https://codeclimate.com/github/kawax/laravel-google-sheets/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/test_coverage)](https://codeclimate.com/github/kawax/laravel-google-sheets/test_coverage)
 
@@ -33,7 +32,7 @@ composer require revolution/laravel-google-sheets
         'client_id'        => env('GOOGLE_CLIENT_ID', ''),
         'client_secret'    => env('GOOGLE_CLIENT_SECRET', ''),
         'redirect_uri'     => env('GOOGLE_REDIRECT', ''),
-        'scopes'           => [\Google_Service_Sheets::DRIVE, \Google_Service_Sheets::SPREADSHEETS],
+        'scopes'           => [\Google\Service\Sheets::DRIVE, \Google\Service\Sheets::SPREADSHEETS],
         'access_type'      => 'online',
         'approval_prompt'  => 'auto',
         'prompt'           => 'consent', //"none", "consent", "select_account" default:none
@@ -100,11 +99,11 @@ use Google\Client;
 use Revolution\Google\Sheets\Sheets;
 
 $client = new Client();
-$client->setScopes([Google_Service_Sheets::DRIVE, Google_Service_Sheets::SPREADSHEETS]);
+$client->setScopes([Google\Service\Sheets::DRIVE, Google\Service\Sheets::SPREADSHEETS]);
 // setup Google Client
 // ...
 
-$service = new \Google_Service_Sheets($client);
+$service = new \Google\Service\Sheets($client);
 
 $sheets = new Sheets();
 $sheets->setService($service);

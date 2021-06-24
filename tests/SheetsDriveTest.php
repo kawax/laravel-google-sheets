@@ -2,7 +2,9 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
-use Google_Service_Drive_DriveFile;
+use Google\Service\Drive;
+use Google\Service\Drive\DriveFile;
+use Google\Service\Drive\Resource\Files;
 use Mockery as m;
 use PulkitJalan\Google\Client;
 use Revolution\Google\Sheets\Facades\Sheets;
@@ -10,12 +12,12 @@ use Revolution\Google\Sheets\Facades\Sheets;
 class SheetsDriveTest extends TestCase
 {
     /**
-     * @var \Google_Service_Drive
+     * @var Drive
      */
     protected $service;
 
     /**
-     * @var \Google_Service_Drive_Resource_Files
+     * @var Files
      */
     protected $files;
 
@@ -32,7 +34,7 @@ class SheetsDriveTest extends TestCase
 
     public function testList()
     {
-        $file = new Google_Service_Drive_DriveFile([
+        $file = new DriveFile([
             'id'   => 'id',
             'name' => 'name',
         ]);

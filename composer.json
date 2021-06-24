@@ -11,7 +11,7 @@
     "php": "^7.3||^8.0",
     "illuminate/container": "^6.0||^7.0||^8.0",
     "illuminate/support": "^6.0||^7.0||^8.0",
-    "google/apiclient": "^2.9",
+    "google/apiclient": "^2.10",
     "pulkitjalan/google-apiclient": "^4.1@dev"
   },
   "require-dev": {

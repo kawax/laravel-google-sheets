@@ -2,6 +2,15 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
+use Google\Service\Sheets\AppendValuesResponse;
+use Google\Service\Sheets\BatchGetValuesResponse;
+use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
+use Google\Service\Sheets\Resource\Spreadsheets;
+use Google\Service\Sheets\Resource\SpreadsheetsValues;
+use Google\Service\Sheets\Sheet;
+use Google\Service\Sheets\Spreadsheet;
+use Google\Service\Sheets\UpdateValuesResponse;
+use Google\Service\Sheets\ValueRange;
 use Illuminate\Support\Collection;
 use Mockery as m;
 use Revolution\Google\Sheets\Sheets;
@@ -14,17 +23,17 @@ class SheetsMockTest extends TestCase
     protected $sheet;
 
     /**
-     * @var \Google_Service_Sheets
+     * @var \Google\Service\Sheets
      */
     protected $service;
 
     /**
-     * @var \Google_Service_Sheets_Resource_Spreadsheets
+     * @var Spreadsheets
      */
     protected $spreadsheets;
 
     /**
-     * @var \Google_Service_Sheets_Resource_SpreadsheetsValues
+     * @var SpreadsheetsValues
      */
     protected $values;
 
@@ -49,19 +58,19 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsAll()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
         $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->spreadsheet('test')
-            ->sheet('test')
-            ->majorDimension('test')
-            ->valueRenderOption('test')
-            ->dateTimeRenderOption('test')
-            ->all();
+                              ->sheet('test')
+                              ->majorDimension('test')
+                              ->valueRenderOption('test')
+                              ->dateTimeRenderOption('test')
+                              ->all();
 
         $this->assertGreaterThan(1, count($values));
         $this->assertSame([['test1' => '1'], ['test2' => '2']], $values);
@@ -69,8 +78,8 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsEmpty()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
@@ -83,8 +92,8 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsGet()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -98,7 +107,7 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsUpdate()
     {
-        $response = new \Google_Service_Sheets_UpdateValuesResponse();
+        $response = new UpdateValuesResponse();
 
         $this->values->shouldReceive('batchUpdate')->once()->andReturn($response);
 
@@ -110,8 +119,8 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsFirst()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -124,8 +133,8 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsFirstEmpty()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse();
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
@@ -147,9 +156,9 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsAppend()
     {
-        $response = new \Google_Service_Sheets_AppendValuesResponse;
-        $updates = new \Google_Service_Sheets_UpdateValuesResponse;
-        $valueRange = new \Google_Service_Sheets_ValueRange;
+        $response = new AppendValuesResponse;
+        $updates = new UpdateValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setUpdates($updates);
 
@@ -162,14 +171,14 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsAppendWithKeys()
     {
-        $response = new \Google_Service_Sheets_BatchGetValuesResponse;
-        $valueRange = new \Google_Service_Sheets_ValueRange;
+        $response = new BatchGetValuesResponse();
+        $valueRange = new ValueRange();
         $valueRange->setValues([['header1', 'header2'], ['value1', 'value2']]);
         $response->setValueRanges([$valueRange]);
 
         $this->values->shouldReceive('batchGet')
-            ->with(m::any(), m::any())
-            ->andReturn($response);
+                     ->with(m::any(), m::any())
+                     ->andReturn($response);
 
         $ordered = $this->sheet->orderAppendables([['header2' => 'value3', 'header1' => null]]);
         $this->assertSame([['', 'value3']], $ordered);
@@ -186,7 +195,7 @@ class SheetsMockTest extends TestCase
 
     public function testSheetProperties()
     {
-        $sheet = m::mock(\Google_Service_Sheets_Spreadsheet::class);
+        $sheet = m::mock(Spreadsheet::class);
         $sheet->shouldReceive('getProperties->toSimpleObject')->once()->andReturn(new \stdClass());
 
         $this->spreadsheets->shouldReceive('get->getSheets')->once()->andReturn([$sheet]);
@@ -205,7 +214,7 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsList()
     {
-        $sheets = new \Google_Service_Sheets_Sheet([
+        $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
                 'title'   => 'title',
@@ -220,7 +229,7 @@ class SheetsMockTest extends TestCase
 
     public function testSheetById()
     {
-        $sheets = new \Google_Service_Sheets_Sheet([
+        $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
                 'title'   => 'title',
@@ -278,7 +287,7 @@ class SheetsMockTest extends TestCase
     {
         $this->spreadsheets
             ->shouldReceive('batchUpdate')
-            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
+            ->andReturn(new BatchUpdateSpreadsheetResponse);
 
         $response = $this->sheet->addSheet('new sheet');
         $this->assertNotNull($response);
@@ -286,7 +295,7 @@ class SheetsMockTest extends TestCase
 
     public function testDeleteSheet()
     {
-        $sheets = new \Google_Service_Sheets_Sheet([
+        $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
                 'title'   => 'title',
@@ -296,7 +305,7 @@ class SheetsMockTest extends TestCase
         $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
         $this->spreadsheets
             ->shouldReceive('batchUpdate')
-            ->andReturn(new \Google_Service_Sheets_BatchUpdateSpreadsheetResponse);
+            ->andReturn(new BatchUpdateSpreadsheetResponse);
 
         $this->sheet->shouldReceive('sheetList')->andReturn([$sheets]);
         $response = $this->sheet->deleteSheet('title');
@@ -308,7 +317,7 @@ class SheetsMockTest extends TestCase
         $this->values
             ->shouldReceive('batchUpdate')
             ->times(3)
-            ->andReturn(new \Google_Service_Sheets_UpdateValuesResponse);
+            ->andReturn(new UpdateValuesResponse);
 
         // If no range is provided, we get the sheet automatically
         $this->sheet->sheet('test')->update([['test']]);

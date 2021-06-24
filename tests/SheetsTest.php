@@ -29,11 +29,11 @@ class SheetsTest extends TestCase
 
     public function testService()
     {
-        $this->google->shouldReceive('make')->once()->andReturns(m::mock(\Google_Service_Sheets::class));
+        $this->google->shouldReceive('make')->once()->andReturns(m::mock(\Google\Service\Sheets::class));
 
         //        Sheets::setService($this->google->make('Sheets'));
 
-        $this->assertInstanceOf(\Google_Service_Sheets::class, Sheets::getService());
+        $this->assertInstanceOf(\Google\Service\Sheets::class, Sheets::getService());
     }
 
     public function testSetAccessToken()
@@ -44,8 +44,8 @@ class SheetsTest extends TestCase
         $this->google->shouldReceive('isAccessTokenExpired')->once()->andReturns(true);
         $this->google->shouldReceive('fetchAccessTokenWithRefreshToken')->once();
         $this->google->shouldReceive('make')->times(2)->andReturns(
-            m::mock(\Google_Service_Sheets::class),
-            m::mock(\Google_Service_Drive::class)
+            m::mock(\Google\Service\Sheets::class),
+            m::mock(\Google\Service\Drive::class)
         );
 
         $photos = Sheets::setAccessToken([
@@ -54,7 +54,7 @@ class SheetsTest extends TestCase
             'expires_in'    => 0,
         ]);
 
-        $this->assertInstanceOf(\Google_Service_Sheets::class, $photos->getService());
+        $this->assertInstanceOf(\Google\Service\Sheets::class, $photos->getService());
     }
 
     public function testTrait()

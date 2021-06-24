@@ -2,21 +2,22 @@
 
 namespace Revolution\Google\Sheets\Contracts;
 
-use Google_Service_Drive;
-use Google_Service_Sheets;
+use Google\Service;
+use Google\Service\Drive;
+use Google\Service\Sheets;
 use Illuminate\Support\Collection;
 
 interface Factory
 {
     /**
-     * @param  Google_Service_Sheets|\Google_Service  $service
+     * @param  Sheets|Service  $service
      */
     public function setService($service);
 
     /**
-     * @return Google_Service_Sheets
+     * @return Sheets
      */
-    public function getService(): Google_Service_Sheets;
+    public function getService(): Sheets;
 
     /**
      * set access_token and set new service.
@@ -79,12 +80,12 @@ interface Factory
     public function spreadsheetList(): array;
 
     /**
-     * @param  Google_Service_Drive|\Google_Service  $drive
+     * @param  Drive|Service  $drive
      */
     public function setDriveService($drive);
 
     /**
-     * @return Google_Service_Drive|\Google_Service
+     * @return Drive|Service
      */
     public function getDriveService();
 

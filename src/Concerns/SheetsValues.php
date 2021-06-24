@@ -2,6 +2,10 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
+use Google\Service\Sheets\BatchUpdateValuesRequest;
+use Google\Service\Sheets\ClearValuesRequest;
+use Google\Service\Sheets\ClearValuesResponse;
+use Google\Service\Sheets\ValueRange;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -63,10 +67,10 @@ trait SheetsValues
     {
         $range = $this->ranges();
 
-        $batch = new \Google_Service_Sheets_BatchUpdateValuesRequest();
+        $batch = new BatchUpdateValuesRequest();
         $batch->setValueInputOption($valueInputOption);
 
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange = new ValueRange();
         $valueRange->setValues($value);
         $valueRange->setRange($range);
 
@@ -76,13 +80,13 @@ trait SheetsValues
     }
 
     /**
-     * @return mixed|\Google_Service_Sheets_ClearValuesResponse
+     * @return mixed|ClearValuesResponse
      */
     public function clear()
     {
         $range = $this->ranges();
 
-        $clear = new \Google_Service_Sheets_ClearValuesRequest();
+        $clear = new ClearValuesRequest();
 
         return $this->serviceValues()->clear($this->spreadsheetId, $range, $clear);
     }
@@ -99,7 +103,7 @@ trait SheetsValues
         $range = $this->ranges();
         $orderedValues = $this->orderAppendables($values);
 
-        $valueRange = new \Google_Service_Sheets_ValueRange();
+        $valueRange = new ValueRange();
         $valueRange->setValues($orderedValues);
         $valueRange->setRange($range);
 
@@ -112,7 +116,7 @@ trait SheetsValues
     }
 
     /**
-     * @param array $values
+     * @param  array  $values
      *
      * @return array
      */

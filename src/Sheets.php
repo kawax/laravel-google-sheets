@@ -3,7 +3,7 @@
 namespace Revolution\Google\Sheets;
 
 use Google\Service;
-use Google_Service_Sheets;
+use Google\Service\Sheets as GoogleSheets;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
@@ -21,7 +21,7 @@ class Sheets implements Factory
     }
 
     /**
-     * @var \Google_Service_Sheets
+     * @var GoogleSheets
      */
     protected $service;
 
@@ -36,7 +36,7 @@ class Sheets implements Factory
     protected $sheet;
 
     /**
-     * @param  Google_Service_Sheets|Service  $service
+     * @param  GoogleSheets|Service  $service
      *
      * @return $this
      */
@@ -48,9 +48,9 @@ class Sheets implements Factory
     }
 
     /**
-     * @return Google_Service_Sheets
+     * @return GoogleSheets
      */
-    public function getService(): Google_Service_Sheets
+    public function getService(): GoogleSheets
     {
         if (is_null($this->service)) {
             $this->service = Container::getInstance()->make(Client::class)->make('sheets');
