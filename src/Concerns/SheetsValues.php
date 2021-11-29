@@ -60,7 +60,6 @@ trait SheetsValues
     /**
      * @param  array  $value
      * @param  string  $valueInputOption
-     *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
     public function update(array $value, string $valueInputOption = 'RAW')
@@ -95,7 +94,6 @@ trait SheetsValues
      * @param  array  $values
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
-     *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
     public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
@@ -117,7 +115,6 @@ trait SheetsValues
 
     /**
      * @param  array  $values
-     *
      * @return array
      */
     public function orderAppendables(array $values)
@@ -177,7 +174,6 @@ trait SheetsValues
 
     /**
      * @param  string  $range
-     *
      * @return $this
      */
     public function range(string $range)
@@ -189,7 +185,6 @@ trait SheetsValues
 
     /**
      * @param  string  $majorDimension
-     *
      * @return $this
      */
     public function majorDimension(string $majorDimension)
@@ -201,7 +196,6 @@ trait SheetsValues
 
     /**
      * @param  string  $valueRenderOption
-     *
      * @return $this
      */
     public function valueRenderOption(string $valueRenderOption)
@@ -213,7 +207,6 @@ trait SheetsValues
 
     /**
      * @param  string  $dateTimeRenderOption
-     *
      * @return $this
      */
     public function dateTimeRenderOption(string $dateTimeRenderOption)

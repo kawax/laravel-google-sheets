@@ -37,7 +37,6 @@ class Sheets implements Factory
 
     /**
      * @param  GoogleSheets|Service  $service
-     *
      * @return $this
      */
     public function setService($service)
@@ -63,8 +62,8 @@ class Sheets implements Factory
      * set access_token and set new service.
      *
      * @param  string|array  $token
-     *
      * @return $this
+     *
      * @throws \Exception
      */
     public function setAccessToken($token)
@@ -96,7 +95,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $spreadsheetId
-     *
      * @return $this
      */
     public function spreadsheet(string $spreadsheetId)
@@ -108,7 +106,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $title
-     *
      * @return $this
      */
     public function spreadsheetByTitle(string $title)
@@ -123,7 +120,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheet
-     *
      * @return $this
      */
     public function sheet(string $sheet)
@@ -135,7 +131,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheetId
-     *
      * @return $this
      */
     public function sheetById(string $sheetId)
@@ -167,7 +162,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheetTitle
-     *
      * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle)
@@ -189,7 +183,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheetTitle
-     *
      * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle)
@@ -212,7 +205,6 @@ class Sheets implements Factory
 
     /**
      * @param  string  $property
-     *
      * @return mixed
      *
      * @throws \InvalidArgumentException
@@ -231,8 +223,8 @@ class Sheets implements Factory
      *
      * @param  string  $method
      * @param  array  $parameters
-     *
      * @return mixed
+     *
      * @throws \BadMethodCallException
      */
     public function __call($method, $parameters)

@@ -23,35 +23,30 @@ interface Factory
      * set access_token and set new service.
      *
      * @param  string|array  $token
-     *
      * @return $this
      */
     public function setAccessToken($token);
 
     /**
      * @param  string  $spreadsheetId
-     *
      * @return $this
      */
     public function spreadsheet(string $spreadsheetId);
 
     /**
      * @param  string  $title
-     *
      * @return $this
      */
     public function spreadsheetByTitle(string $title);
 
     /**
      * @param  string  $sheet
-     *
      * @return $this
      */
     public function sheet(string $sheet);
 
     /**
      * @param  string  $sheetId
-     *
      * @return $this
      */
     public function sheetById(string $sheetId);
@@ -69,7 +64,6 @@ interface Factory
     /**
      * @param  array  $header
      * @param  array|\Illuminate\Support\Collection  $rows
-     *
      * @return \Illuminate\Support\Collection
      */
     public function collection(array $header, $rows): Collection;
@@ -112,7 +106,6 @@ interface Factory
     /**
      * @param  array  $value
      * @param  string  $valueInputOption
-     *
      * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
      */
     public function update(array $value, string $valueInputOption = 'RAW');
@@ -126,7 +119,6 @@ interface Factory
      * @param  array  $value
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
-     *
      * @return mixed|\Google_Service_Sheets_AppendValuesResponse
      */
     public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE');
@@ -138,21 +130,18 @@ interface Factory
 
     /**
      * @param  string  $range
-     *
      * @return $this
      */
     public function range(string $range);
 
     /**
      * @param  string  $majorDimension
-     *
      * @return $this
      */
     public function majorDimension(string $majorDimension);
 
     /**
      * @param  string  $dateTimeRenderOption
-     *
      * @return $this
      */
     public function dateTimeRenderOption(string $dateTimeRenderOption);
@@ -164,14 +153,12 @@ interface Factory
 
     /**
      * @param  string  $sheetTitle
-     *
      * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle);
 
     /**
      * @param  string  $sheetTitle
-     *
      * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle);
