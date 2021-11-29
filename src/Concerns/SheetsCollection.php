@@ -19,7 +19,6 @@ trait SheetsCollection
     /**
      * @param  array  $header
      * @param  array|Collection  $rows
-     *
      * @return Collection
      */
     public function collection(array $header, $rows): Collection

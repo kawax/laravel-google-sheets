@@ -39,7 +39,6 @@ trait SheetsDrive
 
     /**
      * @param  Drive|Service  $drive
-     *
      * @return $this
      */
     public function setDriveService($drive)
