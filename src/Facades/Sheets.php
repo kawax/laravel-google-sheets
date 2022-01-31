@@ -5,6 +5,9 @@ namespace Revolution\Google\Sheets\Facades;
 use Illuminate\Support\Facades\Facade;
 use Revolution\Google\Sheets\Contracts\Factory;
 
+/**
+ * @mixin \Revolution\Google\Sheets\Sheets
+ */
 class Sheets extends Facade
 {
     /**
