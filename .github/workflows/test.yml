@@ -21,9 +21,8 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress  --optimize-autoloader
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: vendor/bin/phpunit
-          coverageLocations: build/logs/clover.xml:clover
