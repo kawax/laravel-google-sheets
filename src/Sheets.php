@@ -8,6 +8,7 @@ use Google\Service\Sheets\BatchUpdateSpreadsheetRequest;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use PulkitJalan\Google\Client;
 use Revolution\Google\Sheets\Contracts\Factory;
@@ -18,6 +19,7 @@ class Sheets implements Factory
     use Concerns\SheetsDrive;
     use Concerns\SheetsProperties;
     use Concerns\SheetsCollection;
+    use Conditionable;
     use Macroable {
         __call as macroCall;
     }
