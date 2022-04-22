@@ -41,7 +41,7 @@ trait SheetsValues
     {
         $query = $this->query();
 
-        $sheets = $this->serviceValues()->batchGet($this->spreadsheetId, $query);
+        $sheets = $this->serviceValues()->batchGet($this->getSpreadsheetId(), $query);
 
         $values = $sheets->getValueRanges()[0]->getValues();
 
@@ -78,7 +78,7 @@ trait SheetsValues
 
         $batch->setData($valueRange);
 
-        return $this->serviceValues()->batchUpdate($this->spreadsheetId, $batch);
+        return $this->serviceValues()->batchUpdate($this->getSpreadsheetId(), $batch);
     }
 
     /**
@@ -90,7 +90,7 @@ trait SheetsValues
 
         $clear = new ClearValuesRequest();
 
-        return $this->serviceValues()->clear($this->spreadsheetId, $range, $clear);
+        return $this->serviceValues()->clear($this->getSpreadsheetId(), $range, $clear);
     }
 
     /**
@@ -113,7 +113,7 @@ trait SheetsValues
             'insertDataOption' => $insertDataOption,
         ];
 
-        return $this->serviceValues()->append($this->spreadsheetId, $range, $valueRange, $optParams);
+        return $this->serviceValues()->append($this->getSpreadsheetId(), $range, $valueRange, $optParams);
     }
 
     /**

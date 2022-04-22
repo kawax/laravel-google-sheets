@@ -2,28 +2,30 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
+use stdClass;
+
 trait SheetsProperties
 {
     /**
-     * @return \stdClass
+     * @return stdClass
      */
-    public function spreadsheetProperties()
+    public function spreadsheetProperties(): stdClass
     {
         return $this->getService()
             ->spreadsheets
-            ->get($this->spreadsheetId)
+            ->get($this->getSpreadsheetId())
             ->getProperties()
             ->toSimpleObject();
     }
 
     /**
-     * @return \stdClass
+     * @return stdClass
      */
-    public function sheetProperties()
+    public function sheetProperties(): stdClass
     {
         $sheets = $this->getService()
             ->spreadsheets
-            ->get($this->spreadsheetId, ['ranges' => $this->sheet])
+            ->get($this->getSpreadsheetId(), ['ranges' => $this->sheet])
             ->getSheets();
 
         return $sheets[0]->getProperties()->toSimpleObject();
@@ -32,8 +34,8 @@ trait SheetsProperties
     /**
      * @return string
      */
-    public function getSpreadsheetId()
+    public function getSpreadsheetId(): string
     {
-        return $this->spreadsheetId;
+        return $this->spreadsheetId ?? '';
     }
 }

@@ -5,6 +5,7 @@ namespace Revolution\Google\Sheets\Tests;
 use Google\Service\Sheets\AppendValuesResponse;
 use Google\Service\Sheets\BatchGetValuesResponse;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
+use Google\Service\Sheets\BatchUpdateValuesResponse;
 use Google\Service\Sheets\Resource\Spreadsheets;
 use Google\Service\Sheets\Resource\SpreadsheetsValues;
 use Google\Service\Sheets\Sheet;
@@ -40,10 +41,10 @@ class SheetsMockTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->service = m::mock('Google_Service_Sheets')->makePartial();
-        $this->spreadsheets = m::mock('Google_Service_Sheets_Resource_Spreadsheets');
+        $this->service = m::mock(\Google\Service\Sheets::class)->makePartial();
+        $this->spreadsheets = m::mock(Spreadsheets::class);
         $this->service->spreadsheets = $this->spreadsheets;
-        $this->values = m::mock('Google_Service_Sheets_Resource_SpreadsheetsValues');
+        $this->values = m::mock(SpreadsheetsValues::class);
         $this->service->spreadsheets_values = $this->values;
 
         $this->sheet = new Sheets();
@@ -107,14 +108,14 @@ class SheetsMockTest extends TestCase
 
     public function testSheetsUpdate()
     {
-        $response = new UpdateValuesResponse();
+        $response = new BatchUpdateValuesResponse();
 
         $this->values->shouldReceive('batchUpdate')->once()->andReturn($response);
 
         $values = $this->sheet->sheet('test')->range('A1')->update([['test']]);
 
         $this->assertEquals('test!A1', $this->sheet->ranges());
-        $this->assertInstanceOf('Google_Service_Sheets_UpdateValuesResponse', $values);
+        $this->assertInstanceOf(BatchUpdateValuesResponse::class, $values);
     }
 
     public function testSheetsFirst()

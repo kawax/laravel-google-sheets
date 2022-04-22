@@ -155,7 +155,7 @@ class Sheets implements Factory
     {
         $list = [];
 
-        $sheets = $this->getService()->spreadsheets->get($this->spreadsheetId)->getSheets();
+        $sheets = $this->getService()->spreadsheets->get($this->getSpreadsheetId())->getSheets();
 
         foreach ($sheets as $sheet) {
             $list[$sheet->getProperties()->getSheetId()] = $sheet->getProperties()->getTitle();
@@ -182,7 +182,7 @@ class Sheets implements Factory
             ]
         );
 
-        return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
+        return $this->getService()->spreadsheets->batchUpdate($this->getSpreadsheetId(), $body);
     }
 
     /**
@@ -204,7 +204,7 @@ class Sheets implements Factory
             ]
         );
 
-        return $this->getService()->spreadsheets->batchUpdate($this->spreadsheetId, $body);
+        return $this->getService()->spreadsheets->batchUpdate($this->getSpreadsheetId(), $body);
     }
 
     /**
