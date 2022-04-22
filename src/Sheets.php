@@ -4,6 +4,8 @@ namespace Revolution\Google\Sheets;
 
 use Google\Service;
 use Google\Service\Sheets as GoogleSheets;
+use Google\Service\Sheets\BatchUpdateSpreadsheetRequest;
+use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
@@ -39,7 +41,7 @@ class Sheets implements Factory
      * @param  GoogleSheets|Service  $service
      * @return $this
      */
-    public function setService($service)
+    public function setService($service): static
     {
         $this->service = $service;
 
@@ -66,7 +68,7 @@ class Sheets implements Factory
      *
      * @throws \Exception
      */
-    public function setAccessToken($token)
+    public function setAccessToken($token): static
     {
         /**
          * @var Client $google
@@ -97,7 +99,7 @@ class Sheets implements Factory
      * @param  string  $spreadsheetId
      * @return $this
      */
-    public function spreadsheet(string $spreadsheetId)
+    public function spreadsheet(string $spreadsheetId): static
     {
         $this->spreadsheetId = $spreadsheetId;
 
@@ -108,7 +110,7 @@ class Sheets implements Factory
      * @param  string  $title
      * @return $this
      */
-    public function spreadsheetByTitle(string $title)
+    public function spreadsheetByTitle(string $title): static
     {
         $list = $this->spreadsheetList();
         $id = Arr::get(array_flip($list), $title);
@@ -122,7 +124,7 @@ class Sheets implements Factory
      * @param  string  $sheet
      * @return $this
      */
-    public function sheet(string $sheet)
+    public function sheet(string $sheet): static
     {
         $this->sheet = $sheet;
 
@@ -133,7 +135,7 @@ class Sheets implements Factory
      * @param  string  $sheetId
      * @return $this
      */
-    public function sheetById(string $sheetId)
+    public function sheetById(string $sheetId): static
     {
         $list = $this->sheetList();
 
@@ -162,11 +164,11 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheetTitle
-     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle)
     {
-        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest(
+        $body = new BatchUpdateSpreadsheetRequest(
             [
                 'requests' => [
                     'addSheet' => [
@@ -183,14 +185,14 @@ class Sheets implements Factory
 
     /**
      * @param  string  $sheetTitle
-     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle)
     {
         $list = $this->sheetList();
         $id = Arr::get(array_flip($list), $sheetTitle);
 
-        $body = new \Google_Service_Sheets_BatchUpdateSpreadsheetRequest(
+        $body = new BatchUpdateSpreadsheetRequest(
             [
                 'requests' => [
                     'deleteSheet' => [

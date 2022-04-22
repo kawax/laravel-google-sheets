@@ -1,5 +1,8 @@
 # UPGRADING
 
+## 5.x to 6.0
+- Require PHP>=8.0 and Laravel>=8.x
+
 ## 4.x to 5.0
 - require `PHP>=7.2`
 

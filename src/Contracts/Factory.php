@@ -5,14 +5,19 @@ namespace Revolution\Google\Sheets\Contracts;
 use Google\Service;
 use Google\Service\Drive;
 use Google\Service\Sheets;
+use Google\Service\Sheets\AppendValuesResponse;
+use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
+use Google\Service\Sheets\BatchUpdateValuesResponse;
+use Google\Service\Sheets\ClearValuesResponse;
 use Illuminate\Support\Collection;
 
 interface Factory
 {
     /**
      * @param  Sheets|Service  $service
+     * @return $this
      */
-    public function setService($service);
+    public function setService($service): static;
 
     /**
      * @return Sheets
@@ -25,31 +30,31 @@ interface Factory
      * @param  string|array  $token
      * @return $this
      */
-    public function setAccessToken($token);
+    public function setAccessToken($token): static;
 
     /**
      * @param  string  $spreadsheetId
      * @return $this
      */
-    public function spreadsheet(string $spreadsheetId);
+    public function spreadsheet(string $spreadsheetId): static;
 
     /**
      * @param  string  $title
      * @return $this
      */
-    public function spreadsheetByTitle(string $title);
+    public function spreadsheetByTitle(string $title): static;
 
     /**
      * @param  string  $sheet
      * @return $this
      */
-    public function sheet(string $sheet);
+    public function sheet(string $sheet): static;
 
     /**
      * @param  string  $sheetId
      * @return $this
      */
-    public function sheetById(string $sheetId);
+    public function sheetById(string $sheetId): static;
 
     /**
      * @return array
@@ -75,6 +80,7 @@ interface Factory
 
     /**
      * @param  Drive|Service  $drive
+     * @return $this
      */
     public function setDriveService($drive);
 
@@ -106,12 +112,12 @@ interface Factory
     /**
      * @param  array  $value
      * @param  string  $valueInputOption
-     * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
+     * @return BatchUpdateValuesResponse
      */
     public function update(array $value, string $valueInputOption = 'RAW');
 
     /**
-     * @return mixed|\Google_Service_Sheets_ClearValuesResponse
+     * @return ClearValuesResponse
      */
     public function clear();
 
@@ -119,7 +125,7 @@ interface Factory
      * @param  array  $value
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
-     * @return mixed|\Google_Service_Sheets_AppendValuesResponse
+     * @return AppendValuesResponse
      */
     public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE');
 
@@ -153,13 +159,13 @@ interface Factory
 
     /**
      * @param  string  $sheetTitle
-     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return BatchUpdateSpreadsheetResponse
      */
     public function addSheet(string $sheetTitle);
 
     /**
      * @param  string  $sheetTitle
-     * @return \Google_Service_Sheets_BatchUpdateSpreadsheetResponse
+     * @return BatchUpdateSpreadsheetResponse
      */
     public function deleteSheet(string $sheetTitle);
 }

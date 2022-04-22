@@ -2,9 +2,12 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
+use Google\Service\Sheets\AppendValuesResponse;
 use Google\Service\Sheets\BatchUpdateValuesRequest;
+use Google\Service\Sheets\BatchUpdateValuesResponse;
 use Google\Service\Sheets\ClearValuesRequest;
 use Google\Service\Sheets\ClearValuesResponse;
+use Google\Service\Sheets\Resource\SpreadsheetsValues;
 use Google\Service\Sheets\ValueRange;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -60,7 +63,7 @@ trait SheetsValues
     /**
      * @param  array  $value
      * @param  string  $valueInputOption
-     * @return mixed|\Google_Service_Sheets_UpdateValuesResponse
+     * @return BatchUpdateValuesResponse
      */
     public function update(array $value, string $valueInputOption = 'RAW')
     {
@@ -79,7 +82,7 @@ trait SheetsValues
     }
 
     /**
-     * @return mixed|ClearValuesResponse
+     * @return ClearValuesResponse
      */
     public function clear()
     {
@@ -94,7 +97,7 @@ trait SheetsValues
      * @param  array  $values
      * @param  string  $valueInputOption
      * @param  string  $insertDataOption
-     * @return mixed|\Google_Service_Sheets_AppendValuesResponse
+     * @return AppendValuesResponse
      */
     public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
     {
@@ -217,7 +220,7 @@ trait SheetsValues
     }
 
     /**
-     * @return \Google_Service_Sheets_Resource_SpreadsheetsValues
+     * @return SpreadsheetsValues
      */
     protected function serviceValues()
     {

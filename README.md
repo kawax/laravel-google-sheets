@@ -5,8 +5,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/test_coverage)](https://codeclimate.com/github/kawax/laravel-google-sheets/test_coverage)
 
 ## Requirements
-- PHP >= 7.4
-- Laravel >= 6.0
+- PHP >= 8.0
+- Laravel >= 8.0
 
 ## Versioning
 - Basic : semver
