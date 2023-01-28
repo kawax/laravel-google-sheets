@@ -15,29 +15,29 @@ use Illuminate\Support\Str;
 trait SheetsValues
 {
     /**
-     * @var string
+     * @var string|null
      */
-    protected $range;
+    protected ?string $range = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $majorDimension;
+    protected ?string $majorDimension = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $valueRenderOption;
+    protected ?string $valueRenderOption = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $dateTimeRenderOption;
+    protected ?string $dateTimeRenderOption = null;
 
     /**
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         $query = $this->query();
 
@@ -51,7 +51,7 @@ trait SheetsValues
     /**
      * @return array
      */
-    public function first()
+    public function first(): array
     {
         $values = $this->all();
 
@@ -65,7 +65,7 @@ trait SheetsValues
      * @param  string  $valueInputOption
      * @return BatchUpdateValuesResponse
      */
-    public function update(array $value, string $valueInputOption = 'RAW')
+    public function update(array $value, string $valueInputOption = 'RAW'): BatchUpdateValuesResponse
     {
         $range = $this->ranges();
 
@@ -82,9 +82,9 @@ trait SheetsValues
     }
 
     /**
-     * @return ClearValuesResponse
+     * @return ClearValuesResponse|null
      */
-    public function clear()
+    public function clear(): ?ClearValuesResponse
     {
         $range = $this->ranges();
 
@@ -99,7 +99,7 @@ trait SheetsValues
      * @param  string  $insertDataOption
      * @return AppendValuesResponse
      */
-    public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE')
+    public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE'): AppendValuesResponse
     {
         $range = $this->ranges();
         $orderedValues = $this->orderAppendables($values);
@@ -120,7 +120,7 @@ trait SheetsValues
      * @param  array  $values
      * @return array
      */
-    public function orderAppendables(array $values)
+    public function orderAppendables(array $values): array
     {
         // The array has integer keys, so just append
         if (! Arr::isAssoc(head($values) ?: [])) {
@@ -157,9 +157,9 @@ trait SheetsValues
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function ranges()
+    public function ranges(): ?string
     {
         // If no range is provided, we get the sheet automatically
         if (blank($this->range)) {
@@ -179,7 +179,7 @@ trait SheetsValues
      * @param  string  $range
      * @return $this
      */
-    public function range(string $range)
+    public function range(string $range): static
     {
         $this->range = $range;
 
@@ -190,7 +190,7 @@ trait SheetsValues
      * @param  string  $majorDimension
      * @return $this
      */
-    public function majorDimension(string $majorDimension)
+    public function majorDimension(string $majorDimension): static
     {
         $this->majorDimension = $majorDimension;
 
@@ -201,7 +201,7 @@ trait SheetsValues
      * @param  string  $valueRenderOption
      * @return $this
      */
-    public function valueRenderOption(string $valueRenderOption)
+    public function valueRenderOption(string $valueRenderOption): static
     {
         $this->valueRenderOption = $valueRenderOption;
 
@@ -212,7 +212,7 @@ trait SheetsValues
      * @param  string  $dateTimeRenderOption
      * @return $this
      */
-    public function dateTimeRenderOption(string $dateTimeRenderOption)
+    public function dateTimeRenderOption(string $dateTimeRenderOption): static
     {
         $this->dateTimeRenderOption = $dateTimeRenderOption;
 
@@ -222,7 +222,7 @@ trait SheetsValues
     /**
      * @return SpreadsheetsValues
      */
-    protected function serviceValues()
+    protected function serviceValues(): SpreadsheetsValues
     {
         return $this->getService()->spreadsheets_values;
     }

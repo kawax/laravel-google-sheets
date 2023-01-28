@@ -318,7 +318,7 @@ class SheetsMockTest extends TestCase
         $this->values
             ->shouldReceive('batchUpdate')
             ->times(3)
-            ->andReturn(new UpdateValuesResponse);
+            ->andReturn(new BatchUpdateValuesResponse());
 
         // If no range is provided, we get the sheet automatically
         $this->sheet->sheet('test')->update([['test']]);

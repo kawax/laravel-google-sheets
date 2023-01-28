@@ -13,7 +13,7 @@ trait GoogleSheets
     /**
      * @return Factory
      */
-    public function sheets()
+    public function sheets(): Factory
     {
         $token = $this->sheetsAccessToken();
 

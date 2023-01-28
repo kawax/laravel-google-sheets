@@ -10,9 +10,9 @@ use PulkitJalan\Google\Client;
 trait SheetsDrive
 {
     /**
-     * @var Drive
+     * @var Drive|null
      */
-    protected $drive;
+    protected ?Drive $drive = null;
 
     /**
      * @return array
@@ -38,10 +38,10 @@ trait SheetsDrive
     }
 
     /**
-     * @param  Drive|Service  $drive
+     * @param  Drive|Service|null  $drive
      * @return $this
      */
-    public function setDriveService($drive)
+    public function setDriveService(Service|Drive|null $drive): static
     {
         $this->drive = $drive;
 
@@ -51,7 +51,7 @@ trait SheetsDrive
     /**
      * @return Drive|Service
      */
-    public function getDriveService()
+    public function getDriveService(): Service|Drive
     {
         if (is_null($this->drive)) {
             $this->drive = Container::getInstance()->make(Client::class)->make('drive');

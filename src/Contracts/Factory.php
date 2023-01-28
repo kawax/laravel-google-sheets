@@ -14,10 +14,10 @@ use Illuminate\Support\Collection;
 interface Factory
 {
     /**
-     * @param  Sheets|Service  $service
+     * @param  Service|Sheets  $service
      * @return $this
      */
-    public function setService($service): static;
+    public function setService(Service|Sheets $service): static;
 
     /**
      * @return Sheets
@@ -27,10 +27,10 @@ interface Factory
     /**
      * set access_token and set new service.
      *
-     * @param  string|array  $token
+     * @param  array|string  $token
      * @return $this
      */
-    public function setAccessToken($token): static;
+    public function setAccessToken(array|string $token): static;
 
     /**
      * @param  string  $spreadsheetId
@@ -71,7 +71,7 @@ interface Factory
      * @param  array|\Illuminate\Support\Collection  $rows
      * @return \Illuminate\Support\Collection
      */
-    public function collection(array $header, $rows): Collection;
+    public function collection(array $header, array|Collection $rows): Collection;
 
     /**
      * @return array
@@ -82,44 +82,44 @@ interface Factory
      * @param  Drive|Service  $drive
      * @return $this
      */
-    public function setDriveService($drive);
+    public function setDriveService(Service|Drive $drive): static;
 
     /**
      * @return Drive|Service
      */
-    public function getDriveService();
+    public function getDriveService(): Service|Drive;
 
     /**
-     * @return \stdClass
+     * @return object
      */
-    public function spreadsheetProperties();
+    public function spreadsheetProperties(): object;
 
     /**
-     * @return \stdClass
+     * @return object
      */
-    public function sheetProperties();
-
-    /**
-     * @return array
-     */
-    public function all();
+    public function sheetProperties(): object;
 
     /**
      * @return array
      */
-    public function first();
+    public function all(): array;
+
+    /**
+     * @return array
+     */
+    public function first(): array;
 
     /**
      * @param  array  $value
      * @param  string  $valueInputOption
      * @return BatchUpdateValuesResponse
      */
-    public function update(array $value, string $valueInputOption = 'RAW');
+    public function update(array $value, string $valueInputOption = 'RAW'): BatchUpdateValuesResponse;
 
     /**
-     * @return ClearValuesResponse
+     * @return ClearValuesResponse|null
      */
-    public function clear();
+    public function clear(): ?ClearValuesResponse;
 
     /**
      * @param  array  $value
@@ -127,45 +127,45 @@ interface Factory
      * @param  string  $insertDataOption
      * @return AppendValuesResponse
      */
-    public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE');
+    public function append(array $value, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE'): AppendValuesResponse;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function ranges();
+    public function ranges(): ?string;
 
     /**
      * @param  string  $range
      * @return $this
      */
-    public function range(string $range);
+    public function range(string $range): static;
 
     /**
      * @param  string  $majorDimension
      * @return $this
      */
-    public function majorDimension(string $majorDimension);
+    public function majorDimension(string $majorDimension): static;
 
     /**
      * @param  string  $dateTimeRenderOption
      * @return $this
      */
-    public function dateTimeRenderOption(string $dateTimeRenderOption);
+    public function dateTimeRenderOption(string $dateTimeRenderOption): static;
 
     /**
      * @return string
      */
-    public function getSpreadsheetId();
+    public function getSpreadsheetId(): string;
 
     /**
      * @param  string  $sheetTitle
      * @return BatchUpdateSpreadsheetResponse
      */
-    public function addSheet(string $sheetTitle);
+    public function addSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse;
 
     /**
      * @param  string  $sheetTitle
      * @return BatchUpdateSpreadsheetResponse
      */
-    public function deleteSheet(string $sheetTitle);
+    public function deleteSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse;
 }

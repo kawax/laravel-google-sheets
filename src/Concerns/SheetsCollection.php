@@ -21,7 +21,7 @@ trait SheetsCollection
      * @param  array|Collection  $rows
      * @return Collection
      */
-    public function collection(array $header, $rows): Collection
+    public function collection(array $header, array|Collection $rows): Collection
     {
         return Collection::make($rows)->map(function ($item) use ($header) {
             $row = Collection::make($item)->pad(count($header), '');

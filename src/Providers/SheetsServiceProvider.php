@@ -12,7 +12,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
@@ -22,7 +22,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(Factory::class, Sheets::class);
     }
@@ -32,7 +32,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
      *
      * @return string[]
      */
-    public function provides()
+    public function provides(): array
     {
         return [Factory::class];
     }

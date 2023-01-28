@@ -25,25 +25,25 @@ class Sheets implements Factory
     }
 
     /**
-     * @var GoogleSheets
+     * @var GoogleSheets|null
      */
-    protected $service;
+    protected ?GoogleSheets $service = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $spreadsheetId;
+    protected ?string $spreadsheetId = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $sheet;
+    protected ?string $sheet = null;
 
     /**
-     * @param  GoogleSheets|Service  $service
+     * @param  Service|Sheets  $service
      * @return $this
      */
-    public function setService($service): static
+    public function setService(Service|Sheets $service): static
     {
         $this->service = $service;
 
@@ -65,12 +65,12 @@ class Sheets implements Factory
     /**
      * set access_token and set new service.
      *
-     * @param  string|array  $token
+     * @param  array|string  $token
      * @return $this
      *
      * @throws \Exception
      */
-    public function setAccessToken($token): static
+    public function setAccessToken(array|string $token): static
     {
         /**
          * @var Client $google
@@ -90,9 +90,9 @@ class Sheets implements Factory
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getAccessToken()
+    public function getAccessToken(): ?array
     {
         return $this->getService()->getClient()->getAccessToken();
     }
@@ -168,7 +168,7 @@ class Sheets implements Factory
      * @param  string  $sheetTitle
      * @return BatchUpdateSpreadsheetResponse
      */
-    public function addSheet(string $sheetTitle)
+    public function addSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse
     {
         $body = new BatchUpdateSpreadsheetRequest(
             [
@@ -189,7 +189,7 @@ class Sheets implements Factory
      * @param  string  $sheetTitle
      * @return BatchUpdateSpreadsheetResponse
      */
-    public function deleteSheet(string $sheetTitle)
+    public function deleteSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse
     {
         $list = $this->sheetList();
         $id = Arr::get(array_flip($list), $sheetTitle);
@@ -213,7 +213,7 @@ class Sheets implements Factory
      *
      * @throws \InvalidArgumentException
      */
-    public function __get($property)
+    public function __get(string $property)
     {
         if (property_exists($this->getService(), $property)) {
             return $this->getService()->{$property};

@@ -7,9 +7,9 @@ use stdClass;
 trait SheetsProperties
 {
     /**
-     * @return stdClass
+     * @return object
      */
-    public function spreadsheetProperties(): stdClass
+    public function spreadsheetProperties(): object
     {
         return $this->getService()
             ->spreadsheets
@@ -19,9 +19,9 @@ trait SheetsProperties
     }
 
     /**
-     * @return stdClass
+     * @return object
      */
-    public function sheetProperties(): stdClass
+    public function sheetProperties(): object
     {
         $sheets = $this->getService()
             ->spreadsheets
