@@ -10,7 +10,6 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
-use PulkitJalan\Google\Client;
 use Revolution\Google\Sheets\Contracts\Factory;
 
 class Sheets implements Factory
@@ -56,7 +55,7 @@ class Sheets implements Factory
     public function getService(): GoogleSheets
     {
         if (is_null($this->service)) {
-            $this->service = Container::getInstance()->make(Client::class)->make('sheets');
+            $this->service = Container::getInstance()->make(GoogleSheetClient::class)->make('sheets');
         }
 
         return $this->service;
@@ -73,9 +72,9 @@ class Sheets implements Factory
     public function setAccessToken(array|string $token): static
     {
         /**
-         * @var Client $google
+         * @var GoogleSheetClient $google
          */
-        $google = Container::getInstance()->make(Client::class);
+        $google = Container::getInstance()->make(GoogleSheetClient::class);
 
         $google->getCache()->clear();
 

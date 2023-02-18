@@ -2,9 +2,9 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
-use PulkitJalan\Google\Facades\Google;
-use PulkitJalan\Google\GoogleServiceProvider;
+use Revolution\Google\Sheets\Facades\Google;
 use Revolution\Google\Sheets\Facades\Sheets;
+use Revolution\Google\Sheets\Providers\GoogleServiceProvider;
 use Revolution\Google\Sheets\Providers\SheetsServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase

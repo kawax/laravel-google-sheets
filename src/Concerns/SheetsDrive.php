@@ -5,7 +5,7 @@ namespace Revolution\Google\Sheets\Concerns;
 use Google\Service;
 use Google\Service\Drive;
 use Illuminate\Container\Container;
-use PulkitJalan\Google\Client;
+use Revolution\Google\Sheets\GoogleSheetClient;
 
 trait SheetsDrive
 {
@@ -54,7 +54,7 @@ trait SheetsDrive
     public function getDriveService(): Service|Drive
     {
         if (is_null($this->drive)) {
-            $this->drive = Container::getInstance()->make(Client::class)->make('drive');
+            $this->drive = Container::getInstance()->make(GoogleSheetClient::class)->make('drive');
         }
 
         return $this->drive;
