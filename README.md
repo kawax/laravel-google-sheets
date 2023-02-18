@@ -22,9 +22,7 @@ composer require revolution/laravel-google-sheets
 
 ### Laravel
 
-1. This package depends on https://github.com/pulkitjalan/google-apiclient
-
-2. Run `php artisan vendor:publish --provider="PulkitJalan\Google\GoogleServiceProvider" --tag="config"` to publish the google config file
+1. Run `php artisan vendor:publish --provider="Revolution\Google\Sheets\GoogleSheetClient" --tag="config"` to publish the google config file
 
         // config/google.php
 
@@ -41,10 +39,10 @@ composer require revolution/laravel-google-sheets
         'file'    => storage_path('credentials.json'),
         'enable'  => env('GOOGLE_SERVICE_ENABLED', true),
 
-3. Get API Credentials from https://developers.google.com/console  
+2. Get API Credentials from https://developers.google.com/console  
 Enable `Google Sheets API`, `Google Drive API`.
 
-4. Configure .env as needed
+3. Configure .env as needed
 
         GOOGLE_APPLICATION_NAME=
         GOOGLE_CLIENT_ID=
