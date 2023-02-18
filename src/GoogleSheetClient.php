@@ -2,8 +2,8 @@
 
 namespace Revolution\Google\Sheets;
 
-use Illuminate\Support\Arr;
 use Google\Client as GoogleClient;
+use Illuminate\Support\Arr;
 use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
 
 class GoogleSheetClient

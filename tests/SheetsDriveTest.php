@@ -6,8 +6,8 @@ use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use Google\Service\Drive\Resource\Files;
 use Mockery as m;
-use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Facades\Sheets;
+use Revolution\Google\Sheets\GoogleSheetClient;
 
 class SheetsDriveTest extends TestCase
 {

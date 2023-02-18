@@ -3,14 +3,14 @@
 namespace Revolution\Google\Sheets\Tests;
 
 use Mockery as m;
-use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Facades\Sheets;
+use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Traits\GoogleSheets;
 
 class SheetsTest extends TestCase
 {
     /**
-     * @var \Revolution\Google\Sheets\Providers\Client
+     * @var GoogleSheetClient
      */
     protected $google;
 

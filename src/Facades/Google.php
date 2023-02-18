@@ -2,8 +2,8 @@
 
 namespace Revolution\Google\Sheets\Facades;
 
-use Revolution\Google\Sheets\GoogleSheetClient;
 use Illuminate\Support\Facades\Facade;
+use Revolution\Google\Sheets\GoogleSheetClient;
 
 /**
  * @mixin GoogleSheetClient
