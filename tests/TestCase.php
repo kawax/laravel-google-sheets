@@ -2,8 +2,8 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
-use Revolution\Google\Sheets\Facades\Sheets;
 use Revolution\Google\Sheets\Facades\Google;
+use Revolution\Google\Sheets\Facades\Sheets;
 use Revolution\Google\Sheets\Providers\GoogleServiceProvider;
 use Revolution\Google\Sheets\Providers\SheetsServiceProvider;
 
