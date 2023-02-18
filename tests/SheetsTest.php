@@ -3,14 +3,14 @@
 namespace Revolution\Google\Sheets\Tests;
 
 use Mockery as m;
-use PulkitJalan\Google\Client;
+use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Facades\Sheets;
 use Revolution\Google\Sheets\Traits\GoogleSheets;
 
 class SheetsTest extends TestCase
 {
     /**
-     * @var \PulkitJalan\Google\Client
+     * @var \Revolution\Google\Sheets\Providers\Client
      */
     protected $google;
 
@@ -18,8 +18,8 @@ class SheetsTest extends TestCase
     {
         parent::setUp();
 
-        $this->google = m::mock(Client::class);
-        app()->instance(Client::class, $this->google);
+        $this->google = m::mock(GoogleSheetClient::class);
+        app()->instance(GoogleSheetClient::class, $this->google);
     }
 
     public function tearDown(): void

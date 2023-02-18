@@ -11,8 +11,7 @@
     "php": "^8.0",
     "illuminate/container": "^9.0||^10.0",
     "illuminate/support": "^9.0||^10.0",
-    "google/apiclient": "^2.12",
-    "pulkitjalan/google-apiclient": "^6.0"
+    "google/apiclient": "^2.12"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
@@ -38,7 +37,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider"
+        "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider",
+        "Revolution\\Google\\Sheets\\Providers\\GoogleServiceProvider"
       ],
       "aliases": {
         "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"

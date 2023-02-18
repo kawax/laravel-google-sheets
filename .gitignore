@@ -3,3 +3,5 @@ composer.lock
 .DS_Store
 tests/data/test*
 !tests/data/test-config-sample.php
+.idea
+.phpunit.result.cache

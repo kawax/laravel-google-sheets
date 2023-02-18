@@ -6,7 +6,7 @@ use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use Google\Service\Drive\Resource\Files;
 use Mockery as m;
-use PulkitJalan\Google\Client;
+use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Facades\Sheets;
 
 class SheetsDriveTest extends TestCase
@@ -52,7 +52,7 @@ class SheetsDriveTest extends TestCase
 
     public function testNull()
     {
-        $this->mock(Client::class, function ($mock) {
+        $this->mock(GoogleSheetClient::class, function ($mock) {
             $mock->shouldReceive('make')->andReturn($this->service);
         });
 
