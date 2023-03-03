@@ -6,9 +6,6 @@ use stdClass;
 
 trait SheetsProperties
 {
-    /**
-     * @return object
-     */
     public function spreadsheetProperties(): object
     {
         return $this->getService()
@@ -18,9 +15,6 @@ trait SheetsProperties
             ->toSimpleObject();
     }
 
-    /**
-     * @return object
-     */
     public function sheetProperties(): object
     {
         $sheets = $this->getService()
@@ -31,9 +25,6 @@ trait SheetsProperties
         return $sheets[0]->getProperties()->toSimpleObject();
     }
 
-    /**
-     * @return string
-     */
     public function getSpreadsheetId(): string
     {
         return $this->spreadsheetId ?? '';
