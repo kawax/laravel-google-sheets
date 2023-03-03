@@ -71,7 +71,7 @@ https://docs.google.com/spreadsheets/d/{spreadsheetID}/...
 
 ### Basic Laravel Usage
 ```php
-use Sheets;
+use Revolution\Google\Sheets\Facades\Sheets;
 
 $user = $request->user();
 
@@ -111,11 +111,13 @@ $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
 
 ### Get a sheet's values with the header as the key
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 // get() returns Laravel Collection
 $rows = Sheets::sheet('Sheet 1')->get();
 
 $header = $rows->pull(0);
-$values = Sheets::collection($header, $rows);
+$values = Sheets::collection(header: $header, rows: $rows);
 $values->toArray()
 // [
 //   ['id' => '1', 'name' => 'name1', 'mail' => 'mail1'],
@@ -132,6 +134,8 @@ Blade
 
 ### Using A1 Notation
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
 // [
 //   ['id', 'name'],
@@ -141,6 +145,8 @@ $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
 
 ### Updating a specific range
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 Sheets::sheet('Sheet 1')->range('A4')->update([['3', 'name3', 'mail3']]);
 $values = Sheets::range('')->all();
 // [
@@ -153,6 +159,8 @@ $values = Sheets::range('')->all();
 
 ### Append a set of values to a sheet
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 // When we don't provide a specific range, the sheet becomes the default range
 Sheets::sheet('Sheet 1')->append([['3', 'name3', 'mail3']]);
 $values = Sheets::all();
@@ -166,6 +174,8 @@ $values = Sheets::all();
 
 ### Append a set of values with keys
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 // When providing an associative array, values get matched up to the headers in the provided sheet
 Sheets::sheet('Sheet 1')->append([['name' => 'name4', 'mail' => 'mail4', 'id' => 4]]);
 $values = Sheets::all();
@@ -180,16 +190,22 @@ $values = Sheets::all();
 
 ### Add a new sheet
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 Sheets::spreadsheetByTitle($title)->addSheet('New Sheet Title');
 ```
 
 ### Deleting a sheet
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 Sheets::spreadsheetByTitle($title)->deleteSheet('Old Sheet Title');
 ```
 
 ### Specifying query parameters
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 $values = Sheets::sheet('Sheet 1')->majorDimension('DIMENSION_UNSPECIFIED')
                                   ->valueRenderOption('FORMATTED_VALUE')
                                   ->dateTimeRenderOption('SERIAL_NUMBER')
@@ -199,6 +215,8 @@ https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/g
 
 ## Use original Google_Service_Sheets
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 $sheets->spreadsheets->...
 $sheets->spreadsheets_sheets->...
 $sheets->spreadsheets_values->...
