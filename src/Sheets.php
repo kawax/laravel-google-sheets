@@ -24,26 +24,23 @@ class Sheets implements Factory
         __call as macroCall;
     }
 
-    protected GoogleSheets|Service|null $service = null;
+    protected ?GoogleSheets $service = null;
 
     protected ?string $spreadsheetId = null;
 
     protected ?string $sheet = null;
 
-    public function setService(Service|Sheets $service): static
+    public function setService(mixed $service): static
     {
         $this->service = $service;
 
         return $this;
     }
 
-    /**
-     * @return GoogleSheets
-     */
     public function getService(): GoogleSheets
     {
         if (is_null($this->service)) {
-            $this->service = Container::getInstance()->make(GoogleSheetClient::class)->make('sheets');
+            $this->service = Google::make(service: 'sheets');
         }
 
         return $this->service;
@@ -56,14 +53,14 @@ class Sheets implements Factory
     {
         Google::getCache()->clear();
 
-        Google::setAccessToken($token);
+        Google::setAccessToken(token: $token);
 
         if (isset($token['refresh_token']) && Google::isAccessTokenExpired()) {
             Google::fetchAccessTokenWithRefreshToken();
         }
 
-        return $this->setService(Google::make('sheets'))
-                    ->setDriveService(Google::make('drive'));
+        return $this->setService(Google::make(service: 'sheets'))
+                    ->setDriveService(Google::make(service: 'drive'));
     }
 
     /**
