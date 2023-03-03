@@ -10,17 +10,7 @@ use Revolution\Google\Sheets\Sheets;
 class SheetsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
-     * Boot the service provider.
-     */
-    public function boot(): void
-    {
-        //
-    }
-
-    /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -30,7 +20,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
     /**
      * Get the services provided by the provider.
      *
-     * @return string[]
+     * @codeCoverageIgnore
      */
     public function provides(): array
     {

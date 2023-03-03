@@ -7,7 +7,6 @@ use Revolution\Google\Sheets\GoogleSheetClient;
 
 class GoogleServiceProvider extends ServiceProvider
 {
-
     /**
      * Register the service provider.
      */
