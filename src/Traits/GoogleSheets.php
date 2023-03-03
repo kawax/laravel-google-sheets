@@ -10,9 +10,6 @@ use Revolution\Google\Sheets\Contracts\Factory;
  */
 trait GoogleSheets
 {
-    /**
-     * @return Factory
-     */
     public function sheets(): Factory
     {
         $token = $this->sheetsAccessToken();
