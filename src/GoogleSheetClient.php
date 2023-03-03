@@ -2,27 +2,20 @@
 
 namespace Revolution\Google\Sheets;
 
+use BadMethodCallException;
+use Exception;
 use Google\Client as GoogleClient;
+use Google\Service;
 use Illuminate\Support\Arr;
 use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
 
 class GoogleSheetClient
 {
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
-    /**
-     * @var GoogleSheetClient
-     */
-    protected $client;
+    protected GoogleClient $client;
 
-    /**
-     * @param  array  $config
-     * @param  string  $userEmail
-     */
-    public function __construct(array $config, $userEmail = '')
+    public function __construct(array $config, string $userEmail = '')
     {
         $this->config = $config;
 
@@ -51,21 +44,16 @@ class GoogleSheetClient
 
     /**
      * Getter for the google client.
-     *
-     * @return GoogleSheetClient
      */
-    public function getClient()
+    public function getClient(): GoogleClient
     {
         return $this->client;
     }
 
     /**
      * Setter for the google client.
-     *
-     * @param  string  $client
-     * @return self
      */
-    public function setClient(GoogleClient $client)
+    public function setClient(GoogleClient $client): self
     {
         $this->client = $client;
 
@@ -76,11 +64,11 @@ class GoogleSheetClient
      * Getter for the google service.
      *
      * @param  string  $service
-     * @return \Google_Service
+     * @return Service
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function make($service)
+    public function make(string $service): Service
     {
         $service = 'Google\\Service\\'.ucfirst($service);
 
@@ -95,11 +83,8 @@ class GoogleSheetClient
 
     /**
      * Setup correct auth method based on type.
-     *
-     * @param $userEmail
-     * @return void
      */
-    protected function auth($userEmail = '')
+    protected function auth(string $userEmail = ''): void
     {
         // see (and use) if user has set Credentials
         if ($this->useAssertCredentials($userEmail)) {
@@ -113,10 +98,10 @@ class GoogleSheetClient
     /**
      * Determine and use credentials if user has set them.
      *
-     * @param $userEmail
+     * @param  string  $userEmail
      * @return bool used or not
      */
-    protected function useAssertCredentials($userEmail = '')
+    protected function useAssertCredentials(string $userEmail = ''): bool
     {
         $serviceJsonUrl = Arr::get($this->config, 'service.file', '');
 
@@ -140,14 +125,14 @@ class GoogleSheetClient
      * @param  array  $parameters
      * @return mixed
      *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters)
     {
         if (method_exists($this->client, $method)) {
-            return call_user_func_array([$this->client, $method], $parameters);
+            return $this->client->{$method}(...array_values($parameters));
         }
 
-        throw new \BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
+        throw new BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
     }
 }
