@@ -63,12 +63,9 @@ class GoogleSheetClient
     /**
      * Getter for the google service.
      *
-     * @param  string  $service
-     * @return Service
-     *
-     * @throws Exception
+     * @throws UnknownServiceException|\ReflectionException
      */
-    public function make(string $service): Service
+    public function make(string $service): mixed
     {
         $service = 'Google\\Service\\'.ucfirst($service);
 
