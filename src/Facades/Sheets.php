@@ -2,8 +2,8 @@
 
 namespace Revolution\Google\Sheets\Facades;
 
-use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\AppendValuesResponse;
+use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Google\Service\Sheets\BatchUpdateValuesResponse;
 use Google\Service\Sheets\ClearValuesResponse;
