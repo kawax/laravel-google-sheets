@@ -6,9 +6,6 @@ use Illuminate\Support\Collection;
 
 trait SheetsCollection
 {
-    /**
-     * @return Collection
-     */
     public function get(): Collection
     {
         $values = $this->all();
@@ -16,11 +13,6 @@ trait SheetsCollection
         return Collection::make($values);
     }
 
-    /**
-     * @param  array  $header
-     * @param  array|Collection  $rows
-     * @return Collection
-     */
     public function collection(array $header, array|Collection $rows): Collection
     {
         return Collection::make($rows)->map(function ($item) use ($header) {
