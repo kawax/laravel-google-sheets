@@ -2,10 +2,8 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
-use Google\Service;
 use Google\Service\Drive;
-use Illuminate\Container\Container;
-use Revolution\Google\Sheets\GoogleSheetClient;
+use Revolution\Google\Sheets\Facades\Google;
 
 trait SheetsDrive
 {
@@ -14,9 +12,6 @@ trait SheetsDrive
      */
     protected ?Drive $drive = null;
 
-    /**
-     * @return array
-     */
     public function spreadsheetList(): array
     {
         $list = [];
@@ -37,24 +32,17 @@ trait SheetsDrive
         return $list;
     }
 
-    /**
-     * @param  Drive|Service|null  $drive
-     * @return $this
-     */
-    public function setDriveService(Service|Drive|null $drive): static
+    public function setDriveService(mixed $drive): static
     {
         $this->drive = $drive;
 
         return $this;
     }
 
-    /**
-     * @return Drive|Service
-     */
-    public function getDriveService(): Service|Drive
+    public function getDriveService(): Drive
     {
         if (is_null($this->drive)) {
-            $this->drive = Container::getInstance()->make(GoogleSheetClient::class)->make('drive');
+            $this->drive = Google::make(service: 'drive');
         }
 
         return $this->drive;
