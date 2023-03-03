@@ -23,25 +23,12 @@ class Sheets implements Factory
         __call as macroCall;
     }
 
-    /**
-     * @var GoogleSheets|null
-     */
-    protected ?GoogleSheets $service = null;
+    protected GoogleSheets|Service|null $service = null;
 
-    /**
-     * @var string|null
-     */
     protected ?string $spreadsheetId = null;
 
-    /**
-     * @var string|null
-     */
     protected ?string $sheet = null;
 
-    /**
-     * @param  Service|Sheets  $service
-     * @return $this
-     */
     public function setService(Service|Sheets $service): static
     {
         $this->service = $service;
@@ -230,7 +217,7 @@ class Sheets implements Factory
      *
      * @throws \BadMethodCallException
      */
-    public function __call($method, $parameters)
+    public function __call($method, array $parameters)
     {
         if (method_exists($this->getService(), $method)) {
             return $this->getService()->{$method}(...array_values($parameters));
