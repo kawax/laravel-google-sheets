@@ -2,6 +2,7 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
+use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\AppendValuesResponse;
 use Google\Service\Sheets\BatchGetValuesResponse;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
@@ -18,30 +19,18 @@ use Revolution\Google\Sheets\Sheets;
 
 class SheetsMockTest extends TestCase
 {
-    /**
-     * @var Sheets
-     */
-    protected $sheet;
+    protected Sheets $sheet;
 
-    /**
-     * @var \Google\Service\Sheets
-     */
-    protected $service;
+    protected GoogleSheets $service;
 
-    /**
-     * @var Spreadsheets
-     */
-    protected $spreadsheets;
+    protected Spreadsheets $spreadsheets;
 
-    /**
-     * @var SpreadsheetsValues
-     */
-    protected $values;
+    protected SpreadsheetsValues $values;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->service = m::mock(\Google\Service\Sheets::class)->makePartial();
+        $this->service = m::mock(GoogleSheets::class)->makePartial();
         $this->spreadsheets = m::mock(Spreadsheets::class);
         $this->service->spreadsheets = $this->spreadsheets;
         $this->values = m::mock(SpreadsheetsValues::class);
@@ -218,7 +207,7 @@ class SheetsMockTest extends TestCase
         $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
-                'title'   => 'title',
+                'title' => 'title',
             ],
         ]);
 
@@ -233,7 +222,7 @@ class SheetsMockTest extends TestCase
         $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
-                'title'   => 'title',
+                'title' => 'title',
             ],
         ]);
 
@@ -299,7 +288,7 @@ class SheetsMockTest extends TestCase
         $sheets = new Sheet([
             'properties' => [
                 'sheetId' => 'sheetId',
-                'title'   => 'title',
+                'title' => 'title',
             ],
         ]);
 
