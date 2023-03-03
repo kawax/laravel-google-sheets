@@ -14,14 +14,12 @@ use Revolution\Google\Sheets\GoogleSheetClient;
  * @method static void fetchAccessTokenWithRefreshToken(?string $refreshToken = null)
  * @method static CacheItemPoolInterface getCache()
  *
- * @mixin GoogleSheetClient
+ * @see GoogleSheetClient
  */
 class Google extends Facade
 {
     /**
      * Get the registered name of the component.
-     *
-     * @return string
      */
     protected static function getFacadeAccessor(): string
     {
