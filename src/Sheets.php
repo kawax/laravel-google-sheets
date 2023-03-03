@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
 use Revolution\Google\Sheets\Contracts\Factory;
+use Revolution\Google\Sheets\Facades\Google;
 
 class Sheets implements Factory
 {
@@ -50,29 +51,19 @@ class Sheets implements Factory
 
     /**
      * set access_token and set new service.
-     *
-     * @param  array|string  $token
-     * @return $this
-     *
-     * @throws \Exception
      */
     public function setAccessToken(array|string $token): static
     {
-        /**
-         * @var GoogleSheetClient $google
-         */
-        $google = Container::getInstance()->make(GoogleSheetClient::class);
+        Google::getCache()->clear();
 
-        $google->getCache()->clear();
+        Google::setAccessToken($token);
 
-        $google->setAccessToken($token);
-
-        if (isset($token['refresh_token']) and $google->isAccessTokenExpired()) {
-            $google->fetchAccessTokenWithRefreshToken();
+        if (isset($token['refresh_token']) && Google::isAccessTokenExpired()) {
+            Google::fetchAccessTokenWithRefreshToken();
         }
 
-        return $this->setService($google->make('sheets'))
-                    ->setDriveService($google->make('drive'));
+        return $this->setService(Google::make('sheets'))
+                    ->setDriveService(Google::make('drive'));
     }
 
     /**
