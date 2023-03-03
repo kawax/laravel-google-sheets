@@ -2,6 +2,8 @@
 
 ## Facade
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
 $spreadsheets = Sheets::setAccessToken($token)
                         ->spreadsheetList();
 ```
