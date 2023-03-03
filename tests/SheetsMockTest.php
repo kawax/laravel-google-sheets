@@ -2,8 +2,8 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
-use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\AppendValuesResponse;
+use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\BatchGetValuesResponse;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Google\Service\Sheets\BatchUpdateValuesResponse;
