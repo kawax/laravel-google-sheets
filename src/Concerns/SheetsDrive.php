@@ -7,9 +7,6 @@ use Revolution\Google\Sheets\Facades\Google;
 
 trait SheetsDrive
 {
-    /**
-     * @var Drive|null
-     */
     protected ?Drive $drive = null;
 
     public function spreadsheetList(): array
