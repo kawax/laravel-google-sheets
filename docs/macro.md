@@ -5,9 +5,11 @@ Extend any method by your self.
 ## Register in AppServiceProvider.php
 
 ```php
+use Revolution\Google\Sheets\Facades\Sheets;
+
     public function boot()
     {
-        \Sheets::macro('my', function () {
+        Sheets::macro('my', function () {
             return $this->getService()->spreadsheets->...
         });
     }
@@ -15,5 +17,7 @@ Extend any method by your self.
 
 ## Use somewhere
 ```php
-$values = \Sheets::sheet('Sheet 1')->my();
+use Revolution\Google\Sheets\Facades\Sheets;
+
+$values = Sheets::sheet('Sheet 1')->my();
 ```
