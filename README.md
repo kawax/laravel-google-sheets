@@ -22,7 +22,7 @@ composer require revolution/laravel-google-sheets
 
 ### Laravel
 
-1. Run `php artisan vendor:publish --provider="Revolution\Google\Sheets\GoogleSheetClient" --tag="config"` to publish the google config file
+1. Run `php artisan vendor:publish --tag="google-config"` to publish the google config file
 
         // config/google.php
 
@@ -62,10 +62,10 @@ Another Google API Series.
 
 ## Usage
 
-|id|name|mail|
-|---|---|---|
-|1|name1|mail1|
-|2|name2|mail2|
+| id  | name  | mail  |
+|-----|-------|-------|
+| 1   | name1 | mail1 |
+| 2   | name2 | mail2 |
 
 https://docs.google.com/spreadsheets/d/{spreadsheetID}/...
 
