@@ -18,11 +18,10 @@ class User extends Authenticatable
     use Notifiable;
     use GoogleSheets;
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
+    protected $casts = [
+        'created' => 'datetime',
     ];
-    
+
     /**
      * Get the Access Token
      *
@@ -34,7 +33,7 @@ class User extends Authenticatable
             'access_token'  => $this->access_token,
             'refresh_token' => $this->refresh_token,
             'expires_in'    => $this->expires_in,
-            'created'       => $this->updated_at->getTimestamp(),
+            'created'       => $this->created->timestamp,
         ];
     }
 }
