@@ -36,6 +36,7 @@ use Revolution\Google\Sheets\Contracts\Factory;
  * @method static object spreadsheetProperties()
  * @method static object sheetProperties()
  * @method static string getSpreadsheetId()
+ * @method static void macro(string $name, object|callable $macro)
  *
  * @see \Revolution\Google\Sheets\Sheets
  */
