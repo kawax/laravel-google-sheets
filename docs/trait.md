@@ -45,6 +45,9 @@ Add `sheetsAccessToken()`(abstract) for access_token.
 Trait has `sheets()` that returns Sheets instance.
 
 ```php
+use Revolution\Google\Sheets\Facades\Google;
+use Revolution\Google\Sheets\Facades\Sheets;
+
     public function __invoke(Request $request)
     {
         // Facade
