@@ -49,9 +49,9 @@ class SheetsTest extends TestCase
         );
 
         $photos = Sheets::setAccessToken([
-            'access_token'  => 'test',
+            'access_token' => 'test',
             'refresh_token' => 'test',
-            'expires_in'    => 0,
+            'expires_in' => 0,
         ]);
 
         $this->assertInstanceOf(\Google\Service\Sheets::class, $photos->getService());
