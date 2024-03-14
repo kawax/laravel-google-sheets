@@ -35,7 +35,7 @@ class SheetsDriveTest extends TestCase
     public function testList()
     {
         $file = new DriveFile([
-            'id'   => 'id',
+            'id' => 'id',
             'name' => 'name',
         ]);
 
