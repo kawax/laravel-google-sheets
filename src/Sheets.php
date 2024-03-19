@@ -203,7 +203,7 @@ class Sheets implements Factory
      *
      * @throws \BadMethodCallException
      */
-    public function __call($method, array $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->getService(), $method)) {
             return $this->getService()->{$method}(...array_values($parameters));
