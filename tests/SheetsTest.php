@@ -25,6 +25,8 @@ class SheetsTest extends TestCase
     public function tearDown(): void
     {
         m::close();
+
+        parent::tearDown();
     }
 
     public function testService()
