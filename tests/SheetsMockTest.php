@@ -44,6 +44,8 @@ class SheetsMockTest extends TestCase
     public function tearDown(): void
     {
         m::close();
+
+        parent::tearDown();
     }
 
     public function testSheetsAll()
@@ -56,11 +58,11 @@ class SheetsMockTest extends TestCase
         $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->spreadsheet('test')
-                              ->sheet('test')
-                              ->majorDimension('test')
-                              ->valueRenderOption('test')
-                              ->dateTimeRenderOption('test')
-                              ->all();
+            ->sheet('test')
+            ->majorDimension('test')
+            ->valueRenderOption('test')
+            ->dateTimeRenderOption('test')
+            ->all();
 
         $this->assertGreaterThan(1, count($values));
         $this->assertSame([['test1' => '1'], ['test2' => '2']], $values);
@@ -167,8 +169,8 @@ class SheetsMockTest extends TestCase
         $response->setValueRanges([$valueRange]);
 
         $this->values->shouldReceive('batchGet')
-                     ->with(m::any(), m::any())
-                     ->andReturn($response);
+            ->with(m::any(), m::any())
+            ->andReturn($response);
 
         $ordered = $this->sheet->orderAppendables([['header2' => 'value3', 'header1' => null]]);
         $this->assertSame([['', 'value3']], $ordered);
