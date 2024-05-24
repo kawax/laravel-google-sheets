@@ -2,46 +2,49 @@
 
 namespace Revolution\Google\Sheets\Tests;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
+use Mockery as m;
 use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
 use Revolution\Google\Sheets\GoogleSheetClient;
+use PulkitJalan\Google\Client as GoogleClient;
+use Revolution\Google\Sheets\Facades\Google;
 
 class ClientTest extends TestCase
 {
     public function tearDown(): void
     {
-        Mockery::close();
+        m::close();
+
+        parent::tearDown();
     }
 
     public function testClientGetter()
     {
-        $client = Mockery::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Client', $client->getClient());
     }
 
     public function testClientGetterWithAdditionalConfig()
     {
-        $client = Mockery::mock(GoogleSheetClient::class, [[
+        $client = m::mock(GoogleSheetClient::class, [[
             'config' => [
                 'subject' => 'test',
             ],
         ]])->makePartial();
 
-        $this->assertEquals($client->getClient()->getConfig('subject'), 'test');
+        $this->assertEquals('test', $client->getClient()->getConfig('subject'));
     }
 
     public function testServiceMake()
     {
-        $client = Mockery::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Service\Storage', $client->make('storage'));
     }
 
     public function testServiceMakeException()
     {
-        $client = Mockery::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
 
         $this->expectException(UnknownServiceException::class);
 
@@ -74,5 +77,17 @@ class ClientTest extends TestCase
         ]);
 
         $this->assertTrue($client->isUsingApplicationDefaultCredentials());
+    }
+
+    public function test_original_client()
+    {
+        $this->assertInstanceOf(GoogleSheetClient::class, Google::getFacadeRoot());
+        Google::clearResolvedInstances();
+
+        $this->app->singleton(GoogleClient::class, fn ($app) => new GoogleClient(config('google', [])));
+        $this->app->alias(GoogleClient::class, 'google-client');
+
+        $this->assertInstanceOf(GoogleClient::class, app('google-client'));
+        $this->assertInstanceOf(GoogleClient::class, Google::getFacadeRoot());
     }
 }

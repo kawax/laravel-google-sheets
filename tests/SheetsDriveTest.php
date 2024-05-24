@@ -25,8 +25,8 @@ class SheetsDriveTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = m::mock('Google_Service_Drive');
-        $this->files = m::mock('Google_Service_Drive_Resource_Files');
+        $this->service = m::mock(Drive::class);
+        $this->files = m::mock(Files::class);
         $this->service->files = $this->files;
 
         Sheets::setDriveService($this->service);

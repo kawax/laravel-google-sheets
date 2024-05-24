@@ -22,6 +22,6 @@ class Google extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return GoogleSheetClient::class;
+        return 'google-client';
     }
 }

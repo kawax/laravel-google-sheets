@@ -15,6 +15,8 @@ class GoogleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../../config/google.php', 'google');
 
         $this->app->singleton(GoogleSheetClient::class, fn ($app) => new GoogleSheetClient($app['config']['google']));
+
+        $this->app->alias(GoogleSheetClient::class, 'google-client');
     }
 
     /**

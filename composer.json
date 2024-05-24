@@ -14,7 +14,8 @@
     "google/apiclient": "^2.15"
   },
   "require-dev": {
-    "orchestra/testbench": "^8.0||^9.0"
+    "orchestra/testbench": "^8.0||^9.0",
+    "pulkitjalan/google-apiclient": "^6.2"
   },
   "autoload": {
     "psr-4": {
@@ -32,6 +33,9 @@
       "email": "kawaxbiz@gmail.com"
     }
   ],
+  "scripts": {
+    "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+  },
   "extra": {
     "laravel": {
       "providers": [
@@ -40,7 +44,11 @@
       ],
       "aliases": {
         "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"
-      }
+      },
+      "google/apiclient-services": [
+        "Drive",
+        "Sheets"
+      ]
     }
   }
 }
