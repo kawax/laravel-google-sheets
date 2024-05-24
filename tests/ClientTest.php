@@ -3,10 +3,10 @@
 namespace Revolution\Google\Sheets\Tests;
 
 use Mockery as m;
-use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
-use Revolution\Google\Sheets\GoogleSheetClient;
 use PulkitJalan\Google\Client as GoogleClient;
+use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
 use Revolution\Google\Sheets\Facades\Google;
+use Revolution\Google\Sheets\GoogleSheetClient;
 
 class ClientTest extends TestCase
 {
