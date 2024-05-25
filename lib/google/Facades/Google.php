@@ -1,10 +1,10 @@
 <?php
 
-namespace Revolution\Google\Sheets\Facades;
+namespace Revolution\Google\Client\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Psr\Cache\CacheItemPoolInterface;
-use Revolution\Google\Sheets\GoogleSheetClient;
+use Revolution\Google\Client\GoogleSheetClient;
 
 /**
  * @method static mixed make(string $service)

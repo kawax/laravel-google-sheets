@@ -1,10 +1,10 @@
 <?php
 
-namespace Revolution\Google\Sheets\Tests;
+namespace Tests;
 
 use Mockery as m;
+use Revolution\Google\Client\GoogleSheetClient;
 use Revolution\Google\Sheets\Facades\Sheets;
-use Revolution\Google\Sheets\GoogleSheetClient;
 use Revolution\Google\Sheets\Traits\GoogleSheets;
 
 class SheetsTest extends TestCase

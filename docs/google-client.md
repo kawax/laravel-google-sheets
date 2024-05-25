@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(GoogleClient::class, fn ($app) => new GoogleClient(config('google')));
         $this->app->alias(GoogleClient::class, 'google-client');
     }
 }

@@ -8,10 +8,10 @@ use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
+use Revolution\Google\Client\Facades\Google;
 use Revolution\Google\Sheets\Contracts\Factory;
-use Revolution\Google\Sheets\Facades\Google;
 
-class Sheets implements Factory
+class SheetsClient implements Factory
 {
     use Concerns\SheetsValues;
     use Concerns\SheetsDrive;
@@ -38,7 +38,7 @@ class Sheets implements Factory
     public function getService(): GoogleSheets
     {
         if (is_null($this->service)) {
-            $this->service = Google::make(service: 'sheets');
+            $this->service = Google::make('sheets');
         }
 
         return $this->service;
@@ -51,14 +51,14 @@ class Sheets implements Factory
     {
         Google::getCache()->clear();
 
-        Google::setAccessToken(token: $token);
+        Google::setAccessToken($token);
 
         if (isset($token['refresh_token']) && Google::isAccessTokenExpired()) {
             Google::fetchAccessTokenWithRefreshToken();
         }
 
-        return $this->setService(Google::make(service: 'sheets'))
-                    ->setDriveService(Google::make(service: 'drive'));
+        return $this->setService(Google::make('sheets'))
+                    ->setDriveService(Google::make('drive'));
     }
 
     /**

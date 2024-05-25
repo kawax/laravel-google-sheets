@@ -5,8 +5,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/20fdd1ca8f3737c383df/test_coverage)](https://codeclimate.com/github/kawax/laravel-google-sheets/test_coverage)
 
 ## Requirements
-- PHP >= 8.1
-- Laravel >= 10.0
+- PHP >= 8.2
+- Laravel >= 11.0
 
 ## Versioning
 - Basic : semver
@@ -60,6 +60,13 @@ Another Google API Series.
 - https://github.com/kawax/laravel-google-photos
 - https://github.com/kawax/laravel-google-searchconsole
 
+## Select auth type
+You must select an authentication type and configure it appropriately.
+
+- Service Account : Access to only your own spreadsheets.
+- OAuth : Access to user's spreadsheets.
+- API key: Access to public spreadsheets.
+
 ## Usage
 
 | id  | name  | mail  |
@@ -92,9 +99,10 @@ $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('S
 ```
 
 ### Basic Non-Laravel Usage
+
 ```php
 use Google\Client;
-use Revolution\Google\Sheets\Sheets;
+use Revolution\Google\Sheets\SheetsClient;
 
 $client = new Client();
 $client->setScopes([Google\Service\Sheets::DRIVE, Google\Service\Sheets::SPREADSHEETS]);
@@ -103,7 +111,7 @@ $client->setScopes([Google\Service\Sheets::DRIVE, Google\Service\Sheets::SPREADS
 
 $service = new \Google\Service\Sheets($client);
 
-$sheets = new Sheets();
+$sheets = new SheetsClient();
 $sheets->setService($service);
 
 $values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();

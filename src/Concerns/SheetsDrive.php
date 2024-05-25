@@ -3,7 +3,7 @@
 namespace Revolution\Google\Sheets\Concerns;
 
 use Google\Service\Drive;
-use Revolution\Google\Sheets\Facades\Google;
+use Revolution\Google\Client\Facades\Google;
 
 trait SheetsDrive
 {
@@ -18,7 +18,7 @@ trait SheetsDrive
             ->listFiles(
                 [
                     'q' => "mimeType = 'application/vnd.google-apps.spreadsheet'",
-                ]
+                ],
             )
             ->getFiles();
 
@@ -38,10 +38,6 @@ trait SheetsDrive
 
     public function getDriveService(): Drive
     {
-        if (is_null($this->drive)) {
-            $this->drive = Google::make(service: 'drive');
-        }
-
-        return $this->drive;
+        return $this->drive ??= Google::make('drive');
     }
 }

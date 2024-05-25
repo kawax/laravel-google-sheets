@@ -7,6 +7,7 @@
   <source>
     <include>
       <directory>src/</directory>
+      <directory>lib/google/</directory>
     </include>
   </source>
   <coverage>

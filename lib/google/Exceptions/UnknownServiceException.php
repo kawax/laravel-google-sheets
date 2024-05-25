@@ -1,6 +1,6 @@
 <?php
 
-namespace Revolution\Google\Sheets\Exceptions;
+namespace Revolution\Google\Client\Exceptions;
 
 class UnknownServiceException extends \Exception
 {

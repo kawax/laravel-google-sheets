@@ -1,5 +1,14 @@
 # UPGRADING
 
+## 6.x to 7.0
+- Require PHP>=8.2 and Laravel>=11.x
+- Change Google Client namespace `Revolution\Google\Client`. Move to `lib/google/`. If you only use "Sheets", there will be little effect.
+- Remove `Sheets` short Facade alias. Always recommended to use the full namespace.
+
+```php
+use Revolution\Google\Sheets\Facades\Sheets;
+```
+
 ## 5.x to 6.0
 - Require PHP>=8.0 and Laravel>=8.x
 

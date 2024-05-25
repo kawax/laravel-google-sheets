@@ -1,12 +1,13 @@
 <?php
 
-namespace Revolution\Google\Sheets\Tests;
+namespace Tests;
 
 use Mockery as m;
+use PHPUnit\Framework\Attributes\RequiresMethod;
 use PulkitJalan\Google\Client as GoogleClient;
-use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
-use Revolution\Google\Sheets\Facades\Google;
-use Revolution\Google\Sheets\GoogleSheetClient;
+use Revolution\Google\Client\Exceptions\UnknownServiceException;
+use Revolution\Google\Client\Facades\Google;
+use Revolution\Google\Client\GoogleSheetClient;
 
 class ClientTest extends TestCase
 {
@@ -79,12 +80,12 @@ class ClientTest extends TestCase
         $this->assertTrue($client->isUsingApplicationDefaultCredentials());
     }
 
+    #[RequiresMethod(GoogleClient::class, 'make')]
     public function test_original_client()
     {
         $this->assertInstanceOf(GoogleSheetClient::class, Google::getFacadeRoot());
         Google::clearResolvedInstances();
 
-        $this->app->singleton(GoogleClient::class, fn ($app) => new GoogleClient(config('google', [])));
         $this->app->alias(GoogleClient::class, 'google-client');
 
         $this->assertInstanceOf(GoogleClient::class, app('google-client'));

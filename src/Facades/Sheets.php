@@ -2,6 +2,7 @@
 
 namespace Revolution\Google\Sheets\Facades;
 
+use Google\Service\Drive;
 use Google\Service\Sheets\AppendValuesResponse;
 use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
@@ -32,13 +33,16 @@ use Revolution\Google\Sheets\Contracts\Factory;
  * @method static static valueRenderOption(string $valueRenderOption)
  * @method static static dateTimeRenderOption(string $dateTimeRenderOption)
  * @method static GoogleSheets getService()
+ * @method static static setService(mixed $service)
+ * @method static Drive getDriveService()
+ * @method static static setDriveService(mixed $drive)
  * @method static array spreadsheetList()
  * @method static object spreadsheetProperties()
  * @method static object sheetProperties()
  * @method static string getSpreadsheetId()
  * @method static void macro(string $name, object|callable $macro)
  *
- * @see \Revolution\Google\Sheets\Sheets
+ * @see \Revolution\Google\Sheets\SheetsClient
  */
 class Sheets extends Facade
 {

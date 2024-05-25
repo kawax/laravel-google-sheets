@@ -133,10 +133,7 @@ trait SheetsValues
         $ordered = [];
         // Gets just the values of an array that has been re-ordered to match the header order
         foreach ($values as $value) {
-            array_push(
-                $ordered,
-                array_values(array_replace(array_flip($header), $value))
-            );
+            $ordered[] = array_values(array_replace(array_flip($header), $value));
         }
 
         // Replaces null values with empty strings to work with Google's API
@@ -146,9 +143,9 @@ trait SheetsValues
                 // If key is the same as value, that's because the user
                 // didn't specify a header that exists in the sheet.
                 if (is_null($value) || $key === $value) {
-                    array_push($notNull, '');
+                    $notNull[] = '';
                 } else {
-                    array_push($notNull, $value);
+                    $notNull[] = $value;
                 }
             }
 

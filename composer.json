@@ -8,23 +8,24 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^8.1",
-    "illuminate/container": "^10.0||^11.0",
-    "illuminate/support": "^10.0||^11.0",
-    "google/apiclient": "^2.15"
+    "php": "^8.2",
+    "illuminate/container": "^11.0",
+    "illuminate/support": "^11.0",
+    "google/apiclient": "^2.16"
   },
   "require-dev": {
-    "orchestra/testbench": "^8.0||^9.0",
+    "orchestra/testbench": "^9.0",
     "pulkitjalan/google-apiclient": "^6.2"
   },
   "autoload": {
     "psr-4": {
-      "Revolution\\Google\\Sheets\\": "src/"
+      "Revolution\\Google\\Sheets\\": "src/",
+      "Revolution\\Google\\Client\\": "lib/google/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Revolution\\Google\\Sheets\\Tests\\": "tests/"
+      "Tests\\": "tests/"
     }
   },
   "authors": [
@@ -40,11 +41,8 @@
     "laravel": {
       "providers": [
         "Revolution\\Google\\Sheets\\Providers\\SheetsServiceProvider",
-        "Revolution\\Google\\Sheets\\Providers\\GoogleServiceProvider"
+        "Revolution\\Google\\Client\\Providers\\GoogleServiceProvider"
       ],
-      "aliases": {
-        "Sheets": "Revolution\\Google\\Sheets\\Facades\\Sheets"
-      },
       "google/apiclient-services": [
         "Drive",
         "Sheets"

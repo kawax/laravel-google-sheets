@@ -1,6 +1,6 @@
 <?php
 
-namespace Revolution\Google\Sheets\Tests;
+namespace Tests;
 
 use Revolution\Google\Sheets\Facades\Sheets;
 

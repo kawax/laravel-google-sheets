@@ -1,11 +1,11 @@
 <?php
 
-namespace Revolution\Google\Sheets;
+namespace Revolution\Google\Client;
 
 use BadMethodCallException;
 use Google\Client as GoogleClient;
 use Illuminate\Support\Arr;
-use Revolution\Google\Sheets\Exceptions\UnknownServiceException;
+use Revolution\Google\Client\Exceptions\UnknownServiceException;
 
 class GoogleSheetClient
 {

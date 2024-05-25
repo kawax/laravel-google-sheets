@@ -1,13 +1,13 @@
 <?php
 
-namespace Revolution\Google\Sheets\Tests;
+namespace Tests;
 
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 use Google\Service\Drive\Resource\Files;
 use Mockery as m;
 use Revolution\Google\Sheets\Facades\Sheets;
-use Revolution\Google\Sheets\GoogleSheetClient;
+use Revolution\Google\Client\Facades\Google;
 
 class SheetsDriveTest extends TestCase
 {
@@ -52,9 +52,7 @@ class SheetsDriveTest extends TestCase
 
     public function testNull()
     {
-        $this->mock(GoogleSheetClient::class, function ($mock) {
-            $mock->shouldReceive('make')->andReturn($this->service);
-        });
+        Google::shouldReceive('make')->andReturn($this->service);
 
         $drive = Sheets::setDriveService(null)->getDriveService();
 
