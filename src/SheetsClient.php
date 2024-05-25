@@ -74,9 +74,8 @@ class SheetsClient implements Factory
     public function spreadsheetByTitle(string $title): static
     {
         $list = $this->spreadsheetList();
-        $id = Arr::get(array_flip($list), $title);
 
-        $this->spreadsheetId = $id;
+        $this->spreadsheetId = Arr::get(array_flip($list), $title);
 
         return $this;
     }
@@ -92,9 +91,7 @@ class SheetsClient implements Factory
     {
         $list = $this->sheetList();
 
-        $sheet = Arr::get($list, $sheetId);
-
-        $this->sheet = $sheet;
+        $this->sheet = Arr::get($list, $sheetId);
 
         return $this;
     }
