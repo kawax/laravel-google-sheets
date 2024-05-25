@@ -3,9 +3,9 @@
 namespace Tests;
 
 use Illuminate\Support\Collection;
+use PulkitJalan\Google\GoogleServiceProvider as PulkitJalanServiceProvider;
 use Revolution\Google\Client\Providers\GoogleServiceProvider;
 use Revolution\Google\Sheets\Providers\SheetsServiceProvider;
-use PulkitJalan\Google\GoogleServiceProvider as PulkitJalanServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
