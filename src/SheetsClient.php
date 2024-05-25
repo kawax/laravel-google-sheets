@@ -2,12 +2,14 @@
 
 namespace Revolution\Google\Sheets;
 
+use BadMethodCallException;
 use Google\Service\Sheets as GoogleSheets;
 use Google\Service\Sheets\BatchUpdateSpreadsheetRequest;
 use Google\Service\Sheets\BatchUpdateSpreadsheetResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Macroable;
+use InvalidArgumentException;
 use Revolution\Google\Client\Facades\Google;
 use Revolution\Google\Sheets\Contracts\Factory;
 
@@ -58,21 +60,14 @@ class SheetsClient implements Factory
         }
 
         return $this->setService(Google::make('sheets'))
-                    ->setDriveService(Google::make('drive'));
+            ->setDriveService(Google::make('drive'));
     }
 
-    /**
-     * @return array|null
-     */
     public function getAccessToken(): ?array
     {
         return $this->getService()->getClient()->getAccessToken();
     }
 
-    /**
-     * @param  string  $spreadsheetId
-     * @return $this
-     */
     public function spreadsheet(string $spreadsheetId): static
     {
         $this->spreadsheetId = $spreadsheetId;
@@ -80,10 +75,6 @@ class SheetsClient implements Factory
         return $this;
     }
 
-    /**
-     * @param  string  $title
-     * @return $this
-     */
     public function spreadsheetByTitle(string $title): static
     {
         $list = $this->spreadsheetList();
@@ -94,10 +85,6 @@ class SheetsClient implements Factory
         return $this;
     }
 
-    /**
-     * @param  string  $sheet
-     * @return $this
-     */
     public function sheet(string $sheet): static
     {
         $this->sheet = $sheet;
@@ -105,10 +92,6 @@ class SheetsClient implements Factory
         return $this;
     }
 
-    /**
-     * @param  string  $sheetId
-     * @return $this
-     */
     public function sheetById(string $sheetId): static
     {
         $list = $this->sheetList();
@@ -120,9 +103,6 @@ class SheetsClient implements Factory
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function sheetList(): array
     {
         $list = [];
@@ -136,10 +116,6 @@ class SheetsClient implements Factory
         return $list;
     }
 
-    /**
-     * @param  string  $sheetTitle
-     * @return BatchUpdateSpreadsheetResponse
-     */
     public function addSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse
     {
         $body = new BatchUpdateSpreadsheetRequest(
@@ -151,16 +127,12 @@ class SheetsClient implements Factory
                         ],
                     ],
                 ],
-            ]
+            ],
         );
 
         return $this->getService()->spreadsheets->batchUpdate($this->getSpreadsheetId(), $body);
     }
 
-    /**
-     * @param  string  $sheetTitle
-     * @return BatchUpdateSpreadsheetResponse
-     */
     public function deleteSheet(string $sheetTitle): BatchUpdateSpreadsheetResponse
     {
         $list = $this->sheetList();
@@ -173,17 +145,14 @@ class SheetsClient implements Factory
                         'sheetId' => $id,
                     ],
                 ],
-            ]
+            ],
         );
 
         return $this->getService()->spreadsheets->batchUpdate($this->getSpreadsheetId(), $body);
     }
 
     /**
-     * @param  string  $property
-     * @return mixed
-     *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __get(string $property)
     {
@@ -191,17 +160,13 @@ class SheetsClient implements Factory
             return $this->getService()->{$property};
         }
 
-        throw new \InvalidArgumentException(sprintf('Property [%s] does not exist.', $property));
+        throw new InvalidArgumentException(sprintf('Property [%s] does not exist.', $property));
     }
 
     /**
      * Magic call method.
      *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return mixed
-     *
-     * @throws \BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __call($method, $parameters)
     {
