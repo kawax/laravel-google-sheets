@@ -14,29 +14,13 @@ use Illuminate\Support\Str;
 
 trait SheetsValues
 {
-    /**
-     * @var string|null
-     */
     protected ?string $range = null;
 
-    /**
-     * @var string|null
-     */
     protected ?string $majorDimension = null;
 
-    /**
-     * @var string|null
-     */
     protected ?string $valueRenderOption = null;
-
-    /**
-     * @var string|null
-     */
     protected ?string $dateTimeRenderOption = null;
 
-    /**
-     * @return array
-     */
     public function all(): array
     {
         $query = $this->query();
@@ -48,9 +32,6 @@ trait SheetsValues
         return $values ?? [];
     }
 
-    /**
-     * @return array
-     */
     public function first(): array
     {
         $values = $this->all();
@@ -60,11 +41,6 @@ trait SheetsValues
         return $first ?: [];
     }
 
-    /**
-     * @param  array  $value
-     * @param  string  $valueInputOption
-     * @return BatchUpdateValuesResponse
-     */
     public function update(array $value, string $valueInputOption = 'RAW'): BatchUpdateValuesResponse
     {
         $range = $this->ranges();
@@ -81,9 +57,6 @@ trait SheetsValues
         return $this->serviceValues()->batchUpdate($this->getSpreadsheetId(), $batch);
     }
 
-    /**
-     * @return ClearValuesResponse|null
-     */
     public function clear(): ?ClearValuesResponse
     {
         $range = $this->ranges();
@@ -93,12 +66,6 @@ trait SheetsValues
         return $this->serviceValues()->clear($this->getSpreadsheetId(), $range, $clear);
     }
 
-    /**
-     * @param  array  $values
-     * @param  string  $valueInputOption
-     * @param  string  $insertDataOption
-     * @return AppendValuesResponse
-     */
     public function append(array $values, string $valueInputOption = 'RAW', string $insertDataOption = 'OVERWRITE'): AppendValuesResponse
     {
         $range = $this->ranges();
@@ -116,10 +83,6 @@ trait SheetsValues
         return $this->serviceValues()->append($this->getSpreadsheetId(), $range, $valueRange, $optParams);
     }
 
-    /**
-     * @param  array  $values
-     * @return array
-     */
     public function orderAppendables(array $values): array
     {
         // The array has integer keys, so just append
@@ -153,9 +116,6 @@ trait SheetsValues
         }, $ordered);
     }
 
-    /**
-     * @return string|null
-     */
     public function ranges(): ?string
     {
         // If no range is provided, we get the sheet automatically
@@ -172,10 +132,6 @@ trait SheetsValues
         return $this->range;
     }
 
-    /**
-     * @param  string  $range
-     * @return $this
-     */
     public function range(string $range): static
     {
         $this->range = $range;
@@ -183,10 +139,6 @@ trait SheetsValues
         return $this;
     }
 
-    /**
-     * @param  string  $majorDimension
-     * @return $this
-     */
     public function majorDimension(string $majorDimension): static
     {
         $this->majorDimension = $majorDimension;
@@ -194,10 +146,6 @@ trait SheetsValues
         return $this;
     }
 
-    /**
-     * @param  string  $valueRenderOption
-     * @return $this
-     */
     public function valueRenderOption(string $valueRenderOption): static
     {
         $this->valueRenderOption = $valueRenderOption;
@@ -205,10 +153,6 @@ trait SheetsValues
         return $this;
     }
 
-    /**
-     * @param  string  $dateTimeRenderOption
-     * @return $this
-     */
     public function dateTimeRenderOption(string $dateTimeRenderOption): static
     {
         $this->dateTimeRenderOption = $dateTimeRenderOption;
@@ -216,17 +160,11 @@ trait SheetsValues
         return $this;
     }
 
-    /**
-     * @return SpreadsheetsValues
-     */
     protected function serviceValues(): SpreadsheetsValues
     {
         return $this->getService()->spreadsheets_values;
     }
 
-    /**
-     * @return array
-     */
     protected function query(): array
     {
         $query = [];
