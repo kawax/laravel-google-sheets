@@ -34,9 +34,6 @@ interface Factory
 
     public function collection(array $header, array|Collection $rows): Collection;
 
-    /**
-     * @return array
-     */
     public function spreadsheetList(): array;
 
     public function setDriveService(mixed $drive): static;
