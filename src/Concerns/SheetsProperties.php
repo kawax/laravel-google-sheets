@@ -2,8 +2,6 @@
 
 namespace Revolution\Google\Sheets\Concerns;
 
-use stdClass;
-
 trait SheetsProperties
 {
     public function spreadsheetProperties(): object
