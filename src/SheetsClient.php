@@ -39,11 +39,7 @@ class SheetsClient implements Factory
 
     public function getService(): GoogleSheets
     {
-        if (is_null($this->service)) {
-            $this->service = Google::make('sheets');
-        }
-
-        return $this->service;
+        return $this->service ??= Google::make('sheets');
     }
 
     /**
