@@ -1,6 +1,6 @@
 # OAuth by Socialite
 
-https://github.com/kawax/google-sheets-project/blob/master/app/Http/Controllers/LoginController.php
+https://github.com/kawax/google-sheets-project/blob/6.x/app/Http/Controllers/LoginController.php
 
 ```php
 public function redirect()
