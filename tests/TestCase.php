@@ -7,7 +7,7 @@ use PulkitJalan\Google\GoogleServiceProvider as PulkitJalanServiceProvider;
 use Revolution\Google\Client\Providers\GoogleServiceProvider;
 use Revolution\Google\Sheets\Providers\SheetsServiceProvider;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app): array
     {
