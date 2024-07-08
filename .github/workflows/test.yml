@@ -21,7 +21,7 @@ jobs:
       - name: Install Composer dependencies
         run: composer install -q
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v6
+        uses: paambaati/codeclimate-action@v8
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
