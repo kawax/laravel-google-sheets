@@ -13,7 +13,7 @@ class GoogleSheetClient
 
     protected GoogleClient $client;
 
-    public function __construct(array $config, string $userEmail = '')
+    public function __construct(#[\SensitiveParameter] array $config, string $userEmail = '')
     {
         $this->config = $config;
 

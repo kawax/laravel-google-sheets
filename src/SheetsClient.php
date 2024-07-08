@@ -45,7 +45,7 @@ class SheetsClient implements Factory
     /**
      * set access_token and set new service.
      */
-    public function setAccessToken(array|string $token): static
+    public function setAccessToken(#[\SensitiveParameter] array|string $token): static
     {
         Google::getCache()->clear();
 
