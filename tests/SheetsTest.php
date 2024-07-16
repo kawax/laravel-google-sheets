@@ -3,14 +3,14 @@
 namespace Tests;
 
 use Mockery as m;
-use Revolution\Google\Client\GoogleSheetClient;
+use Revolution\Google\Client\GoogleApiClient;
 use Revolution\Google\Sheets\Facades\Sheets;
 use Revolution\Google\Sheets\Traits\GoogleSheets;
 
 class SheetsTest extends TestCase
 {
     /**
-     * @var GoogleSheetClient
+     * @var GoogleApiClient
      */
     protected $google;
 
@@ -18,8 +18,8 @@ class SheetsTest extends TestCase
     {
         parent::setUp();
 
-        $this->google = m::mock(GoogleSheetClient::class);
-        app()->instance(GoogleSheetClient::class, $this->google);
+        $this->google = m::mock(GoogleApiClient::class);
+        app()->instance(GoogleApiClient::class, $this->google);
     }
 
     public function tearDown(): void

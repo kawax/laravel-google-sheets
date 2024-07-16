@@ -4,7 +4,7 @@ namespace Revolution\Google\Client\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Psr\Cache\CacheItemPoolInterface;
-use Revolution\Google\Client\GoogleSheetClient;
+use Revolution\Google\Client\GoogleApiClient;
 
 /**
  * @method static mixed make(string $service)
@@ -13,7 +13,7 @@ use Revolution\Google\Client\GoogleSheetClient;
  * @method static void fetchAccessTokenWithRefreshToken(?string $refreshToken = null)
  * @method static CacheItemPoolInterface getCache()
  *
- * @see GoogleSheetClient
+ * @see GoogleApiClient
  */
 class Google extends Facade
 {

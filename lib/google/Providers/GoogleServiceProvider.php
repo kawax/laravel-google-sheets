@@ -3,7 +3,7 @@
 namespace Revolution\Google\Client\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Revolution\Google\Client\GoogleSheetClient;
+use Revolution\Google\Client\GoogleApiClient;
 
 class GoogleServiceProvider extends ServiceProvider
 {
@@ -14,9 +14,9 @@ class GoogleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../../config/google.php', 'google');
 
-        $this->app->singleton(GoogleSheetClient::class, fn ($app) => new GoogleSheetClient($app['config']['google']));
+        $this->app->singleton(GoogleApiClient::class, fn ($app) => new GoogleApiClient($app['config']['google']));
 
-        $this->app->alias(GoogleSheetClient::class, 'google-client');
+        $this->app->alias(GoogleApiClient::class, 'google-client');
     }
 
     /**

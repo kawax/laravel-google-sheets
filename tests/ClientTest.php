@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\RequiresMethod;
 use PulkitJalan\Google\Client as GoogleClient;
 use Revolution\Google\Client\Exceptions\UnknownServiceException;
 use Revolution\Google\Client\Facades\Google;
-use Revolution\Google\Client\GoogleSheetClient;
+use Revolution\Google\Client\GoogleApiClient;
 
 class ClientTest extends TestCase
 {
@@ -20,14 +20,14 @@ class ClientTest extends TestCase
 
     public function testClientGetter()
     {
-        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Client', $client->getClient());
     }
 
     public function testClientGetterWithAdditionalConfig()
     {
-        $client = m::mock(GoogleSheetClient::class, [[
+        $client = m::mock(GoogleApiClient::class, [[
             'config' => [
                 'subject' => 'test',
             ],
@@ -38,14 +38,14 @@ class ClientTest extends TestCase
 
     public function testServiceMake()
     {
-        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Service\Storage', $client->make('storage'));
     }
 
     public function testServiceMakeException()
     {
-        $client = m::mock(GoogleSheetClient::class, [[]])->makePartial();
+        $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
         $this->expectException(UnknownServiceException::class);
 
@@ -54,7 +54,7 @@ class ClientTest extends TestCase
 
     public function testMagicMethodException()
     {
-        $client = new GoogleSheetClient([]);
+        $client = new GoogleApiClient([]);
 
         $this->expectException('BadMethodCallException');
 
@@ -63,14 +63,14 @@ class ClientTest extends TestCase
 
     public function testNoCredentials()
     {
-        $client = new GoogleSheetClient([]);
+        $client = new GoogleApiClient([]);
 
         $this->assertFalse($client->isUsingApplicationDefaultCredentials());
     }
 
     public function testDefaultCredentials()
     {
-        $client = new GoogleSheetClient([
+        $client = new GoogleApiClient([
             'service' => [
                 'enable' => true,
                 'file' => __DIR__.'/data/test.json',
@@ -83,7 +83,7 @@ class ClientTest extends TestCase
     #[RequiresMethod(GoogleClient::class, 'make')]
     public function test_original_client()
     {
-        $this->assertInstanceOf(GoogleSheetClient::class, Google::getFacadeRoot());
+        $this->assertInstanceOf(GoogleApiClient::class, Google::getFacadeRoot());
         Google::clearResolvedInstances();
 
         $this->app->alias(GoogleClient::class, 'google-client');

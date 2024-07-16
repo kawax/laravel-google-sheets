@@ -7,7 +7,7 @@ use Google\Client as GoogleClient;
 use Illuminate\Support\Arr;
 use Revolution\Google\Client\Exceptions\UnknownServiceException;
 
-class GoogleSheetClient
+class GoogleApiClient
 {
     protected array $config;
 
