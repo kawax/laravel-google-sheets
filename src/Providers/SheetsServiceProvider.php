@@ -14,7 +14,7 @@ class SheetsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        $this->app->singleton(Factory::class, SheetsClient::class);
+        $this->app->scoped(Factory::class, SheetsClient::class);
     }
 
     /**

@@ -14,7 +14,7 @@ class GoogleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../../config/google.php', 'google');
 
-        $this->app->singleton(GoogleApiClient::class, fn ($app) => new GoogleApiClient($app['config']['google']));
+        $this->app->scoped(GoogleApiClient::class, fn ($app) => new GoogleApiClient($app['config']['google']));
 
         $this->app->alias(GoogleApiClient::class, 'google-client');
     }
